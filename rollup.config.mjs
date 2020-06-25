@@ -10,7 +10,6 @@ import hmr from 'rollup-plugin-hot'
 import autoPreprocess from 'svelte-preprocess'
 
 const dev = !!process.env.ROLLUP_WATCH
-const production = !dev
 
 export default {
 	input: 'src/main.js',
@@ -23,14 +22,14 @@ export default {
 	},
 	plugins: [
 		svelte({
-			dev: !production,
+			dev: dev,
 			css: css => {
 				css.write('docs/assets/css/main.min.css')
 			},
 			preprocess: autoPreprocess(),
 			hot: dev && {
 				optimistic: true,
-				noPreserveState: true
+				noPreserveState: false
 			}
 		}),
 		resolve({
@@ -38,7 +37,7 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-		babel({
+		!dev && babel({
 			env: {
 				development : {
 					compact: false
@@ -77,7 +76,7 @@ export default {
 			inMemory: true,
 			compatModuleHot: false
 		}),
-		production && terser()
+		!dev && terser()
 	],
 	watch: {
 		clearScreen: false
