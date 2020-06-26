@@ -1,6 +1,6 @@
 <script>
 	import {getContext} from 'svelte'
-	import {TABS} from './Tabs.svelte'
+	import {TABS} from 'Tabs.svelte'
 
 	const panel = {}
 	const {registerPanel, selectedPanel} = getContext(TABS)
@@ -9,7 +9,7 @@
 </script>
 
 <style lang="scss">
-	@import './styles/scss/theme.scss';
+	@import '../Svelteit/styles/scss/theme.scss';
 
 	.tabs-panel {
 		padding: $base-box-padding;

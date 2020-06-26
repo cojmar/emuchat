@@ -1,6 +1,6 @@
 <script>
 	import {getContext} from 'svelte'
-	import {TABS} from './Tabs.svelte'
+	import {TABS} from 'Tabs.svelte'
 
 	const tab = {}
 	const {registerTab, selectTab, selectedTab} = getContext(TABS)
@@ -9,7 +9,7 @@
 </script>
 
 <style lang="scss">
-	@import './styles/scss/theme.scss';
+	@import '../Svelteit/styles/scss/theme.scss';
 
 	button {
 		background: none;

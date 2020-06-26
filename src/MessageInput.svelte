@@ -1,0 +1,73 @@
+<style>
+	:global(.chat-input) {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
+		border: 1px solid #4c4c4c;
+
+		margin: 2px;
+		padding: 4px;
+	}
+
+	:global(.chat-input > *) {
+		float: left;
+	}
+
+	:global(.chat-input > .button-emoji-picker) {
+		border-right: none;
+	}
+
+	:global(.chat-input > .button-emoji-picker:active) {
+		border-right: none;
+	}
+
+	:global(.chat-input > .button-emoji-picker:disabled:active) {
+		border-right: none;
+	}
+
+	:global(.chat-input > .button-send) {
+		border-left: none;
+	}
+
+	:global(.chat-input > .button-send:active) {
+		border-left: none;
+	}
+
+	:global(.chat-input > .button-send:disabled) {
+		border-left: none;
+	}
+
+	:global(.chat-input > .input-message) {
+		width: calc(100% - 42px);
+	}
+</style>
+
+<script>
+	import Button from './Button.svelte'
+	import ButtonIcon from './ButtonIcon.svelte'
+	import Input from './Input.svelte'
+
+	$: message = undefined
+
+	function handleSubmit(e) {
+		console.log(e)
+
+		message = '';
+	}
+</script>
+
+<form class="chat-input clear" on:submit|preventDefault={handleSubmit}>
+	<ButtonIcon class="button button-icon button-emoji-picker" title="Emoji Picker">
+		<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 496 512">
+			<path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm-80-216c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm4 72.6c-20.8 25-51.5 39.4-84 39.4s-63.2-14.3-84-39.4c-8.5-10.2-23.7-11.5-33.8-3.1-10.2 8.5-11.5 23.6-3.1 33.8 30 36 74.1 56.6 120.9 56.6s90.9-20.6 120.9-56.6c8.5-10.2 7.1-25.3-3.1-33.8-10.1-8.4-25.3-7.1-33.8 3.1z"></path>
+		</svg>
+	</ButtonIcon>
+	<Input class="input input-message" bind:value={message} placeholder="Enter a message" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
+	<ButtonIcon class="button button-icon button-send" type="submit" title={message ? "Send" : "Disabled"} disabled={!message}>
+		<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">
+			<path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
+		</svg>
+	</ButtonIcon>
+</form>

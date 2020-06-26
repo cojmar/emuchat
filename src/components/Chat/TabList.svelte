@@ -1,5 +1,5 @@
 <style lang="scss">
-	@import './styles/scss/theme.scss';
+	@import '../Svelteit/styles/scss/theme.scss';
 
 	.tab-list {
 		border-bottom: 1px solid $primary;

@@ -29,7 +29,7 @@ export default {
 			preprocess: autoPreprocess(),
 			hot: dev && {
 				optimistic: true,
-				noPreserveState: false
+				noPreserveState: true
 			}
 		}),
 		resolve({
