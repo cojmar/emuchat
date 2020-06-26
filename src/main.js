@@ -1,6 +1,5 @@
 import App from './App.svelte';
 
-//start
 const app = new App({
 	target: document.body
 });

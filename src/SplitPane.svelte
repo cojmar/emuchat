@@ -9,6 +9,9 @@
 		float: left;
 		width: 100%;
 		height: 100%;
+		word-break: break-all;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 
 	:global(.split-pane > .mouse-catcher) {
