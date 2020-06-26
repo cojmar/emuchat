@@ -9,7 +9,7 @@
 		box-sizing: border-box;
 
 		background-color: #333;
-		background-image: url(assets/images/logos/emuchat/emuchat-logo-256.png);
+		background-image: url(../images/logos/emuchat/emuchat-logo-256.png);
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;
