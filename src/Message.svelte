@@ -28,10 +28,10 @@
 </style>
 
 <script>
-	export let author = '';
+	export let nickname = '';
 	export let message = '';
 </script>
 
 <div class="message">
-	<p class="text"><span>{author}:</span> {message}</p>
+	<p class="text"><span>{nickname}:</span> {message}</p>
 </div>

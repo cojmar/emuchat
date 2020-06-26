@@ -49,12 +49,19 @@
 	import ButtonIcon from './ButtonIcon.svelte'
 	import Input from './Input.svelte'
 
+	import { createEventDispatcher } from 'svelte'
+
+	const dispatch = createEventDispatcher()
+
 	$: message = undefined
 
-	function handleSubmit(e) {
-		console.log(e)
+	function handleSubmit() {
+		dispatch('message', {
+			nickname: 'me',
+			text: message
+		});
 
-		message = '';
+		message = ''
 	}
 </script>
 

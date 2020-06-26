@@ -11,6 +11,27 @@
 		height: 100%;
 		word-break: break-all;
 		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+
+	:global(.split-pane > .pane::-webkit-scrollbar) {
+		width: 5px;
+		height: 5px;
+	}
+
+	:global(.split-pane > .pane::-webkit-scrollbar-track) {
+		background: rgba(34, 33, 33, 0.95);
+	}
+
+	:global(.split-pane > .pane::-webkit-scrollbar-thumb) {
+		background: rgba(0, 0, 0, 0.38);
+	}
+
+	:global(.split-pane > .pane::-webkit-scrollbar-thumb:hover) {
+		background: rgba(0, 0, 0, 0.64);
+	}
+
+	:global(.split-pane > .pane.pane-scrollable) {
 		overflow-y: auto;
 	}
 
@@ -110,7 +131,7 @@
 		dispatch('change')
 	}
 
-	function drag(node, callback) {
+	function drag(node, cb) {
 		const mousedown = e => {
 			if (e.which !== 1) return
 
@@ -121,11 +142,11 @@
 			const onmouseup = () => {
 				dragging = false
 
-				window.removeEventListener('mousemove', callback, false)
+				window.removeEventListener('mousemove', cb, false)
 				window.removeEventListener('mouseup', onmouseup, false)
 			}
 
-			window.addEventListener('mousemove', callback, false)
+			window.addEventListener('mousemove', cb, false)
 			window.addEventListener('mouseup', onmouseup, false)
 		}
 
@@ -140,15 +161,16 @@
 
 	$: side = type === 'horizontal' ? 'left' : 'top'
 	$: dimension = type === 'horizontal' ? 'width' : 'height'
-	$: margin = type === 'horizontal' ? {a: 'right', b: 'left'} : {a: 'bottom', b: 'top'}
+	$: position = type === 'horizontal' ? {a: 'left', b: 'right'} : {a: 'top', b: 'bottom'}
+	$: scrollable = dragging ? '' : 'pane-scrollable'
 </script>
 
 <div class="split-pane clear" bind:this={refs.container}>
-	<div class="pane pane-a" style="{dimension}: calc({pos}% - {spacing}px); margin-{margin.a}: {spacing}px;">
+	<div class="pane pane-{position.a} {scrollable}" style="{dimension}: calc({pos}% - {spacing}px); margin-{position.b}: {spacing}px;">
 		<slot name="a"></slot>
 	</div>
 
-	<div class="pane pane-b" style="{dimension}: calc({100 - (pos)}% - {spacing}px); margin-{margin.b}: {spacing}px;">
+	<div class="pane pane-{position.b} {scrollable}" style="{dimension}: calc({100 - (pos)}% - {spacing}px); margin-{position.a}: {spacing}px;">
 		<slot name="b"></slot>
 	</div>
 

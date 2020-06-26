@@ -1,9 +1,18 @@
+<style>
+	:global(.tabs) {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+</style>
+
 <script context="module">
 	export const TABS = {}
 </script>
 
 <script>
-	import {setContext, onDestroy} from 'svelte'
+	import {onMount, setContext, onDestroy} from 'svelte'
 	import {writable} from 'svelte/store'
 
 	const tabs = []
@@ -11,10 +20,12 @@
 	const selectedTab = writable(null)
 	const selectedPanel = writable(null)
 
+	export let initialSelectedIndex = 0
+
 	setContext(TABS, {
 		registerTab: tab => {
 			tabs.push(tab)
-			selectedTab.update(current => current || tab)
+			selectedTab.update(current => initialSelectedIndex ? tabs[initialSelectedIndex] : current || tab)
 
 			onDestroy(() => {
 				const i = tabs.indexOf(tab)
@@ -25,7 +36,8 @@
 
 		registerPanel: panel => {
 			panels.push(panel)
-			selectedPanel.update(current => current || panel)
+
+			selectedPanel.update(current => initialSelectedIndex ? panels[initialSelectedIndex] : current || panel)
 
 			onDestroy(() => {
 				const i = panels.indexOf(panel)
@@ -39,7 +51,6 @@
 			selectedTab.set(tab)
 			selectedPanel.set(panels[i])
 		},
-
 		selectedTab,
 		selectedPanel
 	})

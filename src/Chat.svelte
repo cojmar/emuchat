@@ -50,7 +50,7 @@
 		padding: 4px;
 	}
 
-	:global(.chat-wrapper > .chat-container > .chat-messages > .split-pane > .pane) {
+	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tabs-panel > .split-pane > .pane) {
 		background-color: rgba(44, 44, 44, 0.9);
 		border: 1px solid #7d7d7d;
 		padding: 2px;
@@ -71,59 +71,102 @@
 </style>
 
 <script>
+	import {onMount, getContext} from 'svelte'
+
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
+	import MessageList from './MessageList.svelte'
+	import TabPanel from './TabPanel.svelte'
+	import TabList from './TabList.svelte'
+	import Tabs from './Tabs.svelte'
+	import {TABS} from './Tabs.svelte'
+	import Tab from './Tab.svelte'
+
+	let tab = 0
+
+	onMount(() => {
+		const {selectedTab} = getContext(TABS)
+
+		selectedTab.subscribe((index) => {
+			tab = index.id
+		})
+	})
+
+	let channels = [{
+		name: 'one',
+		messages: [{
+			nickname: 'me',
+			text: 'test'
+		}],
+		users: []
+	} , {
+		name: 'two',
+		messages: [{
+			nickname: 'me',
+			text: 'test2'
+		}],
+		users: []
+	} , {
+		name: 'three',
+		messages: [],
+		users: []
+	}];
+
+	function handleMessage(e, tabIndex) {
+		console.log(`tabIndex: ${tabIndex}`)
+		channels[tabIndex].messages[channels[tabIndex].messages.length] = e.detail
+	}
 </script>
 
 <div class="chat-wrapper">
 	<div class="chat-container">
 		<canvas id="chat-effect"></canvas>
 		<div class="chat-messages">
-			<SplitPane type="horizontal" pos={75} spacing={1} fixed={false}>
-				<div slot="a">
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>left areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-				</div>
-				<div slot="b">
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-					<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-				</div>
-			</SplitPane>
+			<Tabs initialSelectedIndex={2}>
+				<TabList>
+					{#each channels as channel}
+						<Tab>{channel.name}</Tab>
+					{:else}
+						<Tab>Status</Tab>
+					{/each}
+				</TabList>
+
+				{#each channels as channel}
+					<TabPanel>
+						<SplitPane type="horizontal" pos={75} spacing={1} fixed={false}>
+							<div slot="a">
+								<MessageList messages="{channel.messages}" />
+							</div>
+							<div slot="b">
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+								<p>right areaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaaareaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+							</div>
+						</SplitPane>
+					</TabPanel>
+				{:else}
+					<TabPanel>
+						<p>No messages</p>
+					</TabPanel>
+				{/each}
+			</Tabs>
 		</div>
-		<MessageInput />
+		<MessageInput on:message="{e => handleMessage(e, tab)}" />
 	</div>
 </div>
