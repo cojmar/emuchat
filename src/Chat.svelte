@@ -1,23 +1,12 @@
 <style>
 	:global(.chat-wrapper) {
 		position: relative;
-		/* width: 320px; */
-		/* height: 200px; */
 		width: 100%;
 		height: 100%;
-
 		box-sizing: border-box;
-
 		background-color: #333;
-		background-image: url(assets/images/bg.jpg);
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: cover;
-
 		border: 1px solid #4c4c4c;
-
 		margin: auto;
-
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: 100%;
 		line-height: 1;

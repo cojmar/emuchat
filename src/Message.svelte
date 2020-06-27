@@ -17,8 +17,9 @@
 	export let nickname = ''
 	export let message = ''
 
-	let today = new Date()
-	let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+	let now = new Date()
+	let time = (`0${now.getHours()}`).slice(-2) + ':' + (`0${now.getMinutes()}`).slice(-2) + ':' + (`0${now.getSeconds()}`).slice(-2)
+
 	export let timestamp = time
 </script>
 
