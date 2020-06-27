@@ -38,6 +38,34 @@
 	}
 </style>
 
-<div class="tab-list">
+<script>
+	function scroll(node) {
+		const scrollHorizontally = (e) => {
+			e = window.event || e
+			let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
+			node.scrollLeft -= delta * 40
+		}
+
+		if (node.addEventListener) {
+			node.addEventListener('mousewheel', scrollHorizontally, false)
+			node.addEventListener('DOMMouseScroll', scrollHorizontally, false)
+		} else {
+			node.attachEvent('onmousewheel', scrollHorizontally);
+		}
+
+		return {
+			destroy() {
+				if (node.removeEventListener) {
+					node.removeEventListener('mousewheel', scrollHorizontally, false)
+					node.removeEventListener('DOMMouseScroll', scrollHorizontally, false)
+				} else {
+					node.detachEvent('onmousewheel', scrollHorizontally)
+				}
+			}
+		}
+	}
+</script>
+
+<div class="tab-list" use:scroll>
 	<slot/>
 </div>
