@@ -45,7 +45,6 @@
 </style>
 
 <script>
-	import Button from './Button.svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import Input from './Input.svelte'
 

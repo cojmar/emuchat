@@ -1,5 +1,5 @@
 <style>
-	.tab-list {
+	:global(.tab-list) {
 		height: 32px;
 		border-bottom: 1px solid #fff;
 	}

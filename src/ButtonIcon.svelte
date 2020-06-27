@@ -34,6 +34,6 @@
 	import Button from './Button.svelte'
 </script>
 
-<Button class="button button-icon" {...$$props}>
+<Button class="button button-icon" on:click {...$$props}>
 	<slot />
 </Button>

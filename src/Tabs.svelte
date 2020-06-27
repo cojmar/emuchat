@@ -12,7 +12,7 @@
 </script>
 
 <script>
-	import {onMount, setContext, onDestroy} from 'svelte'
+	import {setContext, onDestroy} from 'svelte'
 	import {writable} from 'svelte/store'
 
 	const tabs = []
@@ -23,7 +23,7 @@
 	export let initialSelectedIndex = 0
 
 	setContext(TABS, {
-		registerTab: tab => {
+		addTab: tab => {
 			tabs.push(tab)
 			selectedTab.update(current => initialSelectedIndex ? tabs[initialSelectedIndex] : current || tab)
 
@@ -34,9 +34,8 @@
 			})
 		},
 
-		registerPanel: panel => {
+		addPanel: panel => {
 			panels.push(panel)
-
 			selectedPanel.update(current => initialSelectedIndex ? panels[initialSelectedIndex] : current || panel)
 
 			onDestroy(() => {

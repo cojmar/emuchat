@@ -58,6 +58,6 @@
 <script>
 </script>
 
-<button class="button" type="button" {...$$props}>
+<button class="button" type="button" on:click {...$$props}>
 	<slot />
 </button>
