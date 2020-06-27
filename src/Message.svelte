@@ -1,25 +1,26 @@
 <style>
-	.message {
+	:global(.message) {
 		margin: 7px 0;
 	}
 
-	.message p {
+	:global(.message p) {
 		border-radius: 5px;
 		padding: 5px;
-		background-color: #eaeaea;
+		margin: 0;
+		background-color: #4c4c4c;
 		display: inline-block;
 	}
 
-	.message.mine {
+	:global(.message.mine) {
 		text-align: right;
 	}
 
-	.message.mine p.text {
+	:global(.message.mine p.text) {
 		background-color: #a62824;
 		color: white;
 	}
 
-	.message p.author {
+	:global(.message p.author) {
 		background-color: white;
 		font-size: 0.8em;
 		display: block;

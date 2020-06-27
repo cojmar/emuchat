@@ -52,7 +52,7 @@
 
 	const dispatch = createEventDispatcher()
 
-	$: message = undefined
+	let message = ''
 
 	function handleSubmit() {
 		dispatch('message', {

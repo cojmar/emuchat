@@ -101,7 +101,7 @@
 </style>
 
 <script>
-	import { createEventDispatcher } from 'svelte'
+	import {createEventDispatcher} from 'svelte'
 
 	const dispatch = createEventDispatcher()
 
@@ -167,11 +167,11 @@
 
 <div class="split-pane clear" bind:this={refs.container}>
 	<div class="pane pane-{position.a} {scrollable}" style="{dimension}: calc({pos}% - {spacing}px); margin-{position.b}: {spacing}px;">
-		<slot name="a"></slot>
+		<slot name="a"/>
 	</div>
 
 	<div class="pane pane-{position.b} {scrollable}" style="{dimension}: calc({100 - (pos)}% - {spacing}px); margin-{position.a}: {spacing}px;">
-		<slot name="b"></slot>
+		<slot name="b"/>
 	</div>
 
 	{#if !fixed}

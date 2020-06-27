@@ -2,12 +2,17 @@
 	:global(.tab) {
 		background: none;
 		border: none;
-		border-bottom: 2px solid #fff;
+		border-right: 1px solid #7d7d7d;
 		margin: 0;
-		color: #fff;
+		color: #7d7d7d;
 		padding: 5px;
 		cursor: pointer;
 		outline: none;
+
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	:global(.tab svg) {
@@ -29,7 +34,7 @@
 	}
 
 	:global(.tab:hover svg path) {
-		fill: #fff;
+		fill: #7d7d7d;
 	}
 
 	:global(.tab:disabled svg path) {
@@ -37,10 +42,9 @@
 	}
 
 	:global(.tab.selected) {
-		border-bottom: 2px solid #fff;
+		background-color: #7d7d7d;
 		color: #fff;
 		outline: none;
-		font-weight: bold;
 	}
 </style>
 
@@ -59,17 +63,63 @@
 		id: id++
 	}
 
+	// let dragging = false
+	// let pos = 0
+	// let min = 50
+
 	const {addTab, selectTab, selectedTab} = getContext(TABS)
+
+	addTab(tab)
 
 	function removeTab() {
 		id--
 		dispatch('close')
 	}
 
-	addTab(tab)
+	/*function clamp(num, min, max) {
+		return num < min ? min : num > max ? max : num
+	}
+
+	function setPos(e) {
+		console.log(e)
+
+		const {left, right } = e.target.parentElement.getBoundingClientRect()
+		const extents = [left, right]
+		const px = clamp(e.clientX, extents[0] + min, extents[1] - min)
+		pos = 100 * (px - extents[0]) / (extents[1] - extents[0])
+	}
+
+	function drag(node, cb) {
+		const mousedown = e => {
+			if (e.which !== 1) return
+
+			e.preventDefault()
+
+			dragging = true
+
+			const onmouseup = () => {
+				dragging = false
+
+				window.removeEventListener('mousemove', cb, false)
+				window.removeEventListener('mouseup', onmouseup, false)
+			}
+
+			window.addEventListener('mousemove', cb, false)
+			window.addEventListener('mouseup', onmouseup, false)
+		}
+
+		node.addEventListener('mousedown', mousedown, false)
+
+		return {
+			destroy() {
+				node.removeEventListener('mousedown', onmousedown, false)
+			}
+		}
+	}*/
 </script>
 
-<span class="tab" class:selected={$selectedTab === tab} on:click={() => selectTab(tab)}>
+<!--style="margin-left: {pos}%;"-->
+<span class="tab" class:selected={$selectedTab === tab}  on:click={() => selectTab(tab)}>
 	<slot/>
 	<ButtonIcon class="button button-icon button-close" title="Close" on:click={removeTab}>
 		<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 352 512">

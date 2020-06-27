@@ -53,12 +53,12 @@
 	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tabs-panel > .split-pane > .pane) {
 		background-color: rgba(44, 44, 44, 0.9);
 		border: 1px solid #7d7d7d;
-		padding: 2px;
+		padding: 10px;
 	}
 
-	:global(.chat-wrapper .clear) {
+	/*:global(.chat-wrapper .clear) {
 		zoom: 1;
-	}
+	}*/
 
 	:global(.chat-wrapper .clear:before, .chat-wrapper .clear:after) {
 		content: '';
@@ -86,21 +86,21 @@
 	let currentTab = 0
 
 	let channels = [{
-		name: '#0',
+		name: 'Tab 0',
 		messages: [{
 			nickname: 'me',
 			text: 'test'
 		}],
 		users: []
 	} , {
-		name: '#1',
+		name: 'Tab 1',
 		messages: [{
 			nickname: 'me',
 			text: 'test2'
 		}],
 		users: []
 	} , {
-		name: '#2',
+		name: 'Tab 2',
 		messages: [],
 		users: []
 	}];
@@ -129,7 +129,7 @@
 
 	function handleTabAdd() {
 		channels[channels.length] = {
-			name: `#${channels.length}`,
+			name: `Tab ${channels.length}`,
 			messages: [],
 			users: []
 		}
@@ -146,7 +146,11 @@
 						{#each channels as channel, index}
 							<Tab on:close="{e => handleTabClose(e, index)}">{channel.name}</Tab>
 						{/each}
-						<ButtonIcon on:click={handleTabAdd}>new tab</ButtonIcon>
+						<ButtonIcon title="New Tab" on:click={handleTabAdd}>
+							<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512">
+								<path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
+							</svg>
+						</ButtonIcon>
 					</TabList>
 
 					{#each channels as channel}
