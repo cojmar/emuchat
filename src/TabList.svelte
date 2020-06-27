@@ -3,7 +3,8 @@
 		position: relative;
 		height: 28px;
 		border: 1px solid #7d7d7d;
-		padding: 2px;
+		padding-top: 2px;
+		padding-bottom: 2px;
 		margin-bottom: 2px;
 		overflow-x: hidden;
 		overflow-y: hidden;

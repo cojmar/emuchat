@@ -9,10 +9,10 @@
 		box-sizing: border-box;
 
 		background-color: #333;
-		background-image: url(../images/bg.jpg);
+		background-image: url(assets/images/bg.jpg);
 		background-repeat: no-repeat;
 		background-position: center;
-		background-size: contain;
+		background-size: cover;
 
 		border: 1px solid #4c4c4c;
 
@@ -34,6 +34,7 @@
 		right: 0;
 		top: 0;
 		bottom: 0;
+		background-color: rgba(44, 44, 44, 0.3);
 	}
 
 	:global(.chat-wrapper > .chat-container > #chat-effect) {
@@ -51,11 +52,11 @@
 	}
 
 	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tab-list) {
-		background-color: rgba(44, 44, 44, 0.9);
+		background-color: rgba(44, 44, 44, 0.8);
 	}
 
 	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tabs-panel > .split-pane > .pane) {
-		background-color: rgba(44, 44, 44, 0.9);
+		background-color: rgba(44, 44, 44, 0.8);
 		border: 1px solid #7d7d7d;
 		padding: 10px;
 	}
