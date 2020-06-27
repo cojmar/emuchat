@@ -1,5 +1,4 @@
 <style>
-
 </style>
 
 <script>
@@ -10,8 +9,8 @@
 
 <div class="message-container">
 	{#each messages as message}
-		<Message nickname={message.nickname} message={message.text} />
+		<Message uid={message.uid} nickname={message.nickname} message={message.text} />
 	{:else}
-		<p>No messages</p>
+		<div>No messages</div>
 	{/each}
 </div>

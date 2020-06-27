@@ -4,35 +4,24 @@
 	}
 
 	:global(.message p) {
+		display: inline-block;
 		border-radius: 5px;
 		padding: 5px;
 		margin: 0;
 		background-color: #4c4c4c;
-		display: inline-block;
-	}
-
-	:global(.message.mine) {
-		text-align: right;
-	}
-
-	:global(.message.mine p.text) {
-		background-color: #a62824;
-		color: white;
-	}
-
-	:global(.message p.author) {
-		background-color: white;
-		font-size: 0.8em;
-		display: block;
-		text-decoration: none;
 	}
 </style>
 
 <script>
-	export let nickname = '';
-	export let message = '';
+	export let uid = ''
+	export let nickname = ''
+	export let message = ''
+
+	let today = new Date()
+	let time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+	export let timestamp = time
 </script>
 
 <div class="message">
-	<p class="text"><span>{nickname}:</span> {message}</p>
+	<p class="text"><span class="timestamp">[{timestamp}]</span> <span title={uid}>[{nickname}]</span> {message}</p>
 </div>

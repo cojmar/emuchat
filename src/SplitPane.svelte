@@ -159,19 +159,35 @@
 		}
 	}
 
+	function scroll(node) {
+		if (!MutationObserver) return
+
+		const observer = new MutationObserver(() => node.scrollTop = node.scrollHeight);
+
+		observer.observe(node, {childList: true, subtree: true});
+
+		return {
+			destroy() {
+				if (observer) {
+					observer.disconnect();
+				}
+			}
+		}
+	}
+
 	$: side = type === 'horizontal' ? 'left' : 'top'
 	$: dimension = type === 'horizontal' ? 'width' : 'height'
-	$: position = type === 'horizontal' ? {a: 'left', b: 'right'} : {a: 'top', b: 'bottom'}
+	$: position = type === 'horizontal' ? {messages: 'left', users: 'right'} : {messages: 'top', users: 'bottom'}
 	$: scrollable = dragging ? '' : 'pane-scrollable'
 </script>
 
 <div class="split-pane clear" bind:this={refs.container}>
-	<div class="pane pane-{position.a} {scrollable}" style="{dimension}: calc({pos}% - {spacing}px); margin-{position.b}: {spacing}px;">
-		<slot name="a"/>
+	<div class="pane pane-{position.messages} {scrollable}" style="{dimension}: calc({pos}% - {spacing}px); margin-{position.users}: {spacing}px;" use:scroll>
+		<slot name="messages"/>
 	</div>
 
-	<div class="pane pane-{position.b} {scrollable}" style="{dimension}: calc({100 - (pos)}% - {spacing}px); margin-{position.a}: {spacing}px;">
-		<slot name="b"/>
+	<div class="pane pane-{position.users} {scrollable}" style="{dimension}: calc({100 - (pos)}% - {spacing}px); margin-{position.messages}: {spacing}px;">
+		<slot name="users"/>
 	</div>
 
 	{#if !fixed}
