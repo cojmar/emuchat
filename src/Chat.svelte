@@ -9,7 +9,7 @@
 		box-sizing: border-box;
 
 		background-color: #333;
-		background-image: url(../images/logos/emuchat/emuchat-logo-256.png);
+		background-image: url(../images/bg.jpg);
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: contain;
@@ -48,6 +48,10 @@
 		border: 1px solid #4c4c4c;
 		margin: 2px;
 		padding: 4px;
+	}
+
+	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tab-list) {
+		background-color: rgba(44, 44, 44, 0.9);
 	}
 
 	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tabs-panel > .split-pane > .pane) {
