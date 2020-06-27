@@ -15,6 +15,12 @@
 		user-select: none;
 	}
 
+	:global(.tab:hover) {
+		outline: 1px solid #fff;
+		outline-offset: -2px;
+		color: #fff;
+	}
+
 	:global(.tab svg) {
 		width: 16px;
 		height: 16px;

@@ -9,6 +9,11 @@
 		overflow-x: hidden;
 		overflow-y: hidden;
 		white-space: nowrap;
+
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	:global(.tab-list:hover) {
