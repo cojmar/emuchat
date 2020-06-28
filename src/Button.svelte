@@ -59,6 +59,6 @@
 <script>
 </script>
 
-<button class="button" type="button" {...$$props} on:click|preventDefault>
+<button class="button" type="button" {...$$props} on:click>
 	<slot />
 </button>
