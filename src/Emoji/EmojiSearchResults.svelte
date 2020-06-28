@@ -41,7 +41,7 @@
 	))
 
 	function onMouseOver() {
-		dispatch('emojihover', null);
+		dispatch('emojihover', null)
 	}
 </script>
 

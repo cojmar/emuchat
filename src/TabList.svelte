@@ -42,9 +42,9 @@
 	function scroll(node) {
 		if (!MutationObserver) return
 
-		const observer = new MutationObserver(() => node.scrollLeft = node.scrollWidth);
+		const observer = new MutationObserver(() => node.scrollLeft = node.scrollWidth)
 
-		observer.observe(node, {childList: true, subtree: true});
+		observer.observe(node, {childList: true, subtree: true})
 
 		const scrollHorizontally = (e) => {
 			e = window.event || e
@@ -56,13 +56,13 @@
 			node.addEventListener('mousewheel', scrollHorizontally, false)
 			node.addEventListener('DOMMouseScroll', scrollHorizontally, false)
 		} else {
-			node.attachEvent('onmousewheel', scrollHorizontally);
+			node.attachEvent('onmousewheel', scrollHorizontally)
 		}
 
 		return {
 			destroy() {
 				if (observer) {
-					observer.disconnect();
+					observer.disconnect()
 				}
 
 				if (node.removeEventListener) {

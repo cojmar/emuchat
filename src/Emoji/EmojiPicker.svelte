@@ -111,7 +111,7 @@
 </style>
 
 <script>
-	import {createEventDispatcher, onMount, tick} from 'svelte'
+	import {createEventDispatcher, tick} from 'svelte'
 	import Icon from '../Icon.svelte'
 	import {faBuilding, faFlag, faLightbulb} from '@fortawesome/free-regular-svg-icons'
 	import {faSmile, faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons'

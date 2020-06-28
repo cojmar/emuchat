@@ -51,7 +51,7 @@
 	import {createEventDispatcher} from 'svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import Input from './Input.svelte'
-	import {EmojiPicker} from './Emoji';
+	import {EmojiPicker} from './Emoji'
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
 	const dispatch = createEventDispatcher()
@@ -77,7 +77,7 @@
 	<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
 	<Input class="input input-message" bind:value={message} placeholder="Enter a message" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
 	<ButtonIcon class="button button-icon button-send" type="submit" title={message ? "Send" : "Disabled"} disabled={!message}>
-		<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">
+		<svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">
 			<path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
 		</svg>
 	</ButtonIcon>

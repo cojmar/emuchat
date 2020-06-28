@@ -111,7 +111,7 @@
 	export let fixed = false
 	export let min = 50
 
-	const refs = {};
+	const refs = {}
 
 	let dragging = false;
 
@@ -162,14 +162,14 @@
 	function scroll(node) {
 		if (!MutationObserver) return
 
-		const observer = new MutationObserver(() => node.scrollTop = node.scrollHeight);
+		const observer = new MutationObserver(() => node.scrollTop = node.scrollHeight)
 
-		observer.observe(node, {childList: true, subtree: true});
+		observer.observe(node, {childList: true, subtree: true})
 
 		return {
 			destroy() {
 				if (observer) {
-					observer.disconnect();
+					observer.disconnect()
 				}
 			}
 		}
