@@ -62,6 +62,8 @@
 
 	function handleSubmit() {
 		dispatch('message', {
+			uid: 0,
+			timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
 			nickname: 'me',
 			text: message
 		});

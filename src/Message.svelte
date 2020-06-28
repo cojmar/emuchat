@@ -13,14 +13,10 @@
 </style>
 
 <script>
-	export let uid = ''
-	export let nickname = ''
-	export let message = ''
-
-	let now = new Date()
-	let time = (`0${now.getHours()}`).slice(-2) + ':' + (`0${now.getMinutes()}`).slice(-2) + ':' + (`0${now.getSeconds()}`).slice(-2)
-
-	export let timestamp = time
+	export let uid = '0'
+	export let nickname = 'me'
+	export let message = 'test'
+	export let timestamp = '00:00:00'
 </script>
 
 <div class="message">

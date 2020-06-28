@@ -9,7 +9,7 @@
 
 <div class="message-container">
 	{#each messages as message}
-		<Message uid={message.uid} nickname={message.nickname} message={message.text} />
+		<Message uid={message.uid} timestamp={message.timestamp} nickname={message.nickname} message={message.text}/>
 	{:else}
 		<div>No messages</div>
 	{/each}

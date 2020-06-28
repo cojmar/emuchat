@@ -79,8 +79,16 @@
 
 	function handleTabClose(e, tab) {
 		e.stopPropagation()
-		selectTab(tabs[tabs.length - 1])
-		dispatch('close', tabs.indexOf(tab))
+
+		let close = tabs.indexOf(tab)
+		let select = close > tabs.indexOf($selectedTab) ? tabs.indexOf($selectedTab) : tabs.indexOf($selectedTab) - 1
+
+		selectTab(tabs[select])
+
+		dispatch('close', {
+			close: close,
+			select: select
+		})
 		id--
 	}
 </script>

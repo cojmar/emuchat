@@ -85,6 +85,7 @@
 		name: 'Tab 0',
 		messages: [{
 			uid: '4546546456456456',
+			timestamp: '00:00:00',
 			nickname: 'me',
 			text: 'test'
 		}],
@@ -98,6 +99,8 @@
 	} , {
 		name: 'Tab 1',
 		messages: [{
+			uid: '2234443243234234',
+			timestamp: '00:00:00',
 			nickname: 'me',
 			text: 'test2'
 		}],
@@ -120,12 +123,12 @@
 	}
 
 	function handleTabClose(e) {
-		if (channels[e.detail]) {
-			channels.splice(e.detail, 1)
+		if (channels[e.detail.close]) {
+			channels.splice(e.detail.close, 1)
 			channels = channels
 		}
 
-		currentTabIndex = channels.length - 1
+		currentTabIndex = e.detail.select
 	}
 
 	function handleTabNew() {
