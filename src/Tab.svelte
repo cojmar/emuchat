@@ -79,6 +79,7 @@
 
 	function handleTabClose(e, tab) {
 		e.stopPropagation()
+		selectTab(tabs[tabs.length - 1])
 		dispatch('close', tabs.indexOf(tab))
 		id--
 	}
