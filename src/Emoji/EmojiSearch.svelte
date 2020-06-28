@@ -33,7 +33,7 @@
 <script>
 	import {onMount} from 'svelte'
 	import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
-	import Icon from 'fa-svelte'
+	import Icon from '../Icon.svelte'
 
 	export let searchText = ''
 

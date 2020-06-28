@@ -5,7 +5,7 @@
 		padding: 2px;
 	}
 
-	:global(.button.button-icon svg) {
+	:global(.button.button-icon svg.icon) {
 		display: inline-block;
 		width: 16px;
 		height: 16px;
@@ -13,40 +13,36 @@
 		overflow: visible;
 	}
 
-	:global(.button.button-icon svg path) {
+	:global(.button.button-icon svg.icon path) {
 		fill: #7d7d7d;
 	}
 
-	:global(.button.button-icon:active svg path) {
+	:global(.button.button-icon:active svg.icon path) {
 		fill: #fff;
 	}
 
-	:global(.button.button-icon:focus svg path) {
+	:global(.button.button-icon:focus svg.icon path) {
 		fill: #fff;
 	}
 
-	:global(.button.button-icon:hover svg path) {
+	:global(.button.button-icon:hover svg.icon path) {
 		fill: #fff;
 	}
 
-	:global(.button.button-icon:disabled svg path) {
+	:global(.button.button-icon:disabled svg.icon path) {
 		fill: #4c4c4c;
 	}
 </style>
 
 <script>
 	import Button from './Button.svelte'
+	import Icon from './Icon.svelte'
 
 	export let icon
-
-	let path = typeof icon !== 'undefined' ? icon.icon[4] : ''
-	let viewBox = typeof icon !== 'undefined' ? '0 0 ' + icon.icon[0] + ' ' + icon.icon[1] : ''
 </script>
 
 <Button class="button button-icon" {...$$props} on:click>
 	<slot>
-		<svg aria-hidden="true" class="icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="{viewBox}">
-			<path fill="currentColor" d="{path}"/>
-		</svg>
+		<Icon icon={icon}/>
 	</slot>
 </Button>

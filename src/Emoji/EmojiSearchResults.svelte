@@ -27,7 +27,7 @@
 
 <script>
 	import {createEventDispatcher} from 'svelte'
-	import Icon from 'fa-svelte';
+	import Icon from '../Icon.svelte'
 	import {faFrown} from '@fortawesome/free-regular-svg-icons'
 	import EmojiList from './EmojiList.svelte'
 	import emojiData from './emoji.js'

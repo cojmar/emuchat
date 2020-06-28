@@ -112,7 +112,7 @@
 
 <script>
 	import {createEventDispatcher, onMount, tick} from 'svelte'
-	import Icon from 'fa-svelte'
+	import Icon from '../Icon.svelte'
 	import {faBuilding, faFlag, faLightbulb} from '@fortawesome/free-regular-svg-icons'
 	import {faSmile, faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons'
 	import Popper from 'popper.js'
@@ -251,16 +251,16 @@
 	}
 </script>
 
-<svelte:body on:keydown={onKeyDown} />
+<svelte:body on:keydown={onKeyDown}/>
 
 <button class="button button-icon button-emoji-picker svelte-emoji-picker__trigger" bind:this={triggerButtonEl} on:click|preventDefault={togglePicker} type="button">
-	<slot><Icon icon={faSmile} /></slot>
+	<slot><Icon icon={faSmile}/></slot>
 </button>
 
 {#if pickerVisible}
 	<ClickOutside on:clickoutside={hidePicker} exclude={[triggerButtonEl]}>
 		<div class="svelte-emoji-picker" bind:this={pickerEl} on:keydown={onKeyDown}>
-			<EmojiSearch bind:searchText={searchText} />
+			<EmojiSearch bind:searchText={searchText}/>
 			{#if searchText}
 				<EmojiSearchResults searchText={searchText} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick}/>
 			{:else}
@@ -268,11 +268,11 @@
 					<Tabs initialSelectedIndex={1}>
 						<TabList>
 							<Tab>
-								<Icon icon={faHistory} />
+								<Icon icon={faHistory}/>
 							</Tab>
 							{#each categoryOrder as category}
 								<Tab>
-									<Icon icon={categoryIcons[category]} />
+									<Icon icon={categoryIcons[category]}/>
 								</Tab>
 							{/each}
 						</TabList>

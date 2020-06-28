@@ -29,7 +29,7 @@
 
 <script>
 	import {createEventDispatcher} from 'svelte'
-	import Icon from 'fa-svelte'
+	import Icon from '../Icon.svelte'
 	import {faTimes} from '@fortawesome/free-solid-svg-icons'
 	import Emoji from './Emoji.svelte'
 
