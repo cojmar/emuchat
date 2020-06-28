@@ -28,21 +28,21 @@
 </style>
 
 <script>
-	import {createEventDispatcher} from 'svelte';
-	import {faTimes} from '@fortawesome/free-solid-svg-icons';
-	import Icon from 'fa-svelte';
-	import Emoji from './Emoji.svelte';
+	import {createEventDispatcher} from 'svelte'
+	import Icon from 'fa-svelte'
+	import {faTimes} from '@fortawesome/free-solid-svg-icons'
+	import Emoji from './Emoji.svelte'
 
-	export let variants;
+	export let variants
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
 	function onClickClose() {
-		dispatch('close');
+		dispatch('close')
 	}
 
-	function onClickContainer(event) {
-		dispatch('close');
+	function onClickContainer() {
+		dispatch('close')
 	}
 </script>
 

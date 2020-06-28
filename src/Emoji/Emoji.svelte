@@ -17,22 +17,22 @@
 </style>
 
 <script>
-	import {createEventDispatcher} from 'svelte';
+	import {createEventDispatcher} from 'svelte'
 
-	export let emoji;
+	export let emoji
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
 	function onClick() {
-		dispatch('emojiclick', emoji);
+		dispatch('emojiclick', emoji)
 	}
 
 	function onMouseOver() {
-		dispatch('emojihover', emoji);
+		dispatch('emojihover', emoji)
 	}
 
 	function onMouseOut() {
-		dispatch('emojihover', null);
+		dispatch('emojihover', null)
 	}
 </script>
 

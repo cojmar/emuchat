@@ -1,23 +1,3 @@
-<script>
-	import {createEventDispatcher} from 'svelte';
-	import {faFrown} from '@fortawesome/free-regular-svg-icons';
-	import Icon from 'fa-svelte';
-	import EmojiList from './EmojiList.svelte';
-	import emojiData from './emoji.js';
-
-	export let searchText = '';
-
-	const dispatch = createEventDispatcher();
-
-	$: searchResults = emojiData.filter(emoji => (
-		emoji.names.find(name => name.indexOf(searchText) >= 0)
-	));
-
-	function onMouseOver() {
-		dispatch('emojihover', null);
-	}
-</script>
-
 <style>
 	.svelte-emoji-picker__search-results {
 		padding: 0.25em;
@@ -44,6 +24,26 @@
 		color: #999999;
 	}
 </style>
+
+<script>
+	import {createEventDispatcher} from 'svelte'
+	import Icon from 'fa-svelte';
+	import {faFrown} from '@fortawesome/free-regular-svg-icons'
+	import EmojiList from './EmojiList.svelte'
+	import emojiData from './emoji.js'
+
+	export let searchText = ''
+
+	const dispatch = createEventDispatcher()
+
+	$: searchResults = emojiData.filter(emoji => (
+		emoji.names.find(name => name.indexOf(searchText) >= 0)
+	))
+
+	function onMouseOver() {
+		dispatch('emojihover', null);
+	}
+</script>
 
 <div class="svelte-emoji-picker__search-results">
 	{#if searchResults.length}

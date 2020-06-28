@@ -31,28 +31,27 @@
 </style>
 
 <script>
-	import {onMount} from 'svelte';
+	import {onMount} from 'svelte'
+	import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons'
+	import Icon from 'fa-svelte'
 
-	import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
-	import Icon from 'fa-svelte';
+	export let searchText = ''
 
-	export let searchText = '';
-
-	let searchField;
+	let searchField
 
 	onMount(() => {
-		searchField.focus();
+		searchField.focus()
 	});
 
 	function clearSearchText() {
-		searchText = '';
-		searchField.focus();
+		searchText = ''
+		searchField.focus()
 	}
 
-	function handleKeyDown(event) {
-		if (event.key === 'Escape' && searchText) {
-			clearSearchText();
-			event.stopPropagation();
+	function handleKeyDown(e) {
+		if (e.key === 'Escape' && searchText) {
+			clearSearchText()
+			e.stopPropagation()
 		}
 	}
 </script>

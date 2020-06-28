@@ -111,52 +111,52 @@
 </style>
 
 <script>
-	import {createEventDispatcher, onMount, tick} from 'svelte';
-	import Icon from 'fa-svelte';
-	import {faBuilding, faFlag, faLightbulb} from '@fortawesome/free-regular-svg-icons';
-	import {faSmile, faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons';
-	import Popper from 'popper.js';
-	import ClickOutside from '../ClickOutside.svelte';
+	import {createEventDispatcher, onMount, tick} from 'svelte'
+	import Icon from 'fa-svelte'
+	import {faBuilding, faFlag, faLightbulb} from '@fortawesome/free-regular-svg-icons'
+	import {faSmile, faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons'
+	import Popper from 'popper.js'
+	import ClickOutside from '../ClickOutside.svelte'
 	import ButtonIcon from '../ButtonIcon.svelte'
 	import TabPanel from '../TabPanel.svelte'
 	import TabList from '../TabList.svelte'
 	import Tabs from '../Tabs.svelte'
 	import {TABS} from '../Tabs.svelte'
 	import Tab from '../Tab.svelte'
-	import EmojiDetail from './EmojiDetail.svelte';
-	import EmojiList from './EmojiList.svelte';
-	import EmojiSearch from './EmojiSearch.svelte';
-	import EmojiSearchResults from './EmojiSearchResults.svelte';
-	import EmojiVariantPopup from './EmojiVariantPopup.svelte';
-	import emojiData from './emoji.js';
+	import EmojiDetail from './EmojiDetail.svelte'
+	import EmojiList from './EmojiList.svelte'
+	import EmojiSearch from './EmojiSearch.svelte'
+	import EmojiSearchResults from './EmojiSearchResults.svelte'
+	import EmojiVariantPopup from './EmojiVariantPopup.svelte'
+	import emojiData from './emoji.js'
 
-	export let maxRecents = 50;
-	export let autoClose = true;
+	export let maxRecents = 50
+	export let autoClose = true
 
-	let triggerButtonEl;
-	let pickerEl;
-	let popper;
+	let triggerButtonEl
+	let pickerEl
+	let popper
 
-	let variantsVisible = false;
-	let pickerVisible = false;
+	let variantsVisible = false
+	let pickerVisible = false
 
-	let variants;
-	let currentEmoji;
-	let searchText;
-	let recentEmojis = JSON.parse(localStorage.getItem('svelte-emoji-picker-recent')) || [];
+	let variants
+	let currentEmoji
+	let searchText
+	let recentEmojis = JSON.parse(localStorage.getItem('svelte-emoji-picker-recent')) || []
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher()
 
-	const emojiCategories = {};
+	const emojiCategories = {}
 
 	emojiData.forEach(emoji => {
-		let categoryList = emojiCategories[emoji.category];
+		let categoryList = emojiCategories[emoji.category]
 
 		if (!categoryList) {
-			categoryList = emojiCategories[emoji.category] = [];
+			categoryList = emojiCategories[emoji.category] = []
 		}
 
-		categoryList.push(emoji);
+		categoryList.push(emoji)
 	});
 
 	const categoryOrder = [
@@ -168,7 +168,7 @@
 		'Objects',
 		'Symbols',
 		'Flags'
-	];
+	]
 
 	const categoryIcons = {
 		'Smileys & People': faSmile,
@@ -179,66 +179,66 @@
 		'Objects': faLightbulb,
 		'Symbols': faMusic,
 		'Flags': faFlag
-	};
+	}
 
-	function hidePicker(event) {
-		pickerVisible = false;
-		searchText = '';
-		popper.destroy();
+	function hidePicker() {
+		pickerVisible = false
+		searchText = ''
+		popper.destroy()
 	}
 
 	async function togglePicker() {
 		console.log('togglePicker')
-		pickerVisible = !pickerVisible;
+		pickerVisible = !pickerVisible
 
 		if (pickerVisible) {
-			await tick();
+			await tick()
 			popper = new Popper(triggerButtonEl, pickerEl, {
 				placement: 'top'
-			});
+			})
 		} else {
-			searchText = '';
-			popper.destroy();
+			searchText = ''
+			popper.destroy()
 		}
 	}
 
-	function onKeyDown(event) {
-		if (event.key === 'Escape') {
-			hidePicker();
+	function onKeyDown(e) {
+		if (e.key === 'Escape') {
+			hidePicker()
 		}
 	}
 
-	function showEmojiDetails(event) {
-		currentEmoji = event.detail;
+	function showEmojiDetails(e) {
+		currentEmoji = e.detail
 	}
 
-	function onEmojiClick(event) {
-		if (event.detail.variants) {
-			variants = event.detail.variants;
-			variantsVisible = true;
+	function onEmojiClick(e) {
+		if (e.detail.variants) {
+			variants = e.detail.variants
+			variantsVisible = true
 		} else {
-			dispatch('emoji', event.detail.emoji);
-			saveRecent(event.detail);
+			dispatch('emoji', e.detail.emoji)
+			saveRecent(e.detail)
 
 			if (autoClose) {
-				hidePicker();
+				hidePicker()
 			}
 		}
 	}
 
-	function onVariantClick(event) {
-		dispatch('emoji', event.detail.emoji);
-		saveRecent(event.detail);
-		hideVariants();
+	function onVariantClick(e) {
+		dispatch('emoji', e.detail.emoji)
+		saveRecent(e.detail)
+		hideVariants()
 
 		if (autoClose) {
-			hidePicker();
+			hidePicker()
 		}
 	}
 
 	function saveRecent(emoji) {
-		recentEmojis = [emoji, ...recentEmojis.filter(recent => recent.key !== emoji.key)].slice(0, maxRecents);
-		localStorage.setItem('svelte-emoji-picker-recent', JSON.stringify(recentEmojis));
+		recentEmojis = [emoji, ...recentEmojis.filter(recent => recent.key !== emoji.key)].slice(0, maxRecents)
+		localStorage.setItem('svelte-emoji-picker-recent', JSON.stringify(recentEmojis))
 	}
 
 	function hideVariants() {
@@ -247,21 +247,19 @@
 		// happens, and the target will have a `null` parent, which
 		// means it will not be excluded and the clickoutside event will fire.
 		setTimeout(() => {
-			variantsVisible = false;
+			variantsVisible = false
 		});
 	}
 </script>
 
 <svelte:body on:keydown={onKeyDown} />
 
-<slot>
-	<button class="button button-icon button-emoji-picker svelte-emoji-picker__trigger" bind:this={triggerButtonEl} on:click|preventDefault={togglePicker} type="button">
-		<slot><Icon icon={faSmile} /></slot>
-	</button>
-	<!--<ButtonIcon bind:this={triggerButtonEl} on:click={togglePicker}>
-		<Icon icon={faSmile} />
-	</ButtonIcon>-->
-</slot>
+<button class="button button-icon button-emoji-picker svelte-emoji-picker__trigger" bind:this={triggerButtonEl} on:click|preventDefault={togglePicker} type="button">
+	<slot><Icon icon={faSmile} /></slot>
+</button>
+<!--<ButtonIcon bind:this={triggerButtonEl} on:click={togglePicker}>
+	<Icon icon={faSmile} />
+</ButtonIcon>-->
 
 {#if pickerVisible}
 	<ClickOutside on:clickoutside={hidePicker} exclude={[triggerButtonEl]}>

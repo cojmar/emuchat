@@ -11,7 +11,7 @@
 </style>
 
 <script>
-	export let emoji;
+	export let emoji
 </script>
 
 <div class="svelte-emoji-picker__emoji-detail">

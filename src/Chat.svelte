@@ -64,6 +64,10 @@
 	}
 </style>
 
+<script context="module">
+	let id = 3
+</script>
+
 <script>
 	import {onMount, getContext} from 'svelte'
 
@@ -78,9 +82,10 @@
 	import {TABS} from './Tabs.svelte'
 	import Tab from './Tab.svelte'
 	import Icon from 'fa-svelte'
-	import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 
-	let currentTab = 0
+	let chatTabs = []
+	let currentTabIndex = 1
 
 	let channels = [{
 		name: 'Tab 0',
@@ -110,10 +115,12 @@
 	}];
 
 	onMount(() => {
-		const {selectedTab} = getContext(TABS)
+		const {tabs, selectedTab} = getContext(TABS)
+
+		chatTabs = tabs
 
 		selectedTab.subscribe((tab) => {
-			currentTab = tab ? tab.id : 0
+			currentTabIndex = tabs.indexOf(tab)
 		})
 	})
 
@@ -133,10 +140,12 @@
 
 	function handleTabAdd() {
 		channels[channels.length] = {
-			name: `Tab ${channels.length}`,
+			name: `Tab ${id++}`,
 			messages: [],
 			users: []
 		}
+
+		currentTabIndex = chatTabs.length
 	}
 </script>
 
@@ -145,7 +154,7 @@
 		<canvas id="chat-effect"></canvas>
 		<div class="chat-messages">
 			{#if channels}
-				<Tabs>
+				<Tabs initialSelectedIndex={currentTabIndex}>
 					<TabList>
 						<ButtonIcon title="New Tab" on:click={handleTabAdd}>
 							<Icon icon={faPlus}/>
@@ -170,6 +179,6 @@
 				</Tabs>
 			{/if}
 		</div>
-		<MessageInput on:message="{e => handleMessage(e, currentTab)}"/>
+		<MessageInput on:message="{e => handleMessage(e, currentTabIndex)}"/>
 	</div>
 </div>

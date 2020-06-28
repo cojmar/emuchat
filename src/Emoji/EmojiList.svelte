@@ -17,11 +17,11 @@
 </style>
 
 <script>
-	import Emoji from './Emoji.svelte';
+	import Emoji from './Emoji.svelte'
 
-	export let name = '';
-	export let withTabs = true;
-	export let emojis;
+	export let name = ''
+	export let withTabs = true
+	export let emojis
 </script>
 
 <h3>{name}</h3>
