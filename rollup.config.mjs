@@ -1,6 +1,7 @@
 import sirv from 'sirv'
 import polka from 'polka'
 import resolve from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
 import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import babel  from 'rollup-plugin-babel'
@@ -36,6 +37,9 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		dev && replace({
+			dev: dev,
+		}),
 		!dev && babel({
 			env: {
 				development : {
