@@ -19,13 +19,13 @@
 
 <script>
 	import {getContext} from 'svelte'
-	import {TABS} from './Tabs.svelte'
+	import {STATE} from './Tabs.svelte'
 
 	const panel = {
 		id: id++
 	}
 
-	const {addPanel, selectedPanel} = getContext(TABS)
+	const {addPanel, selectedPanel} = getContext(STATE)
 
 	addPanel(panel)
 </script>

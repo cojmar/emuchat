@@ -8,11 +8,11 @@
 </style>
 
 <script context="module">
-	export const TABS = {}
+	export const STATE = {}
 </script>
 
 <script>
-	import {setContext, onDestroy, tick} from 'svelte'
+	import {setContext, onDestroy} from 'svelte'
 	import {writable} from 'svelte/store'
 
 	const tabs = []
@@ -22,7 +22,7 @@
 
 	export let initialSelectedIndex = 0
 
-	setContext(TABS, {
+	setContext(STATE, {
 		addTab: tab => {
 			tabs.push(tab)
 			selectedTab.update(current => initialSelectedIndex ? tabs[initialSelectedIndex] : current || tab)
@@ -43,10 +43,9 @@
 				selectedPanel.update(current => current === panel ? panels[i] || panels[panels.length - 1] : current)
 			})
 		},
-		selectTab: async tab => {
+		selectTab: tab => {
 			const i = tabs.indexOf(tab)
 			selectedTab.set(tab)
-			await tick()
 			selectedPanel.set(panels[i])
 		},
 		tabs,

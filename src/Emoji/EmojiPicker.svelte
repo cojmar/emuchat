@@ -116,7 +116,6 @@
 	import TabPanel from '../TabPanel.svelte'
 	import TabList from '../TabList.svelte'
 	import Tabs from '../Tabs.svelte'
-	import {TABS} from '../Tabs.svelte'
 	import Tab from '../Tab.svelte'
 	import EmojiDetail from './EmojiDetail.svelte'
 	import EmojiList from './EmojiList.svelte'
@@ -221,7 +220,7 @@
 		<EmojiSearchResults searchText={searchText} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick}/>
 	{:else}
 		<div class="svelte-emoji-picker__emoji-tabs">
-			<Tabs initialSelectedIndex={1}>
+			<Tabs initialSelectedIndex={0}>
 				<TabList>
 					<Tab>
 						<Icon icon={faHistory}/>

@@ -67,10 +67,10 @@
 
 <div class="popover" on:mousedown on:mouseover={show} on:mouseout={hide} on:mouseup on:mousewheel>
 	<div bind:this={triggerRef}>
-		<slot name="target" />
+		<slot name="target"/>
 	</div>
 	<div class="popover-content" bind:this={contentRef} class:hidden={!open} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
-		<slot name="content" />
+		<slot name="content"/>
 		<div class="arrow" style="border-color: {color} transparent transparent transparent;"></div>
 	</div>
 </div>

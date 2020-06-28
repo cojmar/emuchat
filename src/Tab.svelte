@@ -60,32 +60,33 @@
 
 <script>
 	import {getContext, createEventDispatcher} from 'svelte'
-	import {TABS} from './Tabs.svelte'
+	import {STATE} from './Tabs.svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import {faTimes} from '@fortawesome/free-solid-svg-icons/faTimes'
 
 	export let showCloseButton = false
 
 	const dispatch = createEventDispatcher()
-
-	const tab = {
-		id: id++
-	}
-
-	const {addTab, selectTab, selectedTab} = getContext(TABS)
+	const tab = {id: id++}
+	const {addTab, tabs, selectTab, selectedTab} = getContext(STATE)
 
 	addTab(tab)
-	// selectTab(tab)
 
-	function removeTab() {
+	function handleTabSelect(e, tab) {
+		dispatch('select', tabs.indexOf(tab))
+		selectTab(tab)
+	}
+
+	function handleTabClose(e, tab) {
+		e.stopPropagation()
+		dispatch('close', tabs.indexOf(tab))
 		id--
-		dispatch('close')
 	}
 </script>
 
-<span class="tab" class:selected={$selectedTab === tab} on:click={() => selectTab(tab)}>
+<span class="tab" class:selected={$selectedTab === tab} on:click={(e) => handleTabSelect(e, tab)}>
 	<slot>Tab</slot>
 	{#if showCloseButton}
-		<ButtonIcon class="button button-icon button-close" title="Close" icon={faTimes} on:click={removeTab}/>
+		<ButtonIcon class="button button-icon button-close" title="Close" icon={faTimes} on:click={(e) => handleTabClose(e, tab)}/>
 	{/if}
 </span>

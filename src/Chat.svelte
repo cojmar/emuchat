@@ -69,8 +69,6 @@
 </script>
 
 <script>
-	import {onMount, getContext} from 'svelte'
-
 	import ButtonIcon from './ButtonIcon.svelte'
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
@@ -79,13 +77,10 @@
 	import TabPanel from './TabPanel.svelte'
 	import TabList from './TabList.svelte'
 	import Tabs from './Tabs.svelte'
-	import {TABS} from './Tabs.svelte'
 	import Tab from './Tab.svelte'
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 
-	let chatTabs = []
 	let currentTabIndex = 1
-
 	let channels = [{
 		name: 'Tab 0',
 		messages: [{
@@ -113,38 +108,34 @@
 		users: []
 	}];
 
-	onMount(() => {
-		const {tabs, selectedTab} = getContext(TABS)
-
-		chatTabs = tabs
-
-		selectedTab.subscribe((tab) => {
-			currentTabIndex = tabs.indexOf(tab)
-		})
-	})
-
-	function handleMessage(e, tabIndex) {
-		if (channels[tabIndex]) {
-			channels[tabIndex].messages.push(e.detail)
+	function handleMessage(e) {
+		if (channels[currentTabIndex]) {
+			channels[currentTabIndex].messages.push(e.detail)
 			channels = channels
 		}
 	}
 
-	function handleTabClose(e, tabIndex) {
-		if (channels[tabIndex]) {
-			channels.splice(tabIndex, 1)
-			channels = channels
-		}
+	function handleTabSelect(e) {
+		currentTabIndex = e.detail
 	}
 
-	function handleTabAdd() {
+	function handleTabClose(e) {
+		if (channels[e.detail]) {
+			channels.splice(e.detail, 1)
+			channels = channels
+		}
+
+		currentTabIndex = channels.length - 1
+	}
+
+	function handleTabNew() {
 		channels[channels.length] = {
 			name: `Tab ${id++}`,
 			messages: [],
 			users: []
 		}
 
-		currentTabIndex = chatTabs.length
+		currentTabIndex = channels.length - 1
 	}
 </script>
 
@@ -155,10 +146,10 @@
 			{#if channels}
 				<Tabs initialSelectedIndex={currentTabIndex}>
 					<TabList>
-						{#each channels as channel, index}
-							<Tab showCloseButton={true} on:close="{e => handleTabClose(e, index)}">{channel.name}</Tab>
+						{#each channels as channel}
+							<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
 						{/each}
-						<ButtonIcon title="New Tab" on:click={handleTabAdd} icon={faPlus}/>
+						<ButtonIcon title="New Tab" icon={faPlus} on:click={handleTabNew}/>
 					</TabList>
 
 					{#each channels as channel}
