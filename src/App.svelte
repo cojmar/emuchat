@@ -10,3 +10,8 @@
 	<Route path="/"><Chat /></Route>
 	<Route fallback>No page found</Route>
 </Route>
+
+<Route path="/emuchat/*">
+	<Route path="/"><Chat /></Route>
+	<Route fallback>No page found</Route>
+</Route>
