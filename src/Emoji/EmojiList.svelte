@@ -6,9 +6,27 @@
 	}
 
 	.svelte-emoji-picker__emoji-list {
-		height: 11rem;
+		height: 11.53rem;
+		font-size: 14px;
 		overflow-x: hidden;
 		overflow-y: auto;
+	}
+
+	.svelte-emoji-picker__emoji-list::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+	}
+
+	.svelte-emoji-picker__emoji-list::-webkit-scrollbar-track {
+		background: rgba(34, 33, 33, 0.95);
+	}
+
+	.svelte-emoji-picker__emoji-list::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.38);
+	}
+
+	.svelte-emoji-picker__emoji-list::-webkit-scrollbar-thumb:hover {
+		background: rgba(0, 0, 0, 0.64);
 	}
 
 	.svelte-emoji-picker__emoji-list.tall {

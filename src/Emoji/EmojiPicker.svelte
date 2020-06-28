@@ -1,96 +1,59 @@
 <style>
-	.svelte-emoji-picker {
+	:global(.svelte-emoji-picker) {
 		background: #2c2c2c;
 		border: 1px solid #7d7d7d;
-		width: 25rem;
-		height: 21rem;
-		margin: 0 0.5em;
+		width: 16rem;
+		/* height: 21rem; */
 		z-index: 1;
 	}
 
-	.svelte-emoji-picker :global(a) {
+	:global(.svelte-emoji-picker a) {
 		color: rgb(0,100,200);
 		text-decoration: none;
 	}
 
-	.svelte-emoji-picker :global(a:hover) {
+	:global(.svelte-emoji-picker a:hover) {
 		text-decoration: underline;
 	}
 
-	.svelte-emoji-picker :global(a:visited) {
+	:global(.svelte-emoji-picker a:visited) {
 		color: rgb(0,80,160);
 	}
 
-	.svelte-emoji-picker :global(label) {
-		display: block;
-	}
-
-	.svelte-emoji-picker :global(input, button, select, textarea) {
-		/* font-family: inherit; */
-		/* font-size: inherit; */
+	:global(.svelte-emoji-picker input) {
 		padding: 0.4em;
 		box-sizing: border-box;
 		border: 1px solid #ccc;
 		border-radius: 2px;
 	}
 
-	.svelte-emoji-picker :global(input:disabled) {
+	:global(.svelte-emoji-picker input:disabled) {
 		color: #ccc;
 	}
 
-	.svelte-emoji-picker :global(input[type="range"]) {
+	:global(.svelte-emoji-picker input[type="range"]) {
 		height: 0;
 	}
 
-	.svelte-emoji-picker :global(button) {
+	:global(.svelte-emoji-picker button) {
 		border-color: #7d7d7d;
 		outline: none;
 	}
 
-	.svelte-emoji-picker :global(button:active) {
+	:global(.svelte-emoji-picker button:active) {
 		background-color: #7d7d7d;
 	}
 
-	.svelte-emoji-picker :global(button:hover) {
+	:global(.svelte-emoji-picker button:hover) {
 		border-color: #fff;
 	}
 
-	/*.svelte-emoji-picker__trigger {
-		background-color: #2c2c2c;
-		border: 1px solid #7d7d7d;
-		border-right: none;
-		color: #7d7d7d;
-		width: 22px;
-		height: 22px;
-		padding: 0;
-		cursor: pointer;
-		vertical-align: top;
-		float: left;
-		overflow: hidden;
-		border-radius: 0;
-		outline: none;
+	:global(.svelte-emoji-picker__emoji-tabs) {
+		padding: 0.25em;
+		height: 15rem;
 	}
 
-	.svelte-emoji-picker__trigger:hover {
-		outline: 1px solid #fff;
-		outline-offset: -1px;
-	}
-
-	.svelte-emoji-picker__trigger :global(svg) {
-		width: 20px;
-		height: 20px;
-		vertical-align: middle;
-	}
-
-	.svelte-emoji-picker__trigger :global(svg path) {
-		fill: #7d7d7d;
-	}
-
-	.svelte-emoji-picker__trigger:hover :global(svg path) {
-		fill: #fff;
-	}*/
-
-	.svelte-emoji-picker__emoji-tabs {
+	:global(.svelte-emoji-picker__emoji-tabs) {
 		padding: 0.25em;
 		height: 15rem;
 	}
@@ -101,6 +64,33 @@
 
 	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list) {
 		display: flex;
+		border: none;
+	}
+
+
+	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab) {
+		border-right: none;
+	}
+
+	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab:hover) {
+		outline: none;
+	}
+
+	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab:hover svg path) {
+		fill: #fff
+	}
+
+	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab.selected) {
+		background: transparent;
+		border-bottom: 2px solid #fff;
+	}
+
+	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab.selected svg path) {
+		fill: #fff
+	}
+
+	:global(.svelte-emoji-picker__emoji-tabs .tabs .tabs-panel) {
+
 	}
 
 	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list button) {

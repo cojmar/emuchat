@@ -81,7 +81,7 @@
 		e.stopPropagation()
 
 		let close = tabs.indexOf(tab)
-		let select = close > tabs.indexOf($selectedTab) ? tabs.indexOf($selectedTab) : tabs.indexOf($selectedTab) - 1
+		let select = close > tabs.indexOf($selectedTab) ? tabs.indexOf($selectedTab) : (tabs.indexOf($selectedTab) - 1 < 0 ? 0 : tabs.indexOf($selectedTab) - 1)
 
 		selectTab(tabs[select])
 

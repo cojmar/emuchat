@@ -77,9 +77,9 @@
 </script>
 
 <form class="chat-input clear" on:submit|preventDefault={handleSubmit}>
-	<PopOver>
+	<PopOver color={'#fff'}>
 		<div slot="target">
-			<ButtonIcon class="button button-icon button-emoji-picker" title="Emoji Picker" icon={faSmile}/>
+			<ButtonIcon class="button button-icon button-emoji-picker" title="Emoji" icon={faSmile}/>
 		</div>
 		<div slot="content">
 			<EmojiPicker on:emoji={onEmoji}/>

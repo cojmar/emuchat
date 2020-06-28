@@ -57,7 +57,7 @@
 </script>
 
 <div class="svelte-emoji-picker__search">
-	<input type="text" placeholder="Search emojis..." bind:value={searchText} bind:this={searchField} on:keydown={handleKeyDown}>
+	<input type="text" placeholder="Search" bind:value={searchText} bind:this={searchField} on:keydown={handleKeyDown}>
 
 	{#if searchText}
 		<span class="icon clear-button" role="button" on:click|stopPropagation={clearSearchText}><Icon icon={faTimes}/></span>
