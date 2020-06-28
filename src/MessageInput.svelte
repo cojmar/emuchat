@@ -48,13 +48,11 @@
 </style>
 
 <script>
-	import { createEventDispatcher } from 'svelte'
+	import {createEventDispatcher} from 'svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import Input from './Input.svelte'
-	import { EmojiPicker } from './Emoji';
-	import Icon from 'fa-svelte'
-	import { faSmile } from '@fortawesome/free-solid-svg-icons/faSmile'
-	import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
+	import {EmojiPicker} from './Emoji';
+	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
 	const dispatch = createEventDispatcher()
 
@@ -75,12 +73,8 @@
 </script>
 
 <form class="chat-input clear" on:submit|preventDefault={handleSubmit}>
-	<EmojiPicker on:emoji={onEmoji}>
-		<Icon icon={faSmile}/>
-	</EmojiPicker>
-	<ButtonIcon class="button button-icon button-settings" title="Settings">
-		<Icon icon={faCog}/>
-	</ButtonIcon>
+	<EmojiPicker on:emoji={onEmoji}/>
+	<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
 	<Input class="input input-message" bind:value={message} placeholder="Enter a message" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
 	<ButtonIcon class="button button-icon button-send" type="submit" title={message ? "Send" : "Disabled"} disabled={!message}>
 		<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">

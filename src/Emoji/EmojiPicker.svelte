@@ -117,7 +117,6 @@
 	import {faSmile, faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons'
 	import Popper from 'popper.js'
 	import ClickOutside from '../ClickOutside.svelte'
-	import ButtonIcon from '../ButtonIcon.svelte'
 	import TabPanel from '../TabPanel.svelte'
 	import TabList from '../TabList.svelte'
 	import Tabs from '../Tabs.svelte'
@@ -257,9 +256,6 @@
 <button class="button button-icon button-emoji-picker svelte-emoji-picker__trigger" bind:this={triggerButtonEl} on:click|preventDefault={togglePicker} type="button">
 	<slot><Icon icon={faSmile} /></slot>
 </button>
-<!--<ButtonIcon bind:this={triggerButtonEl} on:click={togglePicker}>
-	<Icon icon={faSmile} />
-</ButtonIcon>-->
 
 {#if pickerVisible}
 	<ClickOutside on:clickoutside={hidePicker} exclude={[triggerButtonEl]}>

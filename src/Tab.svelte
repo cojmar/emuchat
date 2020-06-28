@@ -62,7 +62,6 @@
 	import {getContext, createEventDispatcher} from 'svelte'
 	import {TABS} from './Tabs.svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
-	import Icon from 'fa-svelte'
 	import {faTimes} from '@fortawesome/free-solid-svg-icons/faTimes'
 
 	const dispatch = createEventDispatcher()
@@ -83,7 +82,5 @@
 
 <span class="tab" class:selected={$selectedTab === tab} on:click={() => selectTab(tab)}>
 	<slot>Tab</slot>
-	<ButtonIcon class="button button-icon button-close" title="Close" on:click={removeTab}>
-		<Icon icon={faTimes}/>
-	</ButtonIcon>
+	<ButtonIcon class="button button-icon button-close" title="Close" icon={faTimes} on:click={removeTab}/>
 </span>

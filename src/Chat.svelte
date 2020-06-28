@@ -81,7 +81,6 @@
 	import Tabs from './Tabs.svelte'
 	import {TABS} from './Tabs.svelte'
 	import Tab from './Tab.svelte'
-	import Icon from 'fa-svelte'
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 
 	let chatTabs = []
@@ -156,12 +155,10 @@
 			{#if channels}
 				<Tabs initialSelectedIndex={currentTabIndex}>
 					<TabList>
-						<ButtonIcon title="New Tab" on:click={handleTabAdd}>
-							<Icon icon={faPlus}/>
-						</ButtonIcon>
 						{#each channels as channel, index}
 							<Tab on:close="{e => handleTabClose(e, index)}">{channel.name}</Tab>
 						{/each}
+						<ButtonIcon title="New Tab" on:click={handleTabAdd} icon={faPlus}/>
 					</TabList>
 
 					{#each channels as channel}
