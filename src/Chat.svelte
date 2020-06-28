@@ -156,7 +156,7 @@
 				<Tabs initialSelectedIndex={currentTabIndex}>
 					<TabList>
 						{#each channels as channel, index}
-							<Tab on:close="{e => handleTabClose(e, index)}">{channel.name}</Tab>
+							<Tab showCloseButton={true} on:close="{e => handleTabClose(e, index)}">{channel.name}</Tab>
 						{/each}
 						<ButtonIcon title="New Tab" on:click={handleTabAdd} icon={faPlus}/>
 					</TabList>

@@ -2,11 +2,9 @@
 	.svelte-emoji-picker {
 		background: #2c2c2c;
 		border: 1px solid #7d7d7d;
-		/*border-radius: 5px;*/
 		width: 25rem;
 		height: 21rem;
 		margin: 0 0.5em;
-		/*box-shadow: 0 0 3px 1px #ccc;*/
 		z-index: 1;
 	}
 
@@ -111,12 +109,10 @@
 </style>
 
 <script>
-	import {createEventDispatcher, tick} from 'svelte'
+	import {createEventDispatcher} from 'svelte'
 	import Icon from '../Icon.svelte'
 	import {faBuilding, faFlag, faLightbulb} from '@fortawesome/free-regular-svg-icons'
 	import {faSmile, faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons'
-	import Popper from 'popper.js'
-	import ClickOutside from '../ClickOutside.svelte'
 	import TabPanel from '../TabPanel.svelte'
 	import TabList from '../TabList.svelte'
 	import Tabs from '../Tabs.svelte'
@@ -132,12 +128,7 @@
 	export let maxRecents = 50
 	export let autoClose = true
 
-	let triggerButtonEl
-	let pickerEl
-	let popper
-
 	let variantsVisible = false
-	let pickerVisible = false
 
 	let variants
 	let currentEmoji
@@ -178,33 +169,6 @@
 		'Objects': faLightbulb,
 		'Symbols': faMusic,
 		'Flags': faFlag
-	}
-
-	function hidePicker() {
-		pickerVisible = false
-		searchText = ''
-		popper.destroy()
-	}
-
-	async function togglePicker() {
-		console.log('togglePicker')
-		pickerVisible = !pickerVisible
-
-		if (pickerVisible) {
-			await tick()
-			popper = new Popper(triggerButtonEl, pickerEl, {
-				placement: 'top'
-			})
-		} else {
-			searchText = ''
-			popper.destroy()
-		}
-	}
-
-	function onKeyDown(e) {
-		if (e.key === 'Escape') {
-			hidePicker()
-		}
 	}
 
 	function showEmojiDetails(e) {
@@ -251,50 +215,40 @@
 	}
 </script>
 
-<svelte:body on:keydown={onKeyDown}/>
+<div class="svelte-emoji-picker">
+	<EmojiSearch bind:searchText={searchText}/>
+	{#if searchText}
+		<EmojiSearchResults searchText={searchText} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick}/>
+	{:else}
+		<div class="svelte-emoji-picker__emoji-tabs">
+			<Tabs initialSelectedIndex={1}>
+				<TabList>
+					<Tab>
+						<Icon icon={faHistory}/>
+					</Tab>
+					{#each categoryOrder as category}
+						<Tab>
+							<Icon icon={categoryIcons[category]}/>
+						</Tab>
+					{/each}
+				</TabList>
 
-<button class="button button-icon button-emoji-picker svelte-emoji-picker__trigger" bind:this={triggerButtonEl} on:click|preventDefault={togglePicker} type="button">
-	<slot><Icon icon={faSmile}/></slot>
-</button>
+				<TabPanel>
+					<EmojiList name="Recently Used" emojis={recentEmojis} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
+				</TabPanel>
 
-{#if pickerVisible}
-	<ClickOutside on:clickoutside={hidePicker} exclude={[triggerButtonEl]}>
-		<div class="svelte-emoji-picker" bind:this={pickerEl} on:keydown={onKeyDown}>
-			<EmojiSearch bind:searchText={searchText}/>
-			{#if searchText}
-				<EmojiSearchResults searchText={searchText} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick}/>
-			{:else}
-				<div class="svelte-emoji-picker__emoji-tabs">
-					<Tabs initialSelectedIndex={1}>
-						<TabList>
-							<Tab>
-								<Icon icon={faHistory}/>
-							</Tab>
-							{#each categoryOrder as category}
-								<Tab>
-									<Icon icon={categoryIcons[category]}/>
-								</Tab>
-							{/each}
-						</TabList>
-
-						<TabPanel>
-							<EmojiList name="Recently Used" emojis={recentEmojis} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
-						</TabPanel>
-
-						{#each categoryOrder as category}
-							<TabPanel>
-								<EmojiList name={category} emojis={emojiCategories[category]} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
-							</TabPanel>
-						{/each}
-					</Tabs>
-				</div>
-			{/if}
-
-			{#if variantsVisible}
-				<EmojiVariantPopup variants={variants} on:emojiclick={onVariantClick} on:close={hideVariants}/>
-			{/if}
-
-			<EmojiDetail emoji={currentEmoji}/>
+				{#each categoryOrder as category}
+					<TabPanel>
+						<EmojiList name={category} emojis={emojiCategories[category]} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
+					</TabPanel>
+				{/each}
+			</Tabs>
 		</div>
-	</ClickOutside>
-{/if}
+	{/if}
+
+	{#if variantsVisible}
+		<EmojiVariantPopup variants={variants} on:emojiclick={onVariantClick} on:close={hideVariants}/>
+	{/if}
+
+	<EmojiDetail emoji={currentEmoji}/>
+</div>

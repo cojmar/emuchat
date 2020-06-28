@@ -64,6 +64,8 @@
 	import ButtonIcon from './ButtonIcon.svelte'
 	import {faTimes} from '@fortawesome/free-solid-svg-icons/faTimes'
 
+	export let showCloseButton = false
+
 	const dispatch = createEventDispatcher()
 
 	const tab = {
@@ -73,6 +75,7 @@
 	const {addTab, selectTab, selectedTab} = getContext(TABS)
 
 	addTab(tab)
+	// selectTab(tab)
 
 	function removeTab() {
 		id--
@@ -82,5 +85,7 @@
 
 <span class="tab" class:selected={$selectedTab === tab} on:click={() => selectTab(tab)}>
 	<slot>Tab</slot>
-	<ButtonIcon class="button button-icon button-close" title="Close" icon={faTimes} on:click={removeTab}/>
+	{#if showCloseButton}
+		<ButtonIcon class="button button-icon button-close" title="Close" icon={faTimes} on:click={removeTab}/>
+	{/if}
 </span>

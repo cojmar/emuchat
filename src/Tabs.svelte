@@ -12,7 +12,7 @@
 </script>
 
 <script>
-	import {setContext, onDestroy} from 'svelte'
+	import {setContext, onDestroy, tick} from 'svelte'
 	import {writable} from 'svelte/store'
 
 	const tabs = []
@@ -43,9 +43,10 @@
 				selectedPanel.update(current => current === panel ? panels[i] || panels[panels.length - 1] : current)
 			})
 		},
-		selectTab: tab => {
+		selectTab: async tab => {
 			const i = tabs.indexOf(tab)
 			selectedTab.set(tab)
+			await tick()
 			selectedPanel.set(panels[i])
 		},
 		tabs,
