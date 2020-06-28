@@ -1,12 +1,9 @@
 <script>
 	import {createEventDispatcher} from 'svelte';
-
 	import {faFrown} from '@fortawesome/free-regular-svg-icons';
 	import Icon from 'fa-svelte';
-
 	import EmojiList from './EmojiList.svelte';
-
-	import emojiData from './data/emoji.js';
+	import emojiData from './emoji.js';
 
 	export let searchText = '';
 

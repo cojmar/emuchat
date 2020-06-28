@@ -77,6 +77,8 @@
 	import Tabs from './Tabs.svelte'
 	import {TABS} from './Tabs.svelte'
 	import Tab from './Tab.svelte'
+	import Icon from 'fa-svelte'
+	import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 
 	let currentTab = 0
 
@@ -145,14 +147,12 @@
 			{#if channels}
 				<Tabs>
 					<TabList>
+						<ButtonIcon title="New Tab" on:click={handleTabAdd}>
+							<Icon icon={faPlus}/>
+						</ButtonIcon>
 						{#each channels as channel, index}
 							<Tab on:close="{e => handleTabClose(e, index)}">{channel.name}</Tab>
 						{/each}
-						<ButtonIcon title="New Tab" on:click={handleTabAdd}>
-							<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512">
-								<path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
-							</svg>
-						</ButtonIcon>
 					</TabList>
 
 					{#each channels as channel}

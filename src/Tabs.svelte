@@ -25,7 +25,7 @@
 	setContext(TABS, {
 		addTab: tab => {
 			tabs.push(tab)
-			selectedTab.update(current => initialSelectedIndex ? tabs[initialSelectedIndex] : current || tab)
+			selectedTab.update(current => current || tab)
 
 			onDestroy(() => {
 				const i = tabs.indexOf(tab)
@@ -36,7 +36,7 @@
 
 		addPanel: panel => {
 			panels.push(panel)
-			selectedPanel.update(current => initialSelectedIndex ? panels[initialSelectedIndex] : current || panel)
+			selectedPanel.update(current => current || panel)
 
 			onDestroy(() => {
 				const i = panels.indexOf(panel)

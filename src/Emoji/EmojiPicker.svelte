@@ -7,6 +7,7 @@
 		height: 21rem;
 		margin: 0 0.5em;
 		/*box-shadow: 0 0 3px 1px #ccc;*/
+		z-index: 1;
 	}
 
 	.svelte-emoji-picker :global(a) {
@@ -56,13 +57,13 @@
 		border-color: #fff;
 	}
 
-	.svelte-emoji-picker__trigger {
+	/*.svelte-emoji-picker__trigger {
 		background-color: #2c2c2c;
 		border: 1px solid #7d7d7d;
 		border-right: none;
 		color: #7d7d7d;
-		width: 28px;
-		height: 28px;
+		width: 22px;
+		height: 22px;
 		padding: 0;
 		cursor: pointer;
 		vertical-align: top;
@@ -89,7 +90,7 @@
 
 	.svelte-emoji-picker__trigger:hover :global(svg path) {
 		fill: #fff;
-	}
+	}*/
 
 	.svelte-emoji-picker__emoji-tabs {
 		padding: 0.25em;
@@ -111,24 +112,23 @@
 
 <script>
 	import {createEventDispatcher, onMount, tick} from 'svelte';
-
-	import {faBuilding, faFlag, faLightbulb, faSmile} from '@fortawesome/free-regular-svg-icons';
-	import {faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons';
 	import Icon from 'fa-svelte';
+	import {faBuilding, faFlag, faLightbulb} from '@fortawesome/free-regular-svg-icons';
+	import {faSmile, faCat, faCoffee, faFutbol, faHistory, faMusic} from '@fortawesome/free-solid-svg-icons';
 	import Popper from 'popper.js';
-
-	import ClickOutside from '../Misc/ClickOutside.svelte';
-	import {Tabs, Tab, TabList, TabPanel} from '../Svelteit/';
-
+	import ClickOutside from '../ClickOutside.svelte';
+	import ButtonIcon from '../ButtonIcon.svelte'
+	import TabPanel from '../TabPanel.svelte'
+	import TabList from '../TabList.svelte'
+	import Tabs from '../Tabs.svelte'
+	import {TABS} from '../Tabs.svelte'
+	import Tab from '../Tab.svelte'
 	import EmojiDetail from './EmojiDetail.svelte';
 	import EmojiList from './EmojiList.svelte';
 	import EmojiSearch from './EmojiSearch.svelte';
 	import EmojiSearchResults from './EmojiSearchResults.svelte';
-	import VariantPopup from '../Misc/VariantPopup.svelte';
-
-	import emojiData from './data/emoji.js';
-
-	const smileIcon = faSmile;
+	import EmojiVariantPopup from './EmojiVariantPopup.svelte';
+	import emojiData from './emoji.js';
 
 	export let maxRecents = 50;
 	export let autoClose = true;
@@ -148,6 +148,7 @@
 	const dispatch = createEventDispatcher();
 
 	const emojiCategories = {};
+
 	emojiData.forEach(emoji => {
 		let categoryList = emojiCategories[emoji.category];
 
@@ -187,12 +188,13 @@
 	}
 
 	async function togglePicker() {
+		console.log('togglePicker')
 		pickerVisible = !pickerVisible;
 
 		if (pickerVisible) {
 			await tick();
 			popper = new Popper(triggerButtonEl, pickerEl, {
-				placement: 'right'
+				placement: 'top'
 			});
 		} else {
 			searchText = '';
@@ -252,9 +254,14 @@
 
 <svelte:body on:keydown={onKeyDown} />
 
-<button class="svelte-emoji-picker__trigger" bind:this={triggerButtonEl} on:click|preventDefault={togglePicker} type="button">
-	<Icon icon={smileIcon} />
-</button>
+<slot>
+	<button class="button button-icon button-emoji-picker svelte-emoji-picker__trigger" bind:this={triggerButtonEl} on:click|preventDefault={togglePicker} type="button">
+		<slot><Icon icon={faSmile} /></slot>
+	</button>
+	<!--<ButtonIcon bind:this={triggerButtonEl} on:click={togglePicker}>
+		<Icon icon={faSmile} />
+	</ButtonIcon>-->
+</slot>
 
 {#if pickerVisible}
 	<ClickOutside on:clickoutside={hidePicker} exclude={[triggerButtonEl]}>
@@ -290,7 +297,7 @@
 			{/if}
 
 			{#if variantsVisible}
-				<VariantPopup variants={variants} on:emojiclick={onVariantClick} on:close={hideVariants}/>
+				<EmojiVariantPopup variants={variants} on:emojiclick={onVariantClick} on:close={hideVariants}/>
 			{/if}
 
 			<EmojiDetail emoji={currentEmoji}/>

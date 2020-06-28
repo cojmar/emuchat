@@ -1,5 +1,7 @@
 <style>
 	:global(.button.button-icon) {
+		width: 22px;
+		height: 22px;
 		padding: 2px;
 	}
 
@@ -34,6 +36,6 @@
 	import Button from './Button.svelte'
 </script>
 
-<Button class="button button-icon" on:click {...$$props}>
+<Button class="button button-icon" {...$$props} on:click>
 	<slot />
 </Button>

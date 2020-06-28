@@ -1,11 +1,3 @@
-<script>
-	import Emoji from './Emoji.svelte';
-
-	export let name = '';
-	export let withTabs = true;
-	export let emojis;
-</script>
-
 <style>
 	h3 {
 		margin: 0.25em;
@@ -23,6 +15,14 @@
 		height: 14.9rem;
 	}
 </style>
+
+<script>
+	import Emoji from './Emoji.svelte';
+
+	export let name = '';
+	export let withTabs = true;
+	export let emojis;
+</script>
 
 <h3>{name}</h3>
 

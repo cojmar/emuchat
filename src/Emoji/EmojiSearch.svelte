@@ -1,30 +1,3 @@
-<script>
-	import {onMount} from 'svelte';
-
-	import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
-	import Icon from 'fa-svelte';
-
-	export let searchText = '';
-
-	let searchField;
-
-	onMount(() => {
-		searchField.focus();
-	});
-
-	function clearSearchText() {
-		searchText = '';
-		searchField.focus();
-	}
-
-	function handleKeyDown(event) {
-		if (event.key === 'Escape' && searchText) {
-			clearSearchText();
-			event.stopPropagation();
-		}
-	}
-</script>
-
 <style>
 	.svelte-emoji-picker__search {
 		padding: 0.25em;
@@ -56,6 +29,33 @@
 		cursor: pointer;
 	}
 </style>
+
+<script>
+	import {onMount} from 'svelte';
+
+	import {faSearch, faTimes} from '@fortawesome/free-solid-svg-icons';
+	import Icon from 'fa-svelte';
+
+	export let searchText = '';
+
+	let searchField;
+
+	onMount(() => {
+		searchField.focus();
+	});
+
+	function clearSearchText() {
+		searchText = '';
+		searchField.focus();
+	}
+
+	function handleKeyDown(event) {
+		if (event.key === 'Escape' && searchText) {
+			clearSearchText();
+			event.stopPropagation();
+		}
+	}
+</script>
 
 <div class="svelte-emoji-picker__search">
 	<input type="text" placeholder="Search emojis..." bind:value={searchText} bind:this={searchField} on:keydown={handleKeyDown}>

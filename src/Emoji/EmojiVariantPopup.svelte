@@ -1,24 +1,3 @@
-<script>
-	import {createEventDispatcher} from 'svelte';
-
-	import {faTimes} from '@fortawesome/free-solid-svg-icons';
-	import Icon from 'fa-svelte';
-
-	import Emoji from '../Emoji/Emoji.svelte';
-
-	export let variants;
-
-	const dispatch = createEventDispatcher();
-
-	function onClickClose() {
-		dispatch('close');
-	}
-
-	function onClickContainer(event) {
-		dispatch('close');
-	}
-</script>
-
 <style>
 	.svelte-emoji-picker__variants-container {
 		position: absolute;
@@ -47,6 +26,25 @@
 		cursor: pointer;
 	}
 </style>
+
+<script>
+	import {createEventDispatcher} from 'svelte';
+	import {faTimes} from '@fortawesome/free-solid-svg-icons';
+	import Icon from 'fa-svelte';
+	import Emoji from './Emoji.svelte';
+
+	export let variants;
+
+	const dispatch = createEventDispatcher();
+
+	function onClickClose() {
+		dispatch('close');
+	}
+
+	function onClickContainer(event) {
+		dispatch('close');
+	}
+</script>
 
 <div class="svelte-emoji-picker__variants-container" on:click={onClickContainer}>
 	<div class="svelte-emoji-picker__variants">

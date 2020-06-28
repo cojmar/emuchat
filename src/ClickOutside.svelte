@@ -1,3 +1,6 @@
+<style>
+</style>
+
 <script>
 	import { createEventDispatcher } from 'svelte';
 
@@ -21,14 +24,15 @@
 		return false;
 	}
 
-	function onClickOutside(event) {
-		if (!isExcluded(event.target)) {
+	function onClickOutside(e) {
+		if (!isExcluded(e.target)) {
 			dispatch('clickoutside');
 		}
 	}
 </script>
 
 <svelte:body on:click={onClickOutside} />
+
 <div bind:this={child}>
-	<slot></slot>
+	<slot/>
 </div>

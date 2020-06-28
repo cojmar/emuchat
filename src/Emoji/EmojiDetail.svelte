@@ -1,7 +1,3 @@
-<script>
-	export let emoji;
-</script>
-
 <style>
 	.svelte-emoji-picker__emoji-detail {
 		border-top: 1px solid #7d7d7d;
@@ -13,6 +9,10 @@
 		text-align: center;
 	}
 </style>
+
+<script>
+	export let emoji;
+</script>
 
 <div class="svelte-emoji-picker__emoji-detail">
 	{#if emoji}

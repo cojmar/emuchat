@@ -3,6 +3,7 @@
 		/* background-color: #2c2c2c; */
 		background-color: rgba(44, 44, 44, 0.9);
 		border: 1px solid #7d7d7d;
+		border-radius: 0;
 
 		font-family: Arial, Helvetica, sans-serif;
 		font-size: 100%;
@@ -58,6 +59,6 @@
 <script>
 </script>
 
-<button class="button" type="button" on:click {...$$props}>
+<button class="button" type="button" {...$$props} on:click>
 	<slot />
 </button>

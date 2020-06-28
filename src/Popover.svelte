@@ -1,34 +1,3 @@
-<script>
-	import { onMount } from "svelte";
-
-	export let color = "transparent";
-
-	let _triggerRef;
-	let _contentRef;
-	let _alignment;
-	let _open = true;
-
-	onMount(() => {
-		const triggerBounds = _triggerRef.getBoundingClientRect();
-		const contentBounds = _contentRef.getBoundingClientRect();
-
-		_alignment = triggerBounds.left + contentBounds.width > window.innerWidth ? -1 : 0;
-
-		_contentRef.style.bottom = triggerBounds.height + "px";
-
-		// Start with content box hidden
-		hide();
-	});
-
-	const show = () => {
-		_open = true;
-	};
-
-	const hide = () => {
-		_open = false;
-	};
-</script>
-
 <style>
 	.popover {
 		position: relative;
@@ -72,11 +41,35 @@
 	}
 </style>
 
+<script>
+	import {onMount} from 'svelte'
+
+	export let color = 'transparent'
+
+	let triggerRef
+	let contentRef
+	let alignment
+	let open = true
+
+	onMount(() => {
+		const triggerBounds = triggerRef.getBoundingClientRect()
+		const contentBounds = contentRef.getBoundingClientRect()
+
+		alignment = triggerBounds.left + contentBounds.width > window.innerWidth ? -1 : 0
+		contentRef.style.bottom = triggerBounds.height + 'px'
+
+		hide()
+	});
+
+	const show = () => open = true
+	const hide = () => open = false
+</script>
+
 <div class="popover" on:mousedown on:mouseover={show} on:mouseout={hide} on:mouseup on:mousewheel>
-	<div bind:this={_triggerRef}>
+	<div bind:this={triggerRef}>
 		<slot name="target" />
 	</div>
-	<div class="popover-content" bind:this={_contentRef} class:hidden={!_open} class:left-align={_alignment !== -1} class:right-align={_alignment === -1}>
+	<div class="popover-content" bind:this={contentRef} class:hidden={!open} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
 		<slot name="content" />
 		<div class="arrow" style="border-color: {color} transparent transparent transparent;"></div>
 	</div>

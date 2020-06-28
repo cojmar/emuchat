@@ -40,6 +40,12 @@
 
 <script>
 	function scroll(node) {
+		if (!MutationObserver) return
+
+		const observer = new MutationObserver(() => node.scrollLeft = node.scrollWidth);
+
+		observer.observe(node, {childList: true, subtree: true});
+
 		const scrollHorizontally = (e) => {
 			e = window.event || e
 			let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)))
@@ -55,6 +61,10 @@
 
 		return {
 			destroy() {
+				if (observer) {
+					observer.disconnect();
+				}
+
 				if (node.removeEventListener) {
 					node.removeEventListener('mousewheel', scrollHorizontally, false)
 					node.removeEventListener('DOMMouseScroll', scrollHorizontally, false)
