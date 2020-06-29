@@ -1,5 +1,5 @@
 <style>
-	.icon {
+	:global(.icon) {
 		width: 1em;
 		height: 1em;
 		overflow: visible;

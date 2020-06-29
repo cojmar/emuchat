@@ -3,8 +3,6 @@
 		width: 16px;
 		height: 16px;
 		vertical-align: middle;
-
-
 	}
 
 	:global(.avatar:after) {

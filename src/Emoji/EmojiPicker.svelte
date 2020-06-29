@@ -1,5 +1,5 @@
 <style>
-	:global(.svelte-emoji-picker) {
+	:global(.emoji-picker) {
 		background: #2c2c2c;
 		border: 1px solid #7d7d7d;
 		width: 16rem;
@@ -7,94 +7,86 @@
 		z-index: 1;
 	}
 
-	:global(.svelte-emoji-picker a) {
+	:global(.emoji-picker a) {
 		color: rgb(0,100,200);
 		text-decoration: none;
 	}
 
-	:global(.svelte-emoji-picker a:hover) {
+	:global(.emoji-picker a:hover) {
 		text-decoration: underline;
 	}
 
-	:global(.svelte-emoji-picker a:visited) {
+	:global(.emoji-picker a:visited) {
 		color: rgb(0,80,160);
 	}
 
-	:global(.svelte-emoji-picker input) {
+	:global(.emoji-picker input) {
 		padding: 0.4em;
 		box-sizing: border-box;
 		border: 1px solid #ccc;
 		border-radius: 2px;
 	}
 
-	:global(.svelte-emoji-picker input:disabled) {
+	:global(.emoji-picker input:disabled) {
 		color: #ccc;
 	}
 
-	:global(.svelte-emoji-picker input[type="range"]) {
+	:global(.emoji-picker input[type="range"]) {
 		height: 0;
 	}
 
-	:global(.svelte-emoji-picker button) {
+	:global(.emoji-picker button) {
 		border-color: #7d7d7d;
 		outline: none;
 	}
 
-	:global(.svelte-emoji-picker button:active) {
+	:global(.emoji-picker button:active) {
 		background-color: #7d7d7d;
 	}
 
-	:global(.svelte-emoji-picker button:hover) {
+	:global(.emoji-picker button:hover) {
 		border-color: #fff;
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs) {
+	:global(.emoji-picker .emoji-tabs) {
 		padding: 0.25em;
 		height: 15rem;
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs) {
+	:global(.emoji-picker .emoji-tabs) {
 		padding: 0.25em;
 		height: 15rem;
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tabs-panel) {
+	:global(.emoji-picker .emoji-tabs .tabs .tabs-panel) {
 		padding: 0;
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list) {
+	:global(.emoji-picker .emoji-tabs .tabs .tab-list) {
 		display: flex;
 		border: none;
 	}
 
-
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab) {
+	:global(.emoji-picker .emoji-tabs .tabs .tab-list .tab) {
 		border-right: none;
+		flex-grow: 1;
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab:hover) {
+	:global(.emoji-picker .emoji-tabs .tabs .tab-list .tab:hover) {
 		outline: none;
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab:hover svg path) {
+	:global(.emoji-picker .emoji-tabs .tabs .tab-list .tab:hover svg path) {
 		fill: #fff
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab.selected) {
+	:global(.emoji-picker .emoji-tabs .tabs .tab-list .tab.selected) {
 		background: transparent;
 		border-bottom: 2px solid #fff;
 	}
 
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list .tab.selected svg path) {
+	:global(.emoji-picker .emoji-tabs .tabs .tab-list .tab.selected svg path) {
 		fill: #fff
-	}
-
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tabs-panel) {
-
-	}
-
-	:global(.svelte-emoji-picker__emoji-tabs .tabs .tab-list button) {
-		flex-grow: 1;
 	}
 </style>
 
@@ -122,7 +114,7 @@
 	let variants
 	let currentEmoji
 	let searchText
-	let recentEmojis = JSON.parse(localStorage.getItem('svelte-emoji-picker-recent')) || []
+	let recentEmojis = JSON.parse(localStorage.getItem('emoji-picker-recent')) || []
 
 	const dispatch = createEventDispatcher()
 
@@ -190,7 +182,7 @@
 
 	function saveRecent(emoji) {
 		recentEmojis = [emoji, ...recentEmojis.filter(recent => recent.key !== emoji.key)].slice(0, maxRecents)
-		localStorage.setItem('svelte-emoji-picker-recent', JSON.stringify(recentEmojis))
+		localStorage.setItem('emoji-picker-recent', JSON.stringify(recentEmojis))
 	}
 
 	function hideVariants() {
@@ -204,13 +196,13 @@
 	}
 </script>
 
-<div class="svelte-emoji-picker">
+<div class="emoji-picker">
 	<EmojiSearch bind:searchText={searchText}/>
 	{#if searchText}
 		<EmojiSearchResults searchText={searchText} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick}/>
 	{:else}
-		<div class="svelte-emoji-picker__emoji-tabs">
-			<Tabs initialSelectedIndex={0}>
+		<div class="emoji-tabs">
+			<Tabs initialSelectedIndex={recentEmojis.length > 0 ? 0 : 1}>
 				<TabList>
 					<Tab>
 						<Icon icon={faHistory}/>

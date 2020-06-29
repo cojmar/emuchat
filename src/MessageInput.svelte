@@ -4,14 +4,9 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-
 		border: 1px solid #4c4c4c;
-
 		margin: 2px;
 		padding: 4px;
-
-		/* white-space: nowrap; */
-		/* overflow: hidden; */
 	}
 
 	:global(.chat-input > *) {
@@ -77,7 +72,7 @@
 </script>
 
 <form class="chat-input clear" on:submit|preventDefault={handleSubmit}>
-	<PopOver color={'#fff'}>
+	<PopOver color={'#7d7d7d'}>
 		<div slot="target">
 			<ButtonIcon class="button button-icon button-emoji-picker" title="Emoji" icon={faSmile}/>
 		</div>

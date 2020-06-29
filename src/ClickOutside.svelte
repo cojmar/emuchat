@@ -1,6 +1,3 @@
-<style>
-</style>
-
 <script>
 	import {createEventDispatcher} from 'svelte'
 

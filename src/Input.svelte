@@ -33,24 +33,44 @@
 		color: #fff;
 	}
 
-		:global(.input:-ms-input-placeholder) {
+	:global(.input:-ms-input-placeholder) {
 		color: #7d7d7d;
 		opacity: 1;
+
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	:global(.input::-ms-input-placeholder) {
 		color: #7d7d7d;
 		opacity: 1;
+
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	:global(.input::-webkit-input-placeholder) {
 		color: #7d7d7d;
 		opacity: 1;
+
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	:global(.input::placeholder) {
 		color: #7d7d7d;
 		opacity: 1;
+
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	:global(.input:active::placeholder) {

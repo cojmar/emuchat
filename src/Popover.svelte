@@ -1,9 +1,9 @@
 <style>
-	.popover {
+	:global(.popover) {
 		position: relative;
 	}
 
-	.popover-content {
+	:global(.popover-content) {
 		display: inline-block;
 		position: absolute;
 		opacity: 0;
@@ -13,31 +13,31 @@
 		transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
 	}
 
-	.popover-content.visible {
+	:global(.popover-content.visible) {
 		opacity: 1;
 		visibility: visible;
 		transform: translate(0, -10px);
 	}
 
-	.arrow {
+	:global(.arrow) {
 		position: absolute;
 		content: '';
-		bottom: -6px;
-		padding: 7px;
-		background: #7d7d7d;
-		transform: rotate(-45deg);
+		bottom: -10px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 10px 10px 0 10px;
+		border-color: #7d7d7d transparent transparent transparent;
 		z-index: -1;
 	}
 
-	.left-align,
-	.left-align .arrow {
-		left: 3px;
+	:global(.left-align, .left-align .arrow) {
+		left: 0;
 		right: unset;
 	}
 
-	.right-align,
-	.right-align .arrow {
-		right: 3px;
+	:global(.right-align, .right-align .arrow) {
+		right: 0;
 		left: unset;
 	}
 </style>
@@ -68,7 +68,7 @@
 	<div bind:this={triggerRef}>
 		<slot name="target"/>
 	</div>
-	<div class="popover-content visible" bind:this={contentRef} class:visible={open} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
+	<div class="popover-content" bind:this={contentRef} class:visible={open} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
 		<slot name="content"/>
 		<div class="arrow" style="border-color: {color} transparent transparent transparent;"></div>
 	</div>

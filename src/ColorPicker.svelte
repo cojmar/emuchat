@@ -1,5 +1,5 @@
 <style>
-	.text-input {
+	:global(.text-input) {
 		border: 1px #ccc solid;
 		border-radius: 5px;
 		padding: 3px;
@@ -7,20 +7,20 @@
 		margin: 0;
 	}
 
-	.color-picker {
+	:global(.color-picker) {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		height: 90px;
 	}
 
-	.color-selectors {
+	:global(.color-selectors) {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 	}
 
-	.color-component {
+	:global(.color-component) {
 		display: flex;
 		flex-direction: row;
 		font-size: 12px;
@@ -28,20 +28,20 @@
 		justify-content: center;
 	}
 
-	.color-component strong {
+	:global(.color-component strong) {
 		width: 40px;
 	}
 
-	.color-component input[type="range"] {
+	:global(.color-component input[type="range"]) {
 		margin: 0 0 0 10px;
 	}
 
-	.color-component input[type="number"] {
+	:global(.color-component input[type="number"]) {
 		width: 50px;
 		margin: 0 0 0 10px;
 	}
 
-	.color-preview {
+	:global(.color-preview) {
 		font-size: 12px;
 		display: flex;
 		flex-direction: column;
@@ -49,7 +49,7 @@
 		justify-content: space-between;
 	}
 
-	.preview {
+	:global(.preview) {
 		height: 60px;
 		width: 60px;
 	}

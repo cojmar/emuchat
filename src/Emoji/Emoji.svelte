@@ -1,5 +1,5 @@
 <style>
-	button {
+	:global(button.emoji) {
 		border: none;
 		background: transparent;
 		cursor: pointer;
@@ -10,7 +10,7 @@
 		margin: 0;
 	}
 
-	button:hover {
+	:global(button.emoji:hover) {
 		background: #7d7d7d;
 		border-radius: 5px;
 	}
@@ -36,4 +36,4 @@
 	}
 </script>
 
-<button on:mouseover={onMouseOver} on:mouseout={onMouseOut} on:click={onClick} type="button" >{emoji.emoji}</button>
+<button class="emoji" on:mouseover={onMouseOver} on:mouseout={onMouseOut} on:click={onClick} type="button" >{emoji.emoji}</button>

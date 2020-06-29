@@ -1,6 +1,3 @@
-<style>
-</style>
-
 <script>
 	import User from './User.svelte'
 

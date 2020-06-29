@@ -1,24 +1,24 @@
 <style>
-	.svelte-emoji-picker__search-results {
+	:global(.search-results) {
 		padding: 0.25em;
 		height: 15rem;
 	}
 
-	.svelte-emoji-picker__search-results h3 {
+	:global(.search-results h3) {
 		margin: 0;
 		font-size: 0.9em;
 		margin: 0 auto;
 		color: #999999;
 	}
 
-	.svelte-emoji-picker__no-results {
+	:global(.no-results) {
 		height: 15rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 	}
 
-	.svelte-emoji-picker__no-results .icon {
+	:global(.no-results .icon) {
 		margin: 0 auto;
 		font-size: 3em;
 		color: #999999;
@@ -45,11 +45,11 @@
 	}
 </script>
 
-<div class="svelte-emoji-picker__search-results">
+<div class="search-results">
 	{#if searchResults.length}
 		<EmojiList emojis={searchResults} withTabs={false} on:emojihover on:emojiclick/>
 	{:else}
-		<div class="svelte-emoji-picker__no-results" on:mouseover={onMouseOver}>
+		<div class="no-results" on:mouseover={onMouseOver}>
 			<div class="icon">
 				<Icon icon={faFrown}/>
 			</div>

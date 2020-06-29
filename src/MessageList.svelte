@@ -1,6 +1,3 @@
-<style>
-</style>
-
 <script>
 	import Message from './Message.svelte'
 

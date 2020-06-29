@@ -50,10 +50,6 @@
 		padding: 10px;
 	}
 
-	/*:global(.chat-wrapper .clear) {
-		zoom: 1;
-	}*/
-
 	:global(.chat-wrapper .clear:before, .chat-wrapper .clear:after) {
 		content: '';
 		display: table;
