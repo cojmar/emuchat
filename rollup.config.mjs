@@ -7,7 +7,7 @@ import { terser } from 'rollup-plugin-terser'
 import babel  from 'rollup-plugin-babel'
 import svelte from 'rollup-plugin-svelte-hot'
 import hmr from 'rollup-plugin-hot'
-import autoPreprocess from 'svelte-preprocess'
+//import autoPreprocess from 'svelte-preprocess'
 
 const dev = !!process.env.ROLLUP_WATCH
 
@@ -26,7 +26,7 @@ export default {
 			css: css => {
 				css.write('docs/assets/css/main.min.css')
 			},
-			preprocess: autoPreprocess(),
+			//preprocess: autoPreprocess(),
 			hot: dev && {
 				optimistic: true,
 				noPreserveState: true
