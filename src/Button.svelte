@@ -1,7 +1,6 @@
 <style>
 	:global(.button) {
-		/* background-color: #2c2c2c; */
-		background-color: rgba(44, 44, 44, 0.9);
+		background-color: #2c2c2c;
 		border: 1px solid #7d7d7d;
 		border-radius: 0;
 

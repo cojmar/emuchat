@@ -8,7 +8,7 @@
 		position: absolute;
 		opacity: 0;
 		visibility: hidden;
-		transform: translate(0, 0px);
+		transform: translate(0, -20px);
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 		transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
 	}
@@ -17,6 +17,51 @@
 		opacity: 1;
 		visibility: visible;
 		transform: translate(0, -2px);
+	}
+
+	:global(.popover-target .button) {
+		background-color: #2c2c2c;
+		border: 1px solid #7d7d7d;
+		outline: none;
+		color: #7d7d7d;
+	}
+
+	:global(.popover-target .button:focus) {
+		background-color: #2c2c2c;
+		border: 1px solid #7d7d7d;
+		outline: none;
+		color: #7d7d7d;
+	}
+
+	:global(.popover-target .button:active) {
+		background-color: #2c2c2c;
+		border: 1px solid #7d7d7d;
+		outline: none;
+		color: #7d7d7d;
+	}
+
+	:global(.popover-target .button:hover) {
+		/* background-color: #2c2c2c; */
+		border: 1px solid #fff;
+		outline: 1px solid #fff;
+		outline-offset: -1px;
+		color: #7d7d7d;
+	}
+
+	:global(.popover-target .button:active svg path) {
+		fill: #7d7d7d !important;
+	}
+
+	:global(.popover-target .button:focus svg path) {
+		fill: #7d7d7d !important;
+	}
+
+	:global(.popover-target .button:hover svg path) {
+		fill: #7d7d7d !important;
+	}
+
+	:global(.popover-target.pinned .button svg path) {
+		fill: #fff !important;
 	}
 
 	:global(.arrow) {
@@ -37,7 +82,7 @@
 	}
 
 	:global(.right-align, .right-align .arrow) {
-		right: 0;
+		right: -22px;
 		left: unset;
 	}
 </style>
@@ -51,6 +96,7 @@
 	let contentRef
 	let alignment
 	let open = false
+	let pinned = false
 
 	onMount(() => {
 		const triggerBounds = triggerRef.getBoundingClientRect()
@@ -60,15 +106,24 @@
 		contentRef.style.bottom = triggerBounds.height + 'px'
 	});
 
+	const pin = (e) => {
+		if (pinned) {
+			pinned = false
+			open = false
+		} else {
+			pinned = true
+			open = true
+		}
+	}
 	const show = () => open = true
-	const hide = () => open = false
+	const hide = () => open = pinned
 </script>
 
 <div class="popover" on:mousedown on:mouseover={show} on:mouseout={hide} on:mouseup on:mousewheel>
-	<div bind:this={triggerRef}>
+	<div class="popover-target" on:click={pin} class:pinned={pinned} bind:this={triggerRef}>
 		<slot name="target"/>
 	</div>
-	<div class="popover-content" class:visible={open} bind:this={contentRef}  class:left-align={alignment !== -1} class:right-align={alignment === -1}>
+	<div class="popover-content" class:visible={open} bind:this={contentRef} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
 		<slot name="content"/>
 		<!-- <div class="arrow" style="border-color: {color} transparent transparent transparent;"></div> -->
 	</div>
