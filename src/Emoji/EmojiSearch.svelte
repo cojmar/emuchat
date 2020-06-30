@@ -7,7 +7,7 @@
 	:global(.search input) {
 		width: 100%;
 		border-radius: 0;
-		border-color: #7d7d7d;
+		border: 1px solid #7d7d7d;
 		background-color: #2c2c2c;
 		color: #fff;
 	}

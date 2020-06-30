@@ -18,7 +18,7 @@
 	}
 
 	:global(.input:active) {
-		background-color: #7d7d7d;
+		/* background-color: #7d7d7d; */
 		border-color: #fff;
 		color: #fff;
 	}

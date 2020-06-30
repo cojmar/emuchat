@@ -1,6 +1,6 @@
 <style>
 	:global(.emoji-picker) {
-		background: rgb(44, 44, 44, 0.9);
+		background: #2c2c2c;
 		border: 1px solid #7d7d7d;
 		width: 16rem;
 		/* height: 21rem; */
@@ -23,16 +23,6 @@
 	:global(.emoji-picker input) {
 		padding: 0.4em;
 		box-sizing: border-box;
-		border: 1px solid #ccc;
-		border-radius: 2px;
-	}
-
-	:global(.emoji-picker input:disabled) {
-		color: #ccc;
-	}
-
-	:global(.emoji-picker input[type="range"]) {
-		height: 0;
 	}
 
 	:global(.emoji-picker button) {

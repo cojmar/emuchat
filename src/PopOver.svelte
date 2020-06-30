@@ -68,8 +68,7 @@
 	<div bind:this={triggerRef}>
 		<slot name="target"/>
 	</div>
-	<!-- class:visible={open} -->
-	<div class="popover-content visible" bind:this={contentRef}  class:left-align={alignment !== -1} class:right-align={alignment === -1}>
+	<div class="popover-content" class:visible={open} bind:this={contentRef}  class:left-align={alignment !== -1} class:right-align={alignment === -1}>
 		<slot name="content"/>
 		<!-- <div class="arrow" style="border-color: {color} transparent transparent transparent;"></div> -->
 	</div>

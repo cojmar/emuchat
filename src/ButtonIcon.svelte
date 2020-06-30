@@ -30,7 +30,7 @@
 	}
 
 	:global(.button.button-icon:disabled svg.icon path) {
-		fill: #4c4c4c;
+		/* fill: #4c4c4c; */
 	}
 </style>
 

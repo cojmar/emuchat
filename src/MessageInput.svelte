@@ -14,15 +14,15 @@
 	}
 
 	:global(.chat-input .button-emoji-picker) {
-		border-right: none;
+		border-left: none;
 	}
 
 	:global(.chat-input .button-emoji-picker:active) {
-		border-right: none;
+		border-left: none;
 	}
 
 	:global(.chat-input .button-emoji-picker:disabled:active) {
-		border-right: none;
+		border-left: none;
 	}
 
 	:global(.chat-input .button-send) {
@@ -71,7 +71,8 @@
 </script>
 
 <form class="chat-input clear" on:submit|preventDefault={handleSubmit}>
-	<PopOver color={'#7d7d7d'}>
+	<Input class="input input-message" bind:value={message} placeholder="Enter a message" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
+	<PopOver>
 		<div slot="target">
 			<ButtonIcon class="button button-icon button-emoji-picker" icon={faSmile}/>
 		</div>
@@ -79,7 +80,6 @@
 			<EmojiPicker on:emoji={onEmoji}/>
 		</div>
 	</PopOver>
-	<Input class="input input-message" bind:value={message} placeholder="Enter a message" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
 	<ButtonIcon class="button button-icon button-send" type="submit" title={message ? "Send" : "Disabled"} disabled={!message}>
 		<svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">
 			<path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>

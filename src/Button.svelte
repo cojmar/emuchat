@@ -46,11 +46,11 @@
 
 	:global(.button:disabled) {
 		/* background-color: #2c2c2c; */
-		background-color: rgba(44, 44, 44, 0.9);
-		outline: 1px solid #4c4c4c;
-		outline-offset: -1px;
-		border-color: #4c4c4c;
-		color: #4c4c4c;
+		/* background-color: rgba(44, 44, 44, 0.9); */
+		/* outline: 1px solid #4c4c4c; */
+		/* outline-offset: -1px; */
+		/* border-color: #4c4c4c; */
+		/* color: #4c4c4c; */
 
 		/* cursor: not-allowed; */
 	}
