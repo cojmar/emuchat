@@ -38,7 +38,7 @@
 	}
 
 	:global(.chat-input .input-message) {
-		width: calc(100% - 66px);
+		width: calc(100% - 44px);
 	}
 </style>
 
@@ -73,7 +73,7 @@
 <form class="chat-input clear" on:submit|preventDefault={handleSubmit}>
 	<PopOver color={'#7d7d7d'}>
 		<div slot="target">
-			<ButtonIcon class="button button-icon button-emoji-picker" title="Emoji" icon={faSmile}/>
+			<ButtonIcon class="button button-icon button-emoji-picker" icon={faSmile}/>
 		</div>
 		<div slot="content">
 			<EmojiPicker on:emoji={onEmoji}/>

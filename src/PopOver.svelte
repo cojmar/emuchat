@@ -16,7 +16,7 @@
 	:global(.popover-content.visible) {
 		opacity: 1;
 		visibility: visible;
-		transform: translate(0, -10px);
+		transform: translate(0, -2px);
 	}
 
 	:global(.arrow) {
@@ -68,7 +68,8 @@
 	<div bind:this={triggerRef}>
 		<slot name="target"/>
 	</div>
-	<div class="popover-content" bind:this={contentRef} class:visible={open} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
+	<!-- class:visible={open} -->
+	<div class="popover-content visible" bind:this={contentRef}  class:left-align={alignment !== -1} class:right-align={alignment === -1}>
 		<slot name="content"/>
 		<!-- <div class="arrow" style="border-color: {color} transparent transparent transparent;"></div> -->
 	</div>

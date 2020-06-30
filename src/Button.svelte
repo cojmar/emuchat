@@ -52,7 +52,7 @@
 		border-color: #4c4c4c;
 		color: #4c4c4c;
 
-		cursor: not-allowed;
+		/* cursor: not-allowed; */
 	}
 </style>
 

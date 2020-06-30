@@ -1,6 +1,6 @@
 <style>
 	:global(.emoji-picker) {
-		background: #2c2c2c;
+		background: rgb(44, 44, 44, 0.9);
 		border: 1px solid #7d7d7d;
 		width: 16rem;
 		/* height: 21rem; */
