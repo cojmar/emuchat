@@ -97,7 +97,6 @@
 	import emojiData from './emoji.js'
 
 	export let maxRecents = 50
-	export let autoClose = true
 
 	let variantsVisible = false
 
@@ -153,10 +152,6 @@
 		} else {
 			dispatch('emoji', e.detail.emoji)
 			saveRecent(e.detail)
-
-			if (autoClose) {
-				hidePicker()
-			}
 		}
 	}
 
@@ -164,10 +159,6 @@
 		dispatch('emoji', e.detail.emoji)
 		saveRecent(e.detail)
 		hideVariants()
-
-		if (autoClose) {
-			hidePicker()
-		}
 	}
 
 	function saveRecent(emoji) {

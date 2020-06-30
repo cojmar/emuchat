@@ -4,8 +4,8 @@
 		top: 0;
 		left: 0;
 		background: rgba(0, 0, 0, 0.5);
-		width: 25rem;
-		height: 21rem;
+		width: 100%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;

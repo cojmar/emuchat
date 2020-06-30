@@ -21,8 +21,8 @@
 
 <div class="emoji-detail">
 	{#if emoji}
-		{emoji.name}
+		{emoji.emoji} {emoji.name.replace(/_|-/gi, ' ').replace(/female/gi, 'female ').replace(/male/gi, 'male ')}
 	{:else}
-		&nbsp;
+		Select or search for a emoji
 	{/if}
 </div>

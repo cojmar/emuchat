@@ -21,39 +21,42 @@
 
 	:global(.popover-target .button) {
 		background-color: #2c2c2c;
-		border: 1px solid #7d7d7d;
+		border-color: #7d7d7d;
 		outline: none;
 		color: #7d7d7d;
 	}
 
 	:global(.popover-target .button:focus) {
 		background-color: #2c2c2c;
-		border: 1px solid #7d7d7d;
+		border-color: #7d7d7d;
 		outline: none;
 		color: #7d7d7d;
 	}
 
 	:global(.popover-target .button:active) {
-		background-color: #2c2c2c;
-		border: 1px solid #7d7d7d;
+		background-color: #7d7d7d;
+		border-color: #7d7d7d;
 		outline: none;
 		color: #7d7d7d;
 	}
 
 	:global(.popover-target .button:hover) {
-		/* background-color: #2c2c2c; */
-		border: 1px solid #fff;
+		border-color: #fff;
 		outline: 1px solid #fff;
 		outline-offset: -1px;
 		color: #7d7d7d;
 	}
 
 	:global(.popover-target .button:active svg path) {
-		fill: #7d7d7d !important;
+		fill: #fff !important;
 	}
 
 	:global(.popover-target .button:focus svg path) {
 		fill: #7d7d7d !important;
+	}
+
+	:global(.popover-target .button:active:focus svg path) {
+		fill: #fff !important;
 	}
 
 	:global(.popover-target .button:hover svg path) {
@@ -61,6 +64,10 @@
 	}
 
 	:global(.popover-target.pinned .button svg path) {
+		fill: #fff !important;
+	}
+
+	:global(.popover-target.pinned .button:active svg path) {
 		fill: #fff !important;
 	}
 
