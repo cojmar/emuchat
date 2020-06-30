@@ -30,14 +30,15 @@
 		position: absolute;
 		width: 100%;
 		height: 100%;
+		z-index: -1;
 	}
 
 	:global(.chat-wrapper > .chat-container > .chat-messages) {
 		width: calc(100% - 4px);
-		height: calc(100% - 38px);
-		border: 1px solid #4c4c4c;
+		height: calc(100% - 28px);
+		/* border: 1px solid #4c4c4c; */
 		margin: 2px;
-		padding: 4px;
+		/* padding: 4px; */
 	}
 
 	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tab-list) {
@@ -75,6 +76,7 @@
 	import Tabs from './Tabs.svelte'
 	import Tab from './Tab.svelte'
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
+	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
 	let currentTabIndex = 1
 	let channels = [{
@@ -149,8 +151,8 @@
 							<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
 						{/each}
 						<ButtonIcon title="New Tab" icon={faPlus} on:click={handleTabNew}/>
+						<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
 					</TabList>
-
 					{#each channels as channel}
 						<TabPanel>
 							<SplitPane type="horizontal" pos={75} min={200} spacing={1}>

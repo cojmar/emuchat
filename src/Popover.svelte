@@ -45,7 +45,7 @@
 <script>
 	import {onMount} from 'svelte'
 
-	export let color = 'transparent'
+	// export let color = 'transparent'
 
 	let triggerRef
 	let contentRef
@@ -70,6 +70,6 @@
 	</div>
 	<div class="popover-content" bind:this={contentRef} class:visible={open} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
 		<slot name="content"/>
-		<div class="arrow" style="border-color: {color} transparent transparent transparent;"></div>
+		<!-- <div class="arrow" style="border-color: {color} transparent transparent transparent;"></div> -->
 	</div>
 </div>

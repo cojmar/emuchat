@@ -4,40 +4,40 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		border: 1px solid #4c4c4c;
+		/* border: 1px solid #4c4c4c; */
 		margin: 2px;
-		padding: 4px;
+		/* padding: 4px; */
 	}
 
 	:global(.chat-input > *) {
 		float: left;
 	}
 
-	:global(.chat-input > .button-emoji-picker) {
+	:global(.chat-input .button-emoji-picker) {
 		border-right: none;
 	}
 
-	:global(.chat-input > .button-emoji-picker:active) {
+	:global(.chat-input .button-emoji-picker:active) {
 		border-right: none;
 	}
 
-	:global(.chat-input > .button-emoji-picker:disabled:active) {
+	:global(.chat-input .button-emoji-picker:disabled:active) {
 		border-right: none;
 	}
 
-	:global(.chat-input > .button-send) {
+	:global(.chat-input .button-send) {
 		border-left: none;
 	}
 
-	:global(.chat-input > .button-send:active) {
+	:global(.chat-input .button-send:active) {
 		border-left: none;
 	}
 
-	:global(.chat-input > .button-send:disabled) {
+	:global(.chat-input .button-send:disabled) {
 		border-left: none;
 	}
 
-	:global(.chat-input > .input-message) {
+	:global(.chat-input .input-message) {
 		width: calc(100% - 66px);
 	}
 </style>
@@ -49,7 +49,6 @@
 	import Input from './Input.svelte'
 	import {EmojiPicker} from './Emoji'
 	import {faSmile} from '@fortawesome/free-solid-svg-icons/faSmile'
-	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
 	const dispatch = createEventDispatcher()
 
@@ -80,7 +79,6 @@
 			<EmojiPicker on:emoji={onEmoji}/>
 		</div>
 	</PopOver>
-	<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
 	<Input class="input input-message" bind:value={message} placeholder="Enter a message" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
 	<ButtonIcon class="button button-icon button-send" type="submit" title={message ? "Send" : "Disabled"} disabled={!message}>
 		<svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">

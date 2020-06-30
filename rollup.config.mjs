@@ -17,7 +17,7 @@ export default {
 		sourcemap: true,
 		exports: 'named',
 		format: 'iife',
-		name: 'app',
+		name: 'App',
 		file: 'docs/assets/js/main.min.js'
 	},
 	plugins: [
@@ -38,7 +38,7 @@ export default {
 		}),
 		commonjs(),
 		dev && replace({
-			dev: dev,
+			dev: dev
 		}),
 		!dev && babel({
 			env: {
@@ -66,12 +66,11 @@ export default {
 			]
 		}),
 		dev && (() => {
-			polka().use(sirv('docs', {
+			polka().use('emuchat', sirv('docs', {
 				dev: true,
 				single: true
 			})).listen(5000, err => {
 				if (err) throw err
-				console.log('[HTTP] Listening on localhost:5000')
 			})
 		})(),
 		dev && hmr({
