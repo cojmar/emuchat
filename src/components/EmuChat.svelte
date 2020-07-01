@@ -96,7 +96,7 @@
 	}];
 
 	onMount(() => {
-		Socket.connect()
+		console.log('onMount')
 
 		Socket.on('connect', data => {
 			channels[0].messages[channels[0].messages.length] = {
@@ -106,15 +106,10 @@
 				text: `Connected to ${data.server}`
 			}
 
-			//socket.send({cmd: cmd, data: data})
-			//client.send_cmd('room_msg', msg);
-			//send_cmd('auth', {"user":"", "room":"lobby"})
-
-			Socket.send_cmd('auth', {user: "1593350144-3482940476", room: 'Emupedia'})
+			Socket.send_cmd('auth', {user: '', room: 'Emupedia'})
 		})
 
 		Socket.on('disconnect', e => {
-			console.log(e)
 			channels[0].messages[channels[0].messages.length] = {
 				uid: '0',
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
@@ -156,7 +151,6 @@
 		})
 
 		Socket.on('room.msg', data => {
-			console.log(data)
 			channels[0].messages[channels[0].messages.length] = {
 				uid: data.user,
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
@@ -167,7 +161,7 @@
 
 		Socket.on('room.info', data => {
 			console.log(data)
-			channels[0].name = data.name
+			channels[0].name = data.room
 		})
 
 		Socket.on('room.host', data => {
@@ -193,9 +187,12 @@
 		Socket.on('rooms.list', data => {
 			console.log(data)
 		})
+
+		Socket.connect()
 	})
 
 	onDestroy(() => {
+		console.log('onDestroy')
 		Socket.disconnect()
 	})
 
