@@ -23,4 +23,4 @@
 	export let uid = ''
 </script>
 
-<button class="user" title={uid} type="button" on:click {...$$props}><Avatar uid={uid}/>{nickname}</button>
+<button class="user" title={uid} type="button" on:click {...$$props}><Avatar uid={uid}/> {nickname}</button>

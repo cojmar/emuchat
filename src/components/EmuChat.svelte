@@ -86,13 +86,7 @@
 	let channels = [{
 		name: 'Status',
 		messages: [],
-		users: [{
-			uid: '4546546456456456',
-			nickname: 'gigi'
-		} , {
-			uid: '2234443243234234',
-			nickname: 'tibi'
-		}]
+		users: []
 	}];
 
 	onMount(() => {
@@ -154,14 +148,33 @@
 			channels[0].messages[channels[0].messages.length] = {
 				uid: data.user,
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
-				nickname: data.user,
+				nickname: channels[0].users[data.user].info.nick,
 				text: data.msg
 			}
 		})
 
 		Socket.on('room.info', data => {
-			console.log(data)
 			channels[0].name = data.room
+
+			let users_sorted = Object.values(data.users).sort((a, b) => {
+				if (isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
+					return a.info.nick.localeCompare(b.info.nick)
+				} else if (isNaN(parseInt(a.info.nick[0])) && !isNaN(parseInt(b.info.nick[0]))) {
+					return -1
+				} else if (!isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
+					return 1
+				}
+
+				return a.info.nick[0] - b.info.nick[0]
+			})
+
+			let users = {}
+
+			users_sorted.forEach((user) => {
+				users[user.info.user] = user
+			})
+
+			channels[0].users = users
 		})
 
 		Socket.on('room.host', data => {
@@ -247,7 +260,7 @@
 									<MessageList messages="{channel.messages}"/>
 								</div>
 								<div slot="users">
-									<UserList users="{channel.users}"/>
+									<UserList users="{Object.values(channel.users)}"/>
 								</div>
 							</SplitPane>
 						</TabPanel>
