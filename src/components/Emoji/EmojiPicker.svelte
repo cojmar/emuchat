@@ -94,7 +94,7 @@
 	import EmojiSearch from './EmojiSearch.svelte'
 	import EmojiSearchResults from './EmojiSearchResults.svelte'
 	import EmojiVariantPopup from './EmojiVariantPopup.svelte'
-	import emojiData from './emoji.js'
+	import emojiData from '../../emoji.js'
 
 	export let maxRecents = 50
 

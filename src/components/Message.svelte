@@ -13,12 +13,15 @@
 </style>
 
 <script>
+	import { fade } from 'svelte/transition';
+
+
 	export let uid = '0'
 	export let nickname = 'me'
 	export let message = 'test'
 	export let timestamp = '00:00:00'
 </script>
 
-<div class="message">
+<div class="message" transition:fade>
 	<p class="text"><span class="timestamp">[{timestamp}]</span> <span title={uid}>[{nickname}]</span> {message}</p>
 </div>

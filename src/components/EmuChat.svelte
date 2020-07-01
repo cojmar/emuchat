@@ -62,10 +62,12 @@
 </style>
 
 <script context="module">
-	let id = 3
+	let id = 1
 </script>
 
 <script>
+	import {onMount, onDestroy} from 'svelte'
+	import Socket from '../socket'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
@@ -78,15 +80,12 @@
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
-	let currentTabIndex = 1
+	let nickname = ''
+	let placeholder = ''
+	let currentTabIndex = 0
 	let channels = [{
-		name: 'Tab 0',
-		messages: [{
-			uid: '4546546456456456',
-			timestamp: '00:00:00',
-			nickname: 'me',
-			text: 'test'
-		}],
+		name: 'Status',
+		messages: [],
 		users: [{
 			uid: '4546546456456456',
 			nickname: 'gigi'
@@ -94,20 +93,111 @@
 			uid: '2234443243234234',
 			nickname: 'tibi'
 		}]
-	} , {
-		name: 'Tab 1',
-		messages: [{
-			uid: '2234443243234234',
-			timestamp: '00:00:00',
-			nickname: 'me',
-			text: 'test2'
-		}],
-		users: []
-	} , {
-		name: 'Tab 2',
-		messages: [],
-		users: []
 	}];
+
+	onMount(() => {
+		Socket.connect()
+
+		Socket.on('connect', data => {
+			channels[0].messages[channels[0].messages.length] = {
+				uid: '0',
+				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
+				nickname: 'STATUS',
+				text: `Connected to ${data.server}`
+			}
+
+			//socket.send({cmd: cmd, data: data})
+			//client.send_cmd('room_msg', msg);
+			//send_cmd('auth', {"user":"", "room":"lobby"})
+
+			Socket.send_cmd('auth', {user: "1593350144-3482940476", room: 'Emupedia'})
+		})
+
+		Socket.on('disconnect', e => {
+			console.log(e)
+			channels[0].messages[channels[0].messages.length] = {
+				uid: '0',
+				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
+				nickname: 'STATUS',
+				text: `Disconnected with ${e.reason ? `Reason ${e.reason}` : ''} Error Code ${e.code}`
+			}
+		})
+
+		Socket.on('auth.info', data => {
+			nickname = data.info.nick
+			placeholder = `You are typing as "${nickname}". To change nick, type /nick and your new nickname.`
+			// Socket.send_cmd('list', {})
+		})
+
+		Socket.on('cmd', data => {
+			//console.log(data)
+		})
+
+		Socket.on('eval', data => {
+			console.log(data)
+		})
+
+		Socket.on('server.help', data => {
+			console.log(data)
+		})
+
+		Socket.on('server.msg', data => {
+			console.log(data)
+		})
+
+		Socket.on('silent.msg', data => {
+			// console.log(data)
+			/*channels[0].messages[channels[0].messages.length] = {
+				uid: '0',
+				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
+				nickname: 'STATUS',
+				text: data
+			}*/
+		})
+
+		Socket.on('room.msg', data => {
+			console.log(data)
+			channels[0].messages[channels[0].messages.length] = {
+				uid: data.user,
+				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
+				nickname: data.user,
+				text: data.msg
+			}
+		})
+
+		Socket.on('room.info', data => {
+			console.log(data)
+			channels[0].name = data.name
+		})
+
+		Socket.on('room.host', data => {
+			console.log(data)
+		})
+
+		Socket.on('room.user_join', data => {
+			console.log(data)
+		})
+
+		Socket.on('room.user_leave', data => {
+			console.log(data)
+		})
+
+		Socket.on('room.user_reconnect', data => {
+			console.log(data)
+		})
+
+		Socket.on('rooms.user_info', data => {
+			console.log(data)
+		})
+
+		Socket.on('rooms.list', data => {
+			console.log(data)
+		})
+	})
+
+	onDestroy(() => {
+		Socket.disconnect()
+	})
 
 	function handleMessage(e) {
 		if (channels[currentTabIndex]) {
@@ -168,6 +258,6 @@
 				</Tabs>
 			{/if}
 		</div>
-		<MessageInput on:message="{e => handleMessage(e, currentTabIndex)}"/>
+		<MessageInput placeholder={placeholder} on:message="{e => handleMessage(e, currentTabIndex)}"/>
 	</div>
 </div>

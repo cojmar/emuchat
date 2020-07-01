@@ -1,6 +1,6 @@
 <script>
 	import {Route} from 'tinro'
-	import EmuChat from './EmuChat.svelte'
+	import EmuChat from './components/EmuChat.svelte'
 </script>
 
 <Route path="/*">

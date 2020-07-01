@@ -52,6 +52,7 @@
 
 	const dispatch = createEventDispatcher()
 
+	export let placeholder = 'Enter a message'
 	let message = ''
 
 	function handleSubmit() {
@@ -71,7 +72,7 @@
 </script>
 
 <form class="chat-input clear" on:submit|preventDefault={handleSubmit}>
-	<Input class="input input-message" bind:value={message} placeholder="Enter a message" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
+	<Input class="input input-message" bind:value={message} placeholder="{placeholder}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
 	<PopOver>
 		<div slot="target">
 			<ButtonIcon class="button button-icon button-emoji-picker" icon={faSmile}/>
