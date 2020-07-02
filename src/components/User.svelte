@@ -1,5 +1,5 @@
 <style>
-	:global(.user) {
+	:global(.button.user) {
 		display: block;
 		width: 100%;
 		border: none;
@@ -10,7 +10,12 @@
 		outline: none;
 	}
 
-	:global(.user:hover) {
+	:global(.button.user:hover) {
+		background-color: #4c4c4c;
+		border-radius: 5px;
+	}
+
+	:global(.button.user:focus) {
 		background-color: #4c4c4c;
 		border-radius: 5px;
 	}
@@ -18,9 +23,10 @@
 
 <script>
 	import Avatar from './Avatar/Avatar.svelte'
+	import Button from './Button.svelte'
 
 	export let nickname = ''
 	export let uid = ''
 </script>
 
-<button class="user" title={uid} type="button" on:click {...$$props}>{nickname}</button>
+<Button class="button user" title={uid} on:click {...$$props}>{nickname}</Button>

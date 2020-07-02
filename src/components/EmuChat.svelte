@@ -92,7 +92,7 @@
 	}];
 
 	onMount(() => {
-		console.log('onMount')
+		//console.log('onMount')
 
 		socket.on('connect', data => {
 			channels[0].messages[channels[0].messages.length] = {
@@ -148,37 +148,19 @@
 		})
 
 		socket.on('room.msg', data => {
-			//console.log(data)
 			channels[0].messages[channels[0].messages.length] = {
 				uid: data.user,
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
 				nickname: channels[0].users[data.user].info.nick,
 				text: data.msg
 			}
+
+			//console.log(data)
 		})
 
 		socket.on('room.info', data => {
 			channels[0].name = data.room
-
-			let users_sorted = Object.values(data.users).sort((a, b) => {
-				if (isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
-					return a.info.nick.localeCompare(b.info.nick)
-				} else if (isNaN(parseInt(a.info.nick[0])) && !isNaN(parseInt(b.info.nick[0]))) {
-					return -1
-				} else if (!isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
-					return 1
-				}
-
-				return a.info.nick[0] - b.info.nick[0]
-			})
-
-			let users = {}
-
-			users_sorted.forEach((user) => {
-				users[user.info.user] = user
-			})
-
-			channels[0].users = users
+			channels[0].users = sortUsers(data.users)
 
 			//console.log(data)
 		})
@@ -194,6 +176,8 @@
 				channel.users[data.user] = data.data
 			}
 
+			channel.users = sortUsers(channel.users)
+
 			//console.log(channel.users[data.user])
 		})
 
@@ -204,11 +188,11 @@
 				delete channel.users[data.user]
 			}
 
-			console.log(channel.users[data.user])
+			//console.log(channel.users[data.user])
 		})
 
 		socket.on('room.user_reconnect', data => {
-			console.log(data)
+			//console.log(data)
 		})
 
 		socket.on('rooms.user_info', data => {
@@ -223,9 +207,31 @@
 	})
 
 	onDestroy(() => {
-		console.log('onDestroy')
+		//console.log('onDestroy')
 		socket.disconnect()
 	})
+
+	function sortUsers(users) {
+		let users_sorted = Object.values(users).sort((a, b) => {
+			if (isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
+				return a.info.nick.localeCompare(b.info.nick)
+			} else if (isNaN(parseInt(a.info.nick[0])) && !isNaN(parseInt(b.info.nick[0]))) {
+				return -1
+			} else if (!isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
+				return 1
+			}
+
+			return a.info.nick[0] - b.info.nick[0]
+		})
+
+		let result_users = {}
+
+		users_sorted.forEach((user) => {
+			result_users[user.info.user] = user
+		})
+
+		return result_users
+	}
 
 	function handleMessage(e) {
 		if (channels[currentTabIndex]) {

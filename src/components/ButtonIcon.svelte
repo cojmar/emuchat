@@ -41,7 +41,7 @@
 	export let icon
 </script>
 
-<Button class="button button-icon" {...$$props} on:click>
+<Button class="button button-icon" on:click {...$$props}>
 	<slot>
 		<Icon icon={icon}/>
 	</slot>
