@@ -83,7 +83,6 @@
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
 	let nickname = ''
-	let placeholder = ''
 	let currentTabIndex = 0
 	let channels = [{
 		name: 'Status',
@@ -115,10 +114,8 @@
 		})
 
 		socket.on('auth.info', data => {
-			console.log(data)
 			nickname = data.info.nick
-			placeholder = `You are typing as "${nickname}". To change nick, type /nick and your new nickname.`
-			// Socket.send_cmd('list', {})
+			// socket.send_cmd('list', {})
 		})
 
 		socket.on('cmd', data => {
@@ -138,13 +135,14 @@
 		})
 
 		socket.on('silent.msg', data => {
-			// console.log(data)
 			/*channels[0].messages[channels[0].messages.length] = {
 				uid: '0',
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
 				nickname: 'STATUS',
 				text: data
 			}*/
+
+			// console.log(data)
 		})
 
 		socket.on('room.msg', data => {
@@ -207,8 +205,9 @@
 	})
 
 	onDestroy(() => {
-		//console.log('onDestroy')
 		socket.disconnect()
+
+		//console.log('onDestroy')
 	})
 
 	function sortUsers(users) {
@@ -292,6 +291,6 @@
 				</Tabs>
 			{/if}
 		</div>
-		<MessageInput placeholder={placeholder} on:message="{e => handleMessage(e, currentTabIndex)}"/>
+		<MessageInput placeholder={`You are typing as "${nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
 	</div>
 </div>
