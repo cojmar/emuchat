@@ -41,6 +41,14 @@
 </style>
 
 <script>
+	import Avatars from '../../js/avatar';
+
+	//import sprites from '@dicebear/avatars-bottts-sprites';
+	//console.log(sprites())
+
+	// let avatars = new Avatars(sprites());
+	// let svg = avatars.create('custom-seed')
+
 	export let uid = ''
 </script>
 

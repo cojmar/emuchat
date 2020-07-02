@@ -1,4 +1,4 @@
-class Socket {
+export default class Socket {
 	constructor() {
 		this.socket = {
 			on: () => {this.on(arguments)},
@@ -210,7 +210,3 @@ class Socket {
 		})
 	}
 }
-
-const socket = new Socket()
-
-export default socket

@@ -63,11 +63,13 @@
 
 <script context="module">
 	let id = 1
+
+	const socket = new Socket()
 </script>
 
 <script>
 	import {onMount, onDestroy} from 'svelte'
-	import Socket from '../socket'
+	import Socket from '../js/socket'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
@@ -92,7 +94,7 @@
 	onMount(() => {
 		console.log('onMount')
 
-		Socket.on('connect', data => {
+		socket.on('connect', data => {
 			channels[0].messages[channels[0].messages.length] = {
 				uid: '0',
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
@@ -100,10 +102,10 @@
 				text: `Connected to ${data.server}`
 			}
 
-			Socket.send_cmd('auth', {user: '', room: 'Emupedia'})
+			socket.send_cmd('auth', {user: '', room: 'Emupedia'})
 		})
 
-		Socket.on('disconnect', e => {
+		socket.on('disconnect', e => {
 			channels[0].messages[channels[0].messages.length] = {
 				uid: '0',
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
@@ -112,29 +114,30 @@
 			}
 		})
 
-		Socket.on('auth.info', data => {
+		socket.on('auth.info', data => {
+			console.log(data)
 			nickname = data.info.nick
 			placeholder = `You are typing as "${nickname}". To change nick, type /nick and your new nickname.`
 			// Socket.send_cmd('list', {})
 		})
 
-		Socket.on('cmd', data => {
+		socket.on('cmd', data => {
 			//console.log(data)
 		})
 
-		Socket.on('eval', data => {
-			console.log(data)
+		socket.on('eval', data => {
+			//console.log(data)
 		})
 
-		Socket.on('server.help', data => {
-			console.log(data)
+		socket.on('server.help', data => {
+			// console.log(data)
 		})
 
-		Socket.on('server.msg', data => {
-			console.log(data)
+		socket.on('server.msg', data => {
+			// console.log(data)
 		})
 
-		Socket.on('silent.msg', data => {
+		socket.on('silent.msg', data => {
 			// console.log(data)
 			/*channels[0].messages[channels[0].messages.length] = {
 				uid: '0',
@@ -144,7 +147,8 @@
 			}*/
 		})
 
-		Socket.on('room.msg', data => {
+		socket.on('room.msg', data => {
+			//console.log(data)
 			channels[0].messages[channels[0].messages.length] = {
 				uid: data.user,
 				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
@@ -153,7 +157,7 @@
 			}
 		})
 
-		Socket.on('room.info', data => {
+		socket.on('room.info', data => {
 			channels[0].name = data.room
 
 			let users_sorted = Object.values(data.users).sort((a, b) => {
@@ -175,38 +179,52 @@
 			})
 
 			channels[0].users = users
+
+			//console.log(data)
 		})
 
-		Socket.on('room.host', data => {
+		socket.on('room.host', data => {
+			// console.log(data)
+		})
+
+		socket.on('room.user_join', data => {
+			let channel = channels.find(channel => channel.name === data.room)
+
+			if (channel && data.data) {
+				channel.users[data.user] = data.data
+			}
+
+			//console.log(channel.users[data.user])
+		})
+
+		socket.on('room.user_leave', data => {
+			let channel = channels.find(channel => channel.name === data.room)
+
+			if (channel && data.user) {
+				delete channel.users[data.user]
+			}
+
+			console.log(channel.users[data.user])
+		})
+
+		socket.on('room.user_reconnect', data => {
 			console.log(data)
 		})
 
-		Socket.on('room.user_join', data => {
-			console.log(data)
+		socket.on('rooms.user_info', data => {
+			// console.log(data)
 		})
 
-		Socket.on('room.user_leave', data => {
-			console.log(data)
+		socket.on('rooms.list', data => {
+			// console.log(data)
 		})
 
-		Socket.on('room.user_reconnect', data => {
-			console.log(data)
-		})
-
-		Socket.on('rooms.user_info', data => {
-			console.log(data)
-		})
-
-		Socket.on('rooms.list', data => {
-			console.log(data)
-		})
-
-		Socket.connect()
+		socket.connect()
 	})
 
 	onDestroy(() => {
 		console.log('onDestroy')
-		Socket.disconnect()
+		socket.disconnect()
 	})
 
 	function handleMessage(e) {

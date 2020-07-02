@@ -14,7 +14,7 @@
 
 <script>
 	import { fade } from 'svelte/transition';
-	import Avatar from './Avatar.svelte'
+	import Avatar from './Avatar/Avatar.svelte'
 
 	export let uid = '0'
 	export let nickname = 'me'
@@ -23,5 +23,5 @@
 </script>
 
 <div class="message" transition:fade>
-	<p class="text"><span class="timestamp">[{timestamp}]</span> <span title={uid}>[<Avatar uid={uid}/> {nickname}]</span> {message}</p>
+	<p class="text"><span class="timestamp">[{timestamp}]</span> <span title={uid}>[{nickname}]</span> {message}</p>
 </div>
