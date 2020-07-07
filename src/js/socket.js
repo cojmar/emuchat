@@ -104,7 +104,6 @@ export default class Socket {
 		if (typeof this.events[e] === 'object') this.events[e].forEach(cb => {
 			cb(data)
 		})
-
 	}
 
 	connect() {
@@ -161,10 +160,10 @@ export default class Socket {
 			this.emit_event('connect', { server: this.server })
 		}
 
-		this.ws.onclose = (close_event) => {
+		this.ws.onclose = e => {
 			this.connected = false
 
-			if (close_event.code !== 4666) {
+			if (e.code !== 4666) {
 				if (this.connect_timeout) clearTimeout(this.connect_timeout)
 
 				this.connect_timeout = setTimeout(() => {
@@ -172,10 +171,10 @@ export default class Socket {
 				}, 10000)
 			}
 
-			this.emit_event('disconnect', close_event)
+			this.emit_event('disconnect', e)
 		}
 
-		this.ws.onmessage = (message) => {
+		this.ws.onmessage = message => {
 			let data
 
 			try {
@@ -187,11 +186,14 @@ export default class Socket {
 			this.emit_event(data.cmd, data.data)
 		}
 
+		this.ws.onerror = e => {
+			this.emit_event('error', e)
+		}
+
 		return this
 	}
 
 	send(data) {
-
 		if (data.cmd === 'connect') return this.connect(data.data)
 
 		if (data.cmd === 'disconnect') return this.disconnect()

@@ -41,7 +41,7 @@
 </style>
 
 <script>
-	import Avatars from '../../js/avatar';
+	// import Avatars from '../../js/avatar';
 
 	//import sprites from '@dicebear/avatars-bottts-sprites';
 	//console.log(sprites())
@@ -49,7 +49,9 @@
 	// let avatars = new Avatars(sprites());
 	// let svg = avatars.create('custom-seed')
 
-	export let uid = ''
+	export let uid
 </script>
 
-<span class="avatar" style="--bg-image: url(https://avatars.dicebear.com/api/bottts/{uid}.svg)"><img src="https://avatars.dicebear.com/api/bottts/{uid}.svg" alt=""/></span>
+{#if uid}
+	<span class="avatar" style="--bg-image: url(https://avatars.dicebear.com/api/bottts/{uid}.svg)"><img src="https://avatars.dicebear.com/api/bottts/{uid}.svg" alt=""/></span>
+{/if}

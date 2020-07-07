@@ -1,13 +1,12 @@
 <script>
 	import User from './User.svelte'
+	import normalize from '../js/normalize'
 
 	export let users = []
 </script>
 
-<div class="user-container">
-	{#each users as user}
-		<User uid={user.info.user} nickname={user.info.nick}/>
-	{:else}
-		<div>No users</div>
-	{/each}
-</div>
+{#each users as user}
+	<User uid={user.info.user} nickname={normalize.all(user.info.nick)}/>
+{:else}
+	<div>No users</div>
+{/each}

@@ -29,4 +29,4 @@
 	export let uid = ''
 </script>
 
-<Button class="button user" title={uid} on:click {...$$props}>{nickname}</Button>
+<Button class="button user" title={uid} on:click {...$$props}><!--<Avatar uid={uid}/> -->{nickname}</Button>

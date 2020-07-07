@@ -52,14 +52,18 @@
 
 	const dispatch = createEventDispatcher()
 
+	export let uid = ''
+	export let nickname = ''
+	export let timestamp = (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2)
 	export let placeholder = 'Enter a message'
+
 	let message = ''
 
 	function handleSubmit() {
 		dispatch('message', {
-			uid: 0,
-			timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
-			nickname: 'me',
+			uid,
+			timestamp,
+			nickname,
 			text: message
 		});
 

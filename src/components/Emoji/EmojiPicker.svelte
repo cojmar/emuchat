@@ -103,7 +103,7 @@
 	let variants
 	let currentEmoji
 	let searchText
-	let recentEmojis = JSON.parse(localStorage.getItem('emoji-picker-recent')) || []
+	let recentEmojis = JSON.parse(localStorage.getItem('emuchat-emoji-picker-recent')) || []
 
 	const dispatch = createEventDispatcher()
 
@@ -163,7 +163,7 @@
 
 	function saveRecent(emoji) {
 		recentEmojis = [emoji, ...recentEmojis.filter(recent => recent.key !== emoji.key)].slice(0, maxRecents)
-		localStorage.setItem('emoji-picker-recent', JSON.stringify(recentEmojis))
+		localStorage.setItem('emuchat-emoji-picker-recent', JSON.stringify(recentEmojis))
 	}
 
 	function hideVariants() {
