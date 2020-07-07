@@ -67,6 +67,10 @@
 	:global(.user-container) {
 		height: 100%;
 	}
+
+	:global(.padding) {
+		padding: 10px;
+	}
 </style>
 
 <script context="module">
@@ -94,7 +98,8 @@
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
-	let statusJoinPart = true
+	export let statusJoinPart = true
+	export let virtualScroll = true
 
 	let currentTabIndex = 0
 
@@ -202,10 +207,9 @@
 
 			if (channel) {
 				channel.messages[channel.messages.length] = {
-					uid: '0',
 					timestamp,
 					nickname: 'STATUS',
-					text: `Disconnected with ${e.reason ? `Reason ${e.reason}` : (typeof codes[e.code] !== 'undefined' ? `Reason ${codes[e.code].name} ${codes[e.code].description}` : `Error Code ${e.code}`)}`
+					text: `Disconnected with ${e.reason ? `[Reason] ${e.reason}` : (typeof codes[e.code] !== 'undefined' ? `[Reason] [${codes[e.code].name}] ${codes[e.code].description}` : `[Error Code] ${e.code}`)}`
 				}
 
 				channels = channels
@@ -455,18 +459,32 @@
 					</TabList>
 					{#each channels as channel}
 						<TabPanel>
-							<SplitPane type="horizontal" pos={75} min={200} spacing={1}>
-								<div class="message-container" slot="messages">
-									<VirtualList items={channel.messages} let:item>
-										<Message uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
-									</VirtualList>
-									<!--<MessageList messages="{channel.messages}"/>-->
+							<SplitPane type="horizontal" pos={75} min={200} spacing={1} scrollable={!virtualScroll}>
+								<div class="message-container{virtualScroll ? '': ' padding'}" slot="messages">
+									{#if virtualScroll}
+										{#if channel.messages.length}
+											<VirtualList items={channel.messages} let:item>
+												<Message uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
+											</VirtualList>
+										{:else}
+											<div class="padding">No messages</div>
+										{/if}
+									{:else}
+										<MessageList messages="{channel.messages}"/>
+									{/if}
 								</div>
-								<div class="user-container" slot="users">
-									<VirtualList items={Object.values(channel.users)} let:item>
-										<User uid={item.info.user} nickname={item.info.nick}/>
-									</VirtualList>
-									<!--<UserList users="{Object.values(channel.users)}"/>-->
+								<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
+									{#if virtualScroll}
+										{#if Object.values(channel.users).length}
+											<VirtualList items={Object.values(channel.users)} let:item>
+												<User uid={item.info.user} nickname={item.info.nick}/>
+											</VirtualList>
+										{:else}
+											<div class="padding">No users</div>
+										{/if}
+									{:else}
+										<UserList users="{Object.values(channel.users)}"/>
+									{/if}
 								</div>
 							</SplitPane>
 						</TabPanel>

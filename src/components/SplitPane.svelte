@@ -110,6 +110,7 @@
 	export let spacing = 0
 	export let fixed = false
 	export let min = 50
+	export let scrollable = true
 
 	const refs = {}
 
@@ -178,15 +179,15 @@
 	$: side = type === 'horizontal' ? 'left' : 'top'
 	$: dimension = type === 'horizontal' ? 'width' : 'height'
 	$: position = type === 'horizontal' ? {messages: 'left', users: 'right'} : {messages: 'top', users: 'bottom'}
-	$: scrollable = dragging ? '' : 'pane-scrollable'
+	$: scrolling = scrollable && !dragging ? ' pane-scrollable' : ''
 </script>
 
 <div class="split-pane clear" bind:this={refs.container}>
-	<div class="pane pane-{position.messages}" style="{dimension}: calc({pos}% - {spacing}px); margin-{position.users}: {spacing}px;" use:scroll>
+	<div class="pane pane-{position.messages}{scrolling}" style="{dimension}: calc({pos}% - {spacing}px); margin-{position.users}: {spacing}px;" use:scroll>
 		<slot name="messages"/>
 	</div>
 
-	<div class="pane pane-{position.users}" style="{dimension}: calc({100 - (pos)}% - {spacing}px); margin-{position.messages}: {spacing}px;">
+	<div class="pane pane-{position.users}{scrolling}" style="{dimension}: calc({100 - (pos)}% - {spacing}px); margin-{position.messages}: {spacing}px;">
 		<slot name="users"/>
 	</div>
 
