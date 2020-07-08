@@ -1,22 +1,5 @@
 <style>
-	svelte-virtual-list-viewport::-webkit-scrollbar {
-		width: 5px;
-		height: 5px;
-	}
-
-	svelte-virtual-list-viewport::-webkit-scrollbar-track {
-		background: rgba(34, 33, 33, 0.95);
-	}
-
-	svelte-virtual-list-viewport::-webkit-scrollbar-thumb {
-		background: rgba(0, 0, 0, 0.38);
-	}
-
-	svelte-virtual-list-viewport::-webkit-scrollbar-thumb:hover {
-		background: rgba(0, 0, 0, 0.64);
-	}
-
-	svelte-virtual-list-viewport {
+	:global(.virtual-list-viewport) {
 		display: block;
 		position: relative;
 		overflow-y: auto;
@@ -24,56 +7,78 @@
 		padding: 10px;
 	}
 
-	svelte-virtual-list-contents, svelte-virtual-list-row {
+	:global(.virtual-list-viewport::-webkit-scrollbar) {
+		width: 7px;
+		height: 7px;
+	}
+
+	:global(.virtual-list-viewport::-webkit-scrollbar-track) {
+		background: rgba(34, 33, 33, 0.95);
+	}
+
+	:global(.virtual-list-viewport::-webkit-scrollbar-thumb) {
+		background: rgba(0, 0, 0, 0.38);
+	}
+
+	:global(.virtual-list-viewport::-webkit-scrollbar-thumb:hover) {
+		background: rgba(0, 0, 0, 0.64);
+	}
+
+	:global(.virtual-list-contents) {
 		display: block;
 	}
 
-	svelte-virtual-list-row {
+	:global(.virtual-list-row) {
+		display: block;
+	}
+
+	:global(.virtual-list-row) {
 		overflow: hidden;
 	}
 </style>
 
 <script>
-	import { onMount, tick } from 'svelte'
+	import {onMount, tick} from 'svelte'
 
 	// props
 	export let items
+	export let itemHeight
 	export let height = '100%'
-	export let itemHeight = undefined
+	export let autoScroll = false
 
 	// read-only, but visible to consumers via bind:start
 	export let start = 0
 	export let end = 0
 
 	// local state
-	let height_map = []
+	let heightMap = []
 	let rows
 	let viewport
 	let contents
-	let viewport_height = 0
+	let viewportHeight = 0
 	let visible
 	let mounted
 
 	let top = 0
 	let bottom = 0
-	let average_height
+	let averageHeight
 
 	$: visible = items.slice(start, end).map((data, i) => {
 		return { index: i + start, data }
 	})
 
 	// whenever `items` changes, invalidate the current heightmap
-	$: if (mounted) refresh(items, viewport_height, itemHeight)
+	$: if (mounted) refresh(items, viewportHeight, itemHeight)
 
-	async function refresh(items, viewport_height, itemHeight) {
+	async function refresh(items, viewportHeight, itemHeight) {
 		const { scrollTop } = viewport
 
 		await tick() // wait until the DOM is up to date
 
-		let content_height = top - scrollTop
+		let contentHeight = top - scrollTop
 		let i = start
 
-		while (content_height < viewport_height && i < items.length) {
+		while (contentHeight < viewportHeight && i < items.length) {
 			let row = rows[i - start]
 
 			if (!row) {
@@ -82,75 +87,80 @@
 				row = rows[i - start]
 			}
 
-			const row_height = height_map[i] = itemHeight || row.offsetHeight
-			content_height += row_height
+			const rowHeight = heightMap[i] = itemHeight || row.offsetHeight
+			contentHeight += rowHeight
 			i += 1
 		}
 
 		end = i
 
 		const remaining = items.length - end
-		average_height = (top + content_height) / end
+		averageHeight = (top + contentHeight) / end
 
-		bottom = remaining * average_height
-		height_map.length = items.length
+		bottom = remaining * averageHeight
+		heightMap.length = items.length
+
+		if (autoScroll && bottom <= 200) {
+			viewport.scrollTo(0, viewport.scrollHeight)
+		}
 	}
 
 	async function handleScroll() {
 		const { scrollTop } = viewport
 
-		const old_start = start
+		const oldStart = start
 
 		for (let v = 0; v < rows.length; v += 1) {
-			height_map[start + v] = itemHeight || rows[v].offsetHeight
+			heightMap[start + v] = itemHeight || rows[v].offsetHeight
 		}
 
 		let i = 0
 		let y = 0
 
 		while (i < items.length) {
-			const row_height = height_map[i] || average_height
-			if (y + row_height > scrollTop) {
+			const rowHeight = heightMap[i] || averageHeight
+
+			if (y + rowHeight > scrollTop) {
 				start = i
 				top = y
 
 				break
 			}
 
-			y += row_height
+			y += rowHeight
 			i += 1
 		}
 
 		while (i < items.length) {
-			y += height_map[i] || average_height
+			y += heightMap[i] || averageHeight
 			i += 1
 
-			if (y > scrollTop + viewport_height) break
+			if (y > scrollTop + viewportHeight) break
 		}
 
 		end = i
 
 		const remaining = items.length - end
-		average_height = y / end
+		averageHeight = y / end
 
-		while (i < items.length) height_map[i++] = average_height
-		bottom = remaining * average_height
+		while (i < items.length) heightMap[i++] = averageHeight
+		bottom = remaining * averageHeight
 
 		// prevent jumping if we scrolled up into unknown territory
-		if (start < old_start) {
+		if (start < oldStart) {
 			await tick()
 
-			let expected_height = 0
-			let actual_height = 0
+			let expectedHeight = 0
+			let actualHeight = 0
 
-			for (let i = start; i < old_start; i +=1) {
+			for (let i = start; i < oldStart; i += 1) {
 				if (rows[i - start]) {
-					expected_height += height_map[i]
-					actual_height += itemHeight || rows[i - start].offsetHeight
+					expectedHeight += heightMap[i]
+					actualHeight += itemHeight || rows[i - start].offsetHeight
 				}
 			}
 
-			const d = actual_height - expected_height
+			const d = actualHeight - expectedHeight
 			viewport.scrollTo(0, scrollTop + d)
 		}
 
@@ -161,17 +171,17 @@
 
 	// trigger initial refresh
 	onMount(() => {
-		rows = contents.getElementsByTagName('svelte-virtual-list-row')
+		rows = contents.getElementsByClassName('virtual-list-row')
 		mounted = true
 	});
 </script>
 
-<svelte-virtual-list-viewport bind:this={viewport} bind:offsetHeight={viewport_height} on:scroll={handleScroll} style="height: {height};">
-	<svelte-virtual-list-contents bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
+<div class="virtual-list-viewport" bind:this={viewport} bind:offsetHeight={viewportHeight} on:scroll={handleScroll} style="height: {height};">
+	<div class="virtual-list-contents" bind:this={contents} style="padding-top: {top}px; padding-bottom: {bottom}px;">
 		{#each visible as row (row.index)}
-			<svelte-virtual-list-row>
+			<div class="virtual-list-row">
 				<slot item={row.data}>Missing template</slot>
-			</svelte-virtual-list-row>
+			</div>
 		{/each}
-	</svelte-virtual-list-contents>
-</svelte-virtual-list-viewport>
+	</div>
+</div>

@@ -70,28 +70,6 @@
 	:global(.popover-target.pinned .button:active svg path) {
 		fill: #fff !important;
 	}
-
-	:global(.arrow) {
-		position: absolute;
-		content: '';
-		bottom: -10px;
-		width: 0;
-		height: 0;
-		border-style: solid;
-		border-width: 10px 10px 0 10px;
-		border-color: #7d7d7d transparent transparent transparent;
-		z-index: -1;
-	}
-
-	:global(.left-align, .left-align .arrow) {
-		left: 0;
-		right: unset;
-	}
-
-	:global(.right-align, .right-align .arrow) {
-		right: -22px;
-		left: unset;
-	}
 </style>
 
 <script>
@@ -101,7 +79,8 @@
 
 	let triggerRef
 	let contentRef
-	let alignment
+	let alignmentLeftRight
+	let alignmentTopBottom
 	let open = false
 	let pinned = false
 
@@ -109,11 +88,17 @@
 		const triggerBounds = triggerRef.getBoundingClientRect()
 		const contentBounds = contentRef.getBoundingClientRect()
 
-		alignment = triggerBounds.left + contentBounds.width > window.innerWidth ? -1 : 0
-		contentRef.style.bottom = triggerBounds.height + 'px'
+		alignmentLeftRight = triggerBounds.left + contentBounds.width > window.innerWidth
+		alignmentTopBottom = triggerBounds.top + contentBounds.height > window.innerHeight
+
+		if (alignmentTopBottom) {
+			contentRef.style.bottom = triggerBounds.height + 'px'
+		} else {
+			contentRef.style.top = triggerBounds.height + 'px'
+		}
 	});
 
-	const pin = (e) => {
+	const pin = () => {
 		if (pinned) {
 			pinned = false
 			open = false
@@ -122,16 +107,17 @@
 			open = true
 		}
 	}
+
 	const show = () => open = true
+
 	const hide = () => open = pinned
 </script>
 
-<div class="popover" on:mousedown on:mouseover={show} on:mouseout={hide} on:mouseup on:mousewheel>
-	<div class="popover-target" on:click={pin} class:pinned={pinned} bind:this={triggerRef}>
+<span class="popover" on:mousedown on:mouseover={show} on:mouseout={hide} on:mouseup on:mousewheel>
+	<span class="popover-target" on:click={pin} class:pinned={pinned} bind:this={triggerRef}>
 		<slot name="target"/>
-	</div>
-	<div class="popover-content" class:visible={open} bind:this={contentRef} class:left-align={alignment !== -1} class:right-align={alignment === -1}>
+	</span>
+	<div class="popover-content" class:visible={open} bind:this={contentRef} class:left-align={!alignmentLeftRight} class:right-align={alignmentLeftRight} class:top-align={alignmentTopBottom} class:bottom-align={!alignmentTopBottom}>
 		<slot name="content"/>
-		<!-- <div class="arrow" style="border-color: {color} transparent transparent transparent;"></div> -->
 	</div>
-</div>
+</span>

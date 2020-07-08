@@ -83,7 +83,9 @@
 	import {onMount, onDestroy} from 'svelte'
 	import Socket from '../js/socket'
 	import normalize from '../js/normalize'
+
 	import ButtonIcon from './ButtonIcon.svelte'
+	import PopOver from './PopOver.svelte'
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
 	import MessageList from './MessageList.svelte'
@@ -95,6 +97,7 @@
 	import TabList from './TabList.svelte'
 	import Tabs from './Tabs.svelte'
 	import Tab from './Tab.svelte'
+
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
@@ -304,7 +307,7 @@
 					status.messages[status.messages.length] = {
 						timestamp,
 						nickname: 'STATUS',
-						text: `${channel.users[data.user] ? normalize.all(channel.users[data.user].info.nick) : data.user} has joined ${data.room}`
+						text: `${channel.users[data.user] ? channel.users[data.user].info.nick : data.user} has joined ${data.room}`
 					}
 				}
 
@@ -324,7 +327,7 @@
 					status.messages[status.messages.length] = {
 						timestamp,
 						nickname: 'STATUS',
-						text: `${channel.users[data.user] ? normalize.all(channel.users[data.user].info.nick) : data.user} has left ${data.room}`
+						text: `${channel.users[data.user] ? channel.users[data.user].info.nick : data.user} has left ${data.room}`
 					}
 				}
 
@@ -404,7 +407,8 @@
 
 		let result_users = {}
 
-		users_sorted.forEach((user) => {
+		users_sorted.forEach(user => {
+			user.info.nick = normalize.all(user.info.nick)
 			result_users[user.info.user] = user
 		})
 
@@ -455,7 +459,14 @@
 							<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
 						{/each}
 						<ButtonIcon title="New Tab" icon={faPlus} on:click={handleTabNew}/>
-						<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
+						<PopOver>
+							<span slot="target">
+								<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
+							</span>
+							<div slot="content">
+								TEST
+							</div>
+						</PopOver>
 					</TabList>
 					{#each channels as channel}
 						<TabPanel>
@@ -463,7 +474,7 @@
 								<div class="message-container{virtualScroll ? '': ' padding'}" slot="messages">
 									{#if virtualScroll}
 										{#if channel.messages.length}
-											<VirtualList items={channel.messages} let:item>
+											<VirtualList autoScroll={true} items={channel.messages} let:item>
 												<Message uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
 											</VirtualList>
 										{:else}

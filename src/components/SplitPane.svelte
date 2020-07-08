@@ -15,8 +15,8 @@
 	}
 
 	:global(.split-pane > .pane::-webkit-scrollbar) {
-		width: 5px;
-		height: 5px;
+		width: 7px;
+		height: 7px;
 	}
 
 	:global(.split-pane > .pane::-webkit-scrollbar-track) {
