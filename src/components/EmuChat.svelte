@@ -397,17 +397,21 @@
 	})
 
 	function sortUsers(users) {
-		let users_sorted = Object.values(users).sort((a, b) => {
-			if (isNaN(parseInt(a.info.nick)) && isNaN(parseInt(b.info.nick))) {
-				return a.info.nick.localeCompare(b.info.nick)
-			} else if (isNaN(parseInt(a.info.nick)) && !isNaN(parseInt(b.info.nick))) {
-				return -1
-			} else if (!isNaN(parseInt(a.info.nick)) && isNaN(parseInt(b.info.nick))) {
-				return 1
-			}
+		try {
+			let users_sorted = Object.values(users).sort((a, b) => {
+				if (isNaN(parseInt(a.info.nick)) && isNaN(parseInt(b.info.nick))) {
+					return a.info.nick.localeCompare(b.info.nick)
+				} else if (isNaN(parseInt(a.info.nick)) && !isNaN(parseInt(b.info.nick))) {
+					return -1
+				} else if (!isNaN(parseInt(a.info.nick)) && isNaN(parseInt(b.info.nick))) {
+					return 1
+				}
 
-			return a.info.nick[0] - b.info.nick[0]
-		})
+				return a.info.nick[0] - b.info.nick[0]
+			})
+		} catch(e) {
+			let users_sorted = Object.values(users)
+		}
 
 		let result_users = {}
 
