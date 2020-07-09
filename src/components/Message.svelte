@@ -20,6 +20,8 @@
 	export let uid
 	export let nickname
 	export let text
+
+	console.log('Message avatars', avatars)
 </script>
 
 <div class="message">

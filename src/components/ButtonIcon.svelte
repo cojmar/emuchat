@@ -28,10 +28,6 @@
 	:global(.button.button-icon:hover svg.icon path) {
 		fill: #fff;
 	}
-
-	:global(.button.button-icon:disabled svg.icon path) {
-		/* fill: #4c4c4c; */
-	}
 </style>
 
 <script>
