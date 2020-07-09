@@ -100,9 +100,13 @@
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
-	export let statusJoinPart = true
-	export let virtualScroll = true
-	export let showAvatars = true
+	export let statusJoinPart
+	export let virtualScroll
+	export let showAvatars
+
+	console.log('statusJoinPart', statusJoinPart)
+	console.log('virtualScroll', virtualScroll)
+	console.log('showAvatars', showAvatars)
 
 	$: settingStatusJoinPart = statusJoinPart
 	$: settingVirtualScroll = virtualScroll

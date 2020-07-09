@@ -13,7 +13,19 @@ EmuChat is a fast and data-efficient messaging app.
 ## 👀 <sub>View a Live Demo</sub>
 [![This is currently under active development, and you must understand that some features are not finished.](https://emupedia.net/beta/emuos/assets/images/icons/under-development.svg)](#-view-a-live-demo)
 
-* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emupedia-48.png" /></sub> [https://emupedia.net/emuchat](https://emupedia.net/emuchat)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> [https://emupedia.net/emuchat](https://emupedia.net/emuchat)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> [https://emupedia.org/emuchat](https://emupedia.org/emuchat)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> [https://emuos.net/emuchat](https://emuos.net/emuchat)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> [https://emuos.org/emuchat](https://emuos.org/emuchat)
+
+<details>
+<summary>Mirrors</summary>
+
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 1 [https://emuos.redirectme.net/emuchat](https://emuos.redirectme.net/emuchat)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 2 [https://emu.bounceme.net/emuchat](https://emu.bounceme.net/emuchat)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 3 [https://emu.webhop.me/emuchat](https://emu.webhop.me/emuchat)
+
+</details>
 
 ## 🌍 <sub>Browser support</sub>
 <details>

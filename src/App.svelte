@@ -10,6 +10,6 @@
 
 <Route path="/*">
 	<Route path="/" redirect="/emuchat/"/>
-	<Route path="/emuchat/"><EmuChat useAvatars={showAvatars} statusJoinPart={true} virtualScroll={virtualScroll}/></Route>
+	<Route path="/emuchat/"><EmuChat showAvatars={showAvatars} statusJoinPart={true} virtualScroll={virtualScroll}/></Route>
 	<Route fallback>No page found</Route>
 </Route>
