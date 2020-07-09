@@ -1,84 +1,88 @@
-## Libraries used
+## <sub><img width="38" height="38" alt="" src="https://emupedia.net/emuchat/assets/images/logo/emuchat-logo-48.png" /></sub> EmuChat [![Contribute](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/Emupedia/emuchat/pulls) [![Discord](https://img.shields.io/discord/510149138491506688.svg?logo=discord)](https://discord.gg/wXtGQ4p) [![GitHub last commit](https://img.shields.io/github/last-commit/Emupedia/emuchat.svg)](#-emuchat-----) [![GitHub repo size](https://img.shields.io/github/repo-size/Emupedia/emuchat.svg)](#-emuchat-----)
 
-https://github.com/sveltejs/svelte-virtual-list
-https://github.com/joeattardi/svelte-tabs
-https://github.com/joeattardi/svelte-emoji-selector
-https://github.com/DiceBear/avatars/
-https://github.com/sveltejs/svelte-repl/blob/master/src/SplitPane.svelte
-https://github.com/vaheqelyan/svelte-popover
+---
 
-## Get started
+EmuChat is a fast and data-efficient messaging app.
+
+---
+
+## 💬 <sub>Join us on Discord</sub>
+
+<sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/discord-48.png" /></sub> [Discord](https://discord.gg/wXtGQ4p)
+
+## 👀 <sub>View a Live Demo</sub>
+
+### https://emupedia.net/emuchat
+
+## 🌍 <sub>Browser support</sub>
+<details>
+<summary>Click to reveal</summary>
+
+---
+| <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_24x24.png" alt="Internet Explorer" /><br />Internet<br />Explorer<br />Trident | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/edge_12-18/edge_12-18_24x24.png" alt="Edge" /><br />Edge<br />EdgeHTML<br /><br /> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_24x24.png" alt="Edge" /><br />Edge<br />Blink<br /><br /> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/firefox_3.5-22/firefox_3.5-22_24x24.png" alt="Firefox" /><br />Firefox<br />Gecko<br /><br /> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_24x24.png" alt="Firefox" /><br />Firefox<br />Quantum<br />Gecko | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/pale-moon/pale-moon_24x24.png" alt="Pale Moon" /><br />Pale<br />Moon<br />Goanna | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/chrome_1-11/chrome_1-11_24x24.png" alt="Chrome" /><br />Chrome<br />WebKit<br /><br />  | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_24x24.png" alt="Chrome" /><br />Chrome<br />Blink<br /><br /> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/archive/opera_15-32/opera_15-32_24x24.png" alt="Opera" /><br />Opera<br />Presto<br /><br /> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_24x24.png" alt="Opera" /><br />Opera<br />Blink<br /><br /> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_24x24.png" alt="Safari" /><br />Safari<br />WebKit<br /><br /> |  <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/brave/brave_24x24.png" alt="Brave" /><br />Brave<br />Blink<br /><br /> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/vivaldi/vivaldi_24x24.png" alt="Vivaldi" /><br />Vivaldi<br />Blink<br /><br /> |
+| :-------------: | :-------------: | :---: | :------------: | :---: | :------------: | :------------: | :---: | :-------------: | :---: | :---: | :---: | :---: |
+| <sup>*</sup>11+ | <sup>*</sup>12+ | 79+   | <sup>*</sup>4+ | 57+   | <sup>*</sup>4+ | <sup>*</sup>3+ | 28+   | <sup>*</sup>12+ | 15+   | 8+    | 1+    | 1+    |
+
+</details>
+
+## <sub>Getting started</sub>
+<details>
+<summary>Click to reveal</summary>
 
 Install the dependencies...
 
-```bash
-cd svelte-app
-npm install
-```
+### `npm install`
 
 ...then start [Rollup](https://rollupjs.org):
 
-```bash
-npm run dev
-```
+### `npm run dev`
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Navigate to [localhost:5000/emuchat](http://localhost:5000/emuchat). You should see your app running. Edit a component file in `src`, save it, and hot reload will refresh the page automatically.
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+By default, the server will only respond to requests from localhost.
 
-
-## Building and running in production mode
+## <sub>Building and running in production mode</sub>
 
 To create an optimised version of the app:
 
-```bash
-npm run build
-```
+### `npm run build`
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+</details>
 
+## 📚 <sub>Libraries used</sub>
+<details>
+<summary>Click to reveal</summary>
 
-## Single-page app mode
+---
+| Name                        | Website                                                                                          | Repository                                                                                               | License                                                                            |
+| :---                        | :---                                                                                             | :---                                                                                                     | :---                                                                               |
+| Svelte                      | [svelte.dev](https://svelte.dev)                                                                 | [github.com/sveltejs/svelte](https://github.com/sveltejs/svelte)                                         | [MIT](https://github.com/sveltejs/svelte/blob/master/LICENSE)                      |
+| Svelte REPL                 | [svelte.dev/repl](https://svelte.dev/repl)                                                       | [github.com/sveltejs/svelte-repl](https://github.com/sveltejs/svelte-repl)                               | [MIT](https://github.com/sveltejs/svelte-repl/blob/master/LICENSE)                 |
+| Svelte Tabs                 | [joeattardi.github.io/svelte-tabs](https://joeattardi.github.io/svelte-tabs)                     | [github.com/joeattardi/svelte-tabs](https://github.com/joeattardi/svelte-tabs)                           | ❓                                                                                 |
+| Svelte Emoji Selector       | [joeattardi.github.io/svelte-emoji-selector](https://joeattardi.github.io/svelte-emoji-selector) | [github.com/joeattardi/svelte-emoji-selector](https://github.com/joeattardi/svelte-emoji-selector)       | [MIT](https://github.com/joeattardi/svelte-emoji-selector/blob/master/LICENSE)     |
+| DiceBear Avatars            | [avatars.dicebear.com](https://avatars.dicebear.com)                                             | [github.com/DiceBear/avatars](https://github.com/DiceBear/avatars)                                       | [MIT](https://github.com/millermedeiros/requirejs-plugins/blob/master/LICENSE.txt) |
+| Svelte Virtual List         | [svelte.dev/repl](https://svelte.dev/repl/f78ddd84a1a540a9a40512df39ef751b)                      | [github.com/sveltejs/svelte-virtual-list](https://github.com/sveltejs/svelte-virtual-list)               | [MIT](https://github.com/sveltejs/svelte-virtual-list/blob/master/LICENSE)         |
+---
+</details>
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+https://github.com/vaheqelyan/svelte-popover
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+https://github.com/twitter/twemoji
 
-```js
-"start": "sirv public --single"
-```
+## 📝 <sub>License</sub>
 
+Copyright © 2016 - 2020 Emupedia or its affiliates. All rights reserved.
 
-## Deploying to the web
+The source code provided by Emupedia are for non-commercial testing and evaluation
+purposes only. Emupedia reserves all rights not expressly granted.
 
-### With [now](https://zeit.co/now)
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-now deploy --name my-project
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+EMUPEDIA OR THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
+THE USE OR OTHER DEALINGS IN THE SOFTWARE.
