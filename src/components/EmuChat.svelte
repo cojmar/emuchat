@@ -230,7 +230,7 @@
 			me.uid = data.info.user
 			me.nickname = data.info.nick
 
-			socket.send_cmd('list', {})
+			//socket.send_cmd('list', {})
 		})
 
 		socket.on('cmd', data => {

@@ -1,4 +1,4 @@
-## <sub><img width="38" height="38" alt="" src="https://emupedia.net/emuchat/assets/images/logos/emuchat-logo-48.png" /></sub> EmuChat [![Contribute](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/Emupedia/emuchat/pulls) [![Discord](https://img.shields.io/discord/510149138491506688.svg?logo=discord)](https://discord.gg/wXtGQ4p) [![GitHub last commit](https://img.shields.io/github/last-commit/Emupedia/emuchat.svg)](#-emuchat-----) [![GitHub repo size](https://img.shields.io/github/repo-size/Emupedia/emuchat.svg)](#-emuchat-----)
+## <sub><img width="38" height="38" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> EmuChat [![Contribute](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/Emupedia/emuchat/pulls) [![Discord](https://img.shields.io/discord/510149138491506688.svg?logo=discord)](https://discord.gg/wXtGQ4p) [![GitHub last commit](https://img.shields.io/github/last-commit/Emupedia/emuchat.svg)](#-emuchat-----) [![GitHub repo size](https://img.shields.io/github/repo-size/Emupedia/emuchat.svg)](#-emuchat-----)
 
 ---
 
