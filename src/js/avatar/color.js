@@ -1,5 +1,9 @@
+import colors from './colors'
+
 export default class Color {
 	constructor(color = '#000') {
+		this.alpha = 1
+
 		if (color[0] == '#') {
 			this.hex = color
 		} else {
@@ -25,6 +29,10 @@ export default class Color {
 				throw new Error('Unknown color format: ' + color)
 			}
 		}
+	}
+
+	static get collection() {
+		return colors
 	}
 
 	clone() {

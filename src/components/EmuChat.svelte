@@ -103,6 +103,7 @@
 
 	export let statusJoinPart = true
 	export let virtualScroll = true
+	export let useAvatars = true
 
 	let currentTabIndex = 0
 
@@ -475,7 +476,7 @@
 									{#if virtualScroll}
 										{#if channel.messages.length}
 											<VirtualList autoScroll={true} items={channel.messages} let:item>
-												<Message uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
+												<Message avatars={useAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No messages</div>
@@ -488,7 +489,7 @@
 									{#if virtualScroll}
 										{#if Object.values(channel.users).length}
 											<VirtualList items={Object.values(channel.users)} let:item>
-												<User uid={item.info.user} nickname={item.info.nick}/>
+												<User avatars={useAvatars} uid={item.info.user} nickname={item.info.nick}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No users</div>

@@ -1,7 +1,7 @@
 <style>
-	:global(.avatar img) {
-		width: 16px;
-		height: 16px;
+	:global(.avatar svg) {
+		width: 32px;
+		height: 32px;
 		vertical-align: middle;
 	}
 
@@ -10,10 +10,10 @@
 		display: block;
 		content: '';
 
-		width: 16px;
-		height: 16px;
+		width: 32px;
+		height: 32px;
 
-		margin-top: -16px;
+		margin-top: -32px;
 
 		background-image: var(--bg-image);
 
@@ -41,17 +41,17 @@
 </style>
 
 <script>
-	// import Avatars from '../../js/avatar';
-
-	//import sprites from '@dicebear/avatars-bottts-sprites';
-	//console.log(sprites())
-
-	// let avatars = new Avatars(sprites());
-	// let svg = avatars.create('custom-seed')
+	import Avatar from '../../js/avatar'
+	import Bots from '../../js/avatar/bots'
 
 	export let uid
+
+	let avatar = new Avatar(Bots, {})
+	let svg = avatar.create(uid, {})
+	//let base64 = `data:image/svg+xml;base64,${avatar.base64EncodeUnicode(svg)}`
 </script>
 
 {#if uid}
-	<span class="avatar" style="--bg-image: url(https://avatars.dicebear.com/api/bottts/{uid}.svg)"><img src="https://avatars.dicebear.com/api/bottts/{uid}.svg" alt=""/></span>
+	<!--<span class="avatar" style="--bg-image: url({base64})">{@html svg}</span>-->
+	<span class="avatar">{@html svg}</span>
 {/if}

@@ -1,7 +1,4 @@
-import Color from './color';
-//import Random from './random';
-//import { ColorCollection, Color as ColorType } from '@dicebear/avatars/lib/types';
-//import Options from './options';
+import Color from '../color';
 
 import eyesCollection from './eyes';
 import faceCollection from './face';
@@ -31,7 +28,7 @@ export default function (random, options = {}) {
 
 	let colorsCollection = [];
 
-	Object.keys(Color.collection).forEach((color) => {
+	Object.keys(Color.collection).forEach(color => {
 		if (options.colors === undefined || options.colors.length === 0 || options.colors.indexOf(color) !== -1) {
 			colorsCollection.push(Color.collection[color]);
 		}

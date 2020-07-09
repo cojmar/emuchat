@@ -1,15 +1,16 @@
-import Random from './random'
+import Random from '../random'
 //import Color from './color'
 import Parser from './parser'
 
-export default class Avatars {
+export default class Avatar {
 	/**
 	 * @param spriteCollection
 	 */
 	constructor(spriteCollection, defaultOptions) {
 		this.spriteCollection = spriteCollection
 		this.defaultOptions = {
-			userAgent: typeof window !== 'undefined' && window.navigator && window.navigator.userAgent, ...defaultOptions
+			userAgent: typeof window !== 'undefined' && window.navigator && window.navigator.userAgent,
+			...defaultOptions
 		}
 	}
 

@@ -25,8 +25,9 @@
 	import Avatar from './Avatar/Avatar.svelte'
 	import Button from './Button.svelte'
 
+	export let avatars = false
 	export let nickname = ''
 	export let uid = ''
 </script>
 
-<Button class="button user" title={uid} on:click {...$$props}><!--<Avatar uid={uid}/> -->{nickname}</Button>
+<Button class="button user" title={uid} on:click {...$$props}>{#if avatars}<Avatar uid={uid}/>{/if} {nickname}</Button>

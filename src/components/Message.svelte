@@ -15,6 +15,7 @@
 <script>
 	import Avatar from './Avatar/Avatar.svelte'
 
+	export let avatars = false
 	export let timestamp
 	export let uid
 	export let nickname
@@ -22,5 +23,5 @@
 </script>
 
 <div class="message">
-	<p class="text"><span class="timestamp">[{timestamp}]</span> <span title={uid}><Avatar uid={uid}/> [{nickname}]</span> {text}</p>
+	<p class="text"><span class="timestamp">[{timestamp}]</span> <span title={uid}>{#if avatars}<Avatar uid={uid}/>{/if} [{nickname}]</span> {text}</p>
 </div>
