@@ -1,4 +1,4 @@
-## <sub><img width="38" height="38" alt="" src="https://emupedia.net/emuchat/assets/images/logo/emuchat-logo-48.png" /></sub> EmuChat [![Contribute](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/Emupedia/emuchat/pulls) [![Discord](https://img.shields.io/discord/510149138491506688.svg?logo=discord)](https://discord.gg/wXtGQ4p) [![GitHub last commit](https://img.shields.io/github/last-commit/Emupedia/emuchat.svg)](#-emuchat-----) [![GitHub repo size](https://img.shields.io/github/repo-size/Emupedia/emuchat.svg)](#-emuchat-----)
+## <sub><img width="38" height="38" alt="" src="https://emupedia.net/emuchat/assets/images/logos/emuchat-logo-48.png" /></sub> EmuChat [![Contribute](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/Emupedia/emuchat/pulls) [![Discord](https://img.shields.io/discord/510149138491506688.svg?logo=discord)](https://discord.gg/wXtGQ4p) [![GitHub last commit](https://img.shields.io/github/last-commit/Emupedia/emuchat.svg)](#-emuchat-----) [![GitHub repo size](https://img.shields.io/github/repo-size/Emupedia/emuchat.svg)](#-emuchat-----)
 
 ---
 
@@ -54,20 +54,18 @@ To create an optimised version of the app:
 <summary>Click to reveal</summary>
 
 ---
-| Name                        | Website                                                                                          | Repository                                                                                               | License                                                                            |
-| :---                        | :---                                                                                             | :---                                                                                                     | :---                                                                               |
-| Svelte                      | [svelte.dev](https://svelte.dev)                                                                 | [github.com/sveltejs/svelte](https://github.com/sveltejs/svelte)                                         | [MIT](https://github.com/sveltejs/svelte/blob/master/LICENSE)                      |
-| Svelte REPL                 | [svelte.dev/repl](https://svelte.dev/repl)                                                       | [github.com/sveltejs/svelte-repl](https://github.com/sveltejs/svelte-repl)                               | [MIT](https://github.com/sveltejs/svelte-repl/blob/master/LICENSE)                 |
-| Svelte Tabs                 | [joeattardi.github.io/svelte-tabs](https://joeattardi.github.io/svelte-tabs)                     | [github.com/joeattardi/svelte-tabs](https://github.com/joeattardi/svelte-tabs)                           | ❓                                                                                 |
-| Svelte Emoji Selector       | [joeattardi.github.io/svelte-emoji-selector](https://joeattardi.github.io/svelte-emoji-selector) | [github.com/joeattardi/svelte-emoji-selector](https://github.com/joeattardi/svelte-emoji-selector)       | [MIT](https://github.com/joeattardi/svelte-emoji-selector/blob/master/LICENSE)     |
-| DiceBear Avatars            | [avatars.dicebear.com](https://avatars.dicebear.com)                                             | [github.com/DiceBear/avatars](https://github.com/DiceBear/avatars)                                       | [MIT](https://github.com/millermedeiros/requirejs-plugins/blob/master/LICENSE.txt) |
-| Svelte Virtual List         | [svelte.dev/repl](https://svelte.dev/repl/f78ddd84a1a540a9a40512df39ef751b)                      | [github.com/sveltejs/svelte-virtual-list](https://github.com/sveltejs/svelte-virtual-list)               | [MIT](https://github.com/sveltejs/svelte-virtual-list/blob/master/LICENSE)         |
+| Name                  | Website                                                                                          | Repository                                                                                         | License                                                                            |
+| :---                  | :---                                                                                             | :---                                                                                               | :---                                                                               |
+| Svelte                | [svelte.dev](https://svelte.dev)                                                                 | [github.com/sveltejs/svelte](https://github.com/sveltejs/svelte)                                   | [MIT](https://github.com/sveltejs/svelte/blob/master/LICENSE)                      |
+| Svelte REPL           | [svelte.dev/repl](https://svelte.dev/repl)                                                       | [github.com/sveltejs/svelte-repl](https://github.com/sveltejs/svelte-repl)                         | [MIT](https://github.com/sveltejs/svelte-repl/blob/master/LICENSE)                 |
+| Svelte Tabs           | [joeattardi.github.io/svelte-tabs](https://joeattardi.github.io/svelte-tabs)                     | [github.com/joeattardi/svelte-tabs](https://github.com/joeattardi/svelte-tabs)                     | ❓                                                                                 |
+| Svelte Virtual List   | [svelte.dev/repl](https://svelte.dev/repl/f78ddd84a1a540a9a40512df39ef751b)                      | [github.com/sveltejs/svelte-virtual-list](https://github.com/sveltejs/svelte-virtual-list)         | [MIT](https://github.com/sveltejs/svelte-virtual-list/blob/master/LICENSE)         |
+| Svelte Emoji Selector | [joeattardi.github.io/svelte-emoji-selector](https://joeattardi.github.io/svelte-emoji-selector) | [github.com/joeattardi/svelte-emoji-selector](https://github.com/joeattardi/svelte-emoji-selector) | [MIT](https://github.com/joeattardi/svelte-emoji-selector/blob/master/LICENSE)     |
+| Svelte PopOver        | [svelte-popover.now.sh](https://svelte-popover.now.sh)                                           | [github.com/vaheqelyan/svelte-popover](https://github.com/vaheqelyan/svelte-popover)               | [MIT](https://github.com/vaheqelyan/svelte-popover/blob/master/LICENSE)            |
+| DiceBear Avatars      | [avatars.dicebear.com](https://avatars.dicebear.com)                                             | [github.com/DiceBear/avatars](https://github.com/DiceBear/avatars)                                 | [MIT](https://github.com/millermedeiros/requirejs-plugins/blob/master/LICENSE.txt) |
+| Twitter Twemoji       | [twemoji.twitter.com](https://twemoji.twitter.com)                                               | [github.com/twitter/twemoji](https://github.com/twitter/twemoji)                                   | [MIT/CC-BY 4.0](https://github.com/twitter/twemoji/blob/master/LICENSE)            |
 ---
 </details>
-
-https://github.com/vaheqelyan/svelte-popover
-
-https://github.com/twitter/twemoji
 
 ## 📝 <sub>License</sub>
 
