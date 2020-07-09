@@ -11,8 +11,9 @@ EmuChat is a fast and data-efficient messaging app.
 <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/discord-48.png" /></sub> [Discord](https://discord.gg/wXtGQ4p)
 
 ## 👀 <sub>View a Live Demo</sub>
+[![This is currently under active development, and you must understand that some features are not finished.](https://emupedia.net/beta/emuos/assets/images/icons/under-development.svg)](#-view-a-live-demo)
 
-### https://emupedia.net/emuchat
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emupedia-48.png" /></sub> [https://emupedia.net/emuchat](https://emupedia.net/emuchat)
 
 ## 🌍 <sub>Browser support</sub>
 <details>
@@ -23,9 +24,11 @@ EmuChat is a fast and data-efficient messaging app.
 | :-------------: | :-------------: | :---: | :------------: | :---: | :------------: | :------------: | :---: | :-------------: | :---: | :---: | :---: | :---: |
 | <sup>*</sup>11+ | <sup>*</sup>12+ | 79+   | <sup>*</sup>4+ | 57+   | <sup>*</sup>4+ | <sup>*</sup>3+ | 28+   | <sup>*</sup>12+ | 15+   | 8+    | 1+    | 1+    |
 
+[![* application support may vary](https://emupedia.net/beta/emuos/assets/images/icons/ie-notice.svg)](#-browser-support)
+
 </details>
 
-## <sub>Getting started</sub>
+## 🚀 <sub>Getting started</sub>
 <details>
 <summary>Click to reveal</summary>
 
