@@ -5,11 +5,11 @@
 	let sys = window.$sys
 
 	let virtualScroll = !sys.browser.isIE
-	let useAvatars = !sys.browser.isEdgeHTML
+	let showAvatars = !sys.browser.isEdgeHTML
 </script>
 
 <Route path="/*">
 	<Route path="/" redirect="/emuchat/"/>
-	<Route path="/emuchat/"><EmuChat useAvatars={useAvatars} statusJoinPart={true} virtualScroll={virtualScroll}/></Route>
+	<Route path="/emuchat/"><EmuChat useAvatars={showAvatars} statusJoinPart={true} virtualScroll={virtualScroll}/></Route>
 	<Route fallback>No page found</Route>
 </Route>

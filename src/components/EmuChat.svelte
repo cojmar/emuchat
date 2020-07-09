@@ -102,11 +102,15 @@
 
 	export let statusJoinPart = true
 	export let virtualScroll = true
-	export let useAvatars = true
+	export let showAvatars = true
 
-	console.log('statusJoinPart', statusJoinPart)
-	console.log('virtualScroll', virtualScroll)
-	console.log('useAvatars', useAvatars)
+	$: settingStatusJoinPart = statusJoinPart
+	$: settingVirtualScroll = virtualScroll
+	$: settingShowAvatars = showAvatars
+
+	console.log('statusJoinPart', settingStatusJoinPart)
+	console.log('virtualScroll', settingVirtualScroll)
+	console.log('showAvatars', settingShowAvatars)
 
 	let currentTabIndex = 0
 
@@ -305,7 +309,7 @@
 			if (channel && data.data) {
 				channel.users[data.user] = data.data
 
-				if (statusJoinPart) {
+				if (settingStatusJoinPart) {
 					let status = channels.find(channel => channel.name === 'Status')
 
 					status.messages[status.messages.length] = {
@@ -325,7 +329,7 @@
 			let channel = channels.find(channel => channel.name === data.room)
 
 			if (channel && data.user) {
-				if (statusJoinPart) {
+				if (settingStatusJoinPart) {
 					let status = channels.find(channel => channel.name === 'Status')
 
 					status.messages[status.messages.length] = {
@@ -479,12 +483,12 @@
 					</TabList>
 					{#each channels as channel}
 						<TabPanel>
-							<SplitPane type="horizontal" pos={75} min={200} spacing={1} scrollable={!virtualScroll}>
-								<div class="message-container{virtualScroll ? '': ' padding'}" slot="messages">
-									{#if virtualScroll}
+							<SplitPane type="horizontal" pos={75} min={200} spacing={1} scrollable={!settingVirtualScroll}>
+								<div class="message-container{settingVirtualScroll ? '': ' padding'}" slot="messages">
+									{#if settingVirtualScroll}
 										{#if channel.messages.length}
 											<VirtualList autoScroll={true} items={channel.messages} let:item>
-												<Message avatars={useAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
+												<Message avatars={settingShowAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No messages</div>
@@ -493,11 +497,11 @@
 										<MessageList messages="{channel.messages}"/>
 									{/if}
 								</div>
-								<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
-									{#if virtualScroll}
+								<div class="user-container{settingVirtualScroll ? '': ' padding'}" slot="users">
+									{#if settingVirtualScroll}
 										{#if Object.values(channel.users).length}
 											<VirtualList items={Object.values(channel.users)} let:item>
-												<User avatars={useAvatars} uid={item.info.user} nickname={item.info.name}/>
+												<User avatars={settingShowAvatars} uid={item.info.user} nickname={item.info.name}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No users</div>
