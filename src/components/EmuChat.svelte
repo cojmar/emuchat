@@ -409,7 +409,7 @@
 
 		users_sorted.forEach(user => {
 			user.info.nick = normalize.all(user.info.nick)
-			user.info.name = !isNaN(parseInt(user.info.nick)) ? Name(user.info.user) : user.info.nick
+			user.info.name = typeof user.info.name !== 'undefined' ? user.info.name : (!isNaN(parseInt(user.info.nick)) ? Name(user.info.user) : user.info.nick)
 			result_users[user.info.user] = user
 		})
 

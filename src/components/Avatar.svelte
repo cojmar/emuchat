@@ -46,12 +46,9 @@
 
 	export let uid
 
-	let avatar = new Avatar(Bots, {})
-	let svg = avatar.create(uid, {})
-	//let base64 = `data:image/svg+xml;base64,${avatar.base64EncodeUnicode(svg)}`
+	$: avatar = new Avatar(Bots).create(uid)
 </script>
 
 {#if uid}
-	<!--<span class="avatar" style="--bg-image: url({base64})">{@html svg}</span>-->
-	<span class="avatar">{@html svg}</span>
+	<span class="avatar">{@html avatar}</span>
 {/if}
