@@ -15,7 +15,7 @@
 <script>
 	import Avatar from './Avatar.svelte'
 
-	export let avatars = false
+	export let avatars
 	export let timestamp
 	export let uid
 	export let nickname
