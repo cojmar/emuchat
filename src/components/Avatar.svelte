@@ -41,8 +41,8 @@
 </style>
 
 <script>
-	import Avatar from '../../js/avatar'
-	import Bots from '../../js/avatar/bots'
+	import Avatar from '../js/avatar'
+	import Bots from '../js/avatar/bots'
 
 	export let uid
 

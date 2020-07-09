@@ -1,20 +1,11 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+## Libraries used
 
----
-
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
+https://github.com/sveltejs/svelte-virtual-list
+https://github.com/joeattardi/svelte-tabs
+https://github.com/joeattardi/svelte-emoji-selector
+https://github.com/DiceBear/avatars/
+https://github.com/sveltejs/svelte-repl/blob/master/src/SplitPane.svelte
+https://github.com/vaheqelyan/svelte-popover
 
 ## Get started
 

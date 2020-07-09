@@ -83,21 +83,20 @@
 	import {onMount, onDestroy} from 'svelte'
 	import Socket from '../js/socket'
 	import normalize from '../js/normalize'
-
+	import Name from '../js/names'
 	import ButtonIcon from './ButtonIcon.svelte'
-	import PopOver from './PopOver.svelte'
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
+	import VirtualList from './VirtualList.svelte'
 	import MessageList from './MessageList.svelte'
+	import UserList from './UserList.svelte'
 	import Message from './Message.svelte'
 	import User from './User.svelte'
-	import UserList from './UserList.svelte'
-	import VirtualList from './VirtualList.svelte'
+	import PopOver from './PopOver.svelte'
 	import TabPanel from './TabPanel.svelte'
 	import TabList from './TabList.svelte'
 	import Tabs from './Tabs.svelte'
 	import Tab from './Tab.svelte'
-
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
@@ -268,7 +267,7 @@
 				channel.messages[channel.messages.length] = {
 					timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
 					uid: data.user,
-					nickname: channel.users[data.user] ? normalize.all(channel.users[data.user].info.nick) : data.user,
+					nickname: channel.users[data.user] ? channel.users[data.user].info.name : data.user,
 					text: normalize.all(data.msg)
 				}
 
@@ -395,11 +394,11 @@
 
 	function sortUsers(users) {
 		let users_sorted = Object.values(users).sort((a, b) => {
-			if (isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
+			if (isNaN(parseInt(a.info.nick)) && isNaN(parseInt(b.info.nick))) {
 				return a.info.nick.localeCompare(b.info.nick)
-			} else if (isNaN(parseInt(a.info.nick[0])) && !isNaN(parseInt(b.info.nick[0]))) {
+			} else if (isNaN(parseInt(a.info.nick)) && !isNaN(parseInt(b.info.nick))) {
 				return -1
-			} else if (!isNaN(parseInt(a.info.nick[0])) && isNaN(parseInt(b.info.nick[0]))) {
+			} else if (!isNaN(parseInt(a.info.nick)) && isNaN(parseInt(b.info.nick))) {
 				return 1
 			}
 
@@ -410,6 +409,7 @@
 
 		users_sorted.forEach(user => {
 			user.info.nick = normalize.all(user.info.nick)
+			user.info.name = !isNaN(parseInt(user.info.nick)) ? Name(user.info.user) : user.info.nick
 			result_users[user.info.user] = user
 		})
 
@@ -489,7 +489,7 @@
 									{#if virtualScroll}
 										{#if Object.values(channel.users).length}
 											<VirtualList items={Object.values(channel.users)} let:item>
-												<User avatars={useAvatars} uid={item.info.user} nickname={item.info.nick}/>
+												<User avatars={useAvatars} uid={item.info.user} nickname={item.info.name}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No users</div>

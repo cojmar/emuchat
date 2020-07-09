@@ -1,11 +1,7 @@
 import Random from '../random'
-//import Color from './color'
 import Parser from './parser'
 
 export default class Avatar {
-	/**
-	 * @param spriteCollection
-	 */
 	constructor(spriteCollection, defaultOptions) {
 		this.spriteCollection = spriteCollection
 		this.defaultOptions = {
@@ -14,11 +10,6 @@ export default class Avatar {
 		}
 	}
 
-	/**
-	 * Creates an avatar
-	 *
-	 * @param seed
-	 */
 	create(seed, options) {
 		options = { ...this.defaultOptions, ...options }
 

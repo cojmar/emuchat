@@ -30,9 +30,6 @@
 
 	:global(.virtual-list-row) {
 		display: block;
-	}
-
-	:global(.virtual-list-row) {
 		overflow: hidden;
 	}
 </style>
