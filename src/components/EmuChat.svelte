@@ -104,6 +104,10 @@
 	export let virtualScroll = true
 	export let useAvatars = true
 
+	console.log('statusJoinPart', statusJoinPart)
+	console.log('virtualScroll', virtualScroll)
+	console.log('useAvatars', useAvatars)
+
 	let currentTabIndex = 0
 
 	let auth = JSON.parse(localStorage.getItem('emuchat-auth')) || {login: '', info: {user: '', nick: ''}}

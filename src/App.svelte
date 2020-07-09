@@ -6,9 +6,6 @@
 
 	let virtualScroll = !sys.browser.isIE
 	let useAvatars = !sys.browser.isEdgeHTML
-
-	console.log('virtualScroll', !sys.browser.isIE)
-	console.log('useAvatars', !sys.browser.isEdgeHTML)
 </script>
 
 <Route path="/*">

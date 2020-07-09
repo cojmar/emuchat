@@ -22,12 +22,12 @@
 </style>
 
 <script>
-	import Avatar from './Avatar.svelte'
+	//import Avatar from './Avatar.svelte'
 	import Button from './Button.svelte'
 
-	export let avatars = false
+	//export let avatars = false
 	export let nickname = ''
 	export let uid = ''
 </script>
 
-<Button class="button user" title={uid} on:click {...$$props}>{#if avatars}<Avatar uid={uid}/> {/if}{nickname}</Button>
+<Button class="button user" title={uid} on:click {...$$props}>{nickname}</Button>
