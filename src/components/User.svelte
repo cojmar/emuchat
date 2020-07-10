@@ -28,8 +28,6 @@
 	export let avatars
 	export let nickname
 	export let uid
-
-	console.log('User avatars', avatars)
 </script>
 
 <Button class="button user" title={uid} on:click {...$$props}>{#if avatars}<Avatar uid={uid}/> {/if}{nickname}</Button>
