@@ -21,9 +21,9 @@ EmuChat is a fast and data-efficient messaging app.
 <details>
 <summary>Mirrors</summary>
 
-* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 1 [https://emuos.redirectme.net/emuchat](https://emuos.redirectme.net/emuchat)
-* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 2 [https://emu.bounceme.net/emuchat](https://emu.bounceme.net/emuchat)
-* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 3 [https://emu.webhop.me/emuchat](https://emu.webhop.me/emuchat)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 1 [https://emuos.redirectme.net/emuchat/](https://emuos.redirectme.net/emuchat/)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 2 [https://emu.bounceme.net/emuchat/](https://emu.bounceme.net/emuchat/)
+* <sub><img width="18" height="18" alt="" src="https://emupedia.net/beta/emuos/assets/images/icons/desktop/emuchat-48.png" /></sub> Mirror 3 [https://emu.webhop.me/emuchat/](https://emu.webhop.me/emuchat/)
 
 </details>
 

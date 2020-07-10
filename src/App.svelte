@@ -6,6 +6,11 @@
 
 	let virtualScroll = !sys.browser.isIE
 	let showAvatars = !sys.browser.isEdgeHTML
+
+	console.log('showAvatars', showAvatars)
+	console.log('virtualScroll', virtualScroll)
+	console.log('sys.browser.isIE', sys.browser.isIE)
+	console.log('sys.browser.isEdgeHTML', sys.browser.isEdgeHTML)
 </script>
 
 <Route path="/*">
