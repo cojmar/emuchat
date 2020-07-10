@@ -486,7 +486,7 @@
 											<div class="padding">No messages</div>
 										{/if}
 									{:else}
-										<MessageList messages="{channel.messages}"/>
+										<MessageList avatars={showAvatars} messages="{channel.messages}"/>
 									{/if}
 								</div>
 								<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
@@ -499,7 +499,7 @@
 											<div class="padding">No users</div>
 										{/if}
 									{:else}
-										<UserList users="{Object.values(channel.users)}"/>
+										<UserList avatars={showAvatars} users="{Object.values(channel.users)}"/>
 									{/if}
 								</div>
 							</SplitPane>
