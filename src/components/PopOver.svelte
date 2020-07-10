@@ -11,12 +11,14 @@
 		transform: translate(0, -20px);
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 		transition: all 0.3s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+		z-index: -1;
 	}
 
 	:global(.popover-content.visible) {
 		opacity: 1;
 		visibility: visible;
 		transform: translate(0, -2px);
+		z-index: 1;
 	}
 
 	:global(.popover-target .button) {
