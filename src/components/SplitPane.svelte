@@ -161,6 +161,7 @@
 	}
 
 	function scroll(node) {
+		if (!scrollable) return
 		if (!MutationObserver) return
 
 		const observer = new MutationObserver(() => node.scrollTop = node.scrollHeight)
