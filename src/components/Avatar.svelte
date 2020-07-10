@@ -1,4 +1,10 @@
 <style>
+	:global(.avatar img) {
+		width: 32px;
+		height: 32px;
+		vertical-align: middle;
+	}
+
 	:global(.avatar svg) {
 		width: 32px;
 		height: 32px;
@@ -41,14 +47,14 @@
 </style>
 
 <script>
-	import Avatar from '../js/avatar'
-	import Bots from '../js/avatar/bots'
+	import RandomAvatar from '../js/avatars'
+	import Bots from '../js/avatars/bots'
 
 	export let uid
 
-	$: avatar = new Avatar(Bots).create(uid)
+	let randomAvatar = new RandomAvatar(Bots)
+
+	$: userAvatar = uid ? randomAvatar.create(uid, {base64: true}) : ''
 </script>
 
-{#if uid}
-	<span class="avatar">{@html avatar}</span>
-{/if}
+{#if uid}<span class="avatar"><img src="{userAvatar}" alt="{uid}"></span>{/if}

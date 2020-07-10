@@ -82,8 +82,10 @@
 <script>
 	import {onMount, onDestroy} from 'svelte'
 	import Socket from '../js/socket'
-	import normalize from '../js/normalize'
-	import Name from '../js/names'
+	import Normalize from '../js/normalize'
+	import RandomName from '../js/names'
+	import RandomAvatar from '../js/avatars'
+	import Bots from '../js/avatars/bots'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
@@ -104,6 +106,8 @@
 	export let virtualScroll
 	export let showAvatars
 
+	let randomAvatar = new RandomAvatar(Bots)
+
 	let currentTabIndex = 0
 
 	let auth = JSON.parse(localStorage.getItem('emuchat-auth')) || {login: '', info: {user: '', nick: ''}}
@@ -120,15 +124,13 @@
 		users: []
 	}];
 
-	let timestamp = (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2)
-
 	onMount(() => {
 		socket.on('connect', data => {
 			let channel = channels.find(channel => channel.name === 'Status')
 
 			if (channel) {
 				channel.messages[channel.messages.length] = {
-					timestamp,
+					timestamp: timestamp(),
 					nickname: 'STATUS',
 					text: `Connected to ${data.server}`
 				}
@@ -204,15 +206,15 @@
 				},
 				4666: {
 					name: 'Server Closed Connection',
-					description: 'Server closed your connection forcibly and prevents your automatic reconnection'
+					description: 'Server closed your connection because you have logged in from another location'
 				}
 			}
 
 			if (channel) {
 				channel.messages[channel.messages.length] = {
-					timestamp,
+					timestamp: timestamp(),
 					nickname: 'STATUS',
-					text: `Disconnected with ${e.reason ? `[Reason] ${e.reason}` : (typeof codes[e.code] !== 'undefined' ? `[Reason] [${codes[e.code].name}] ${codes[e.code].description}` : `[Error Code] ${e.code}`)}`
+					text: `Disconnected with ${e.reason ? `[Reason] ${e.reason}` : (typeof codes[e.code] !== 'undefined' ? `[Reason ${e.code}] [${codes[e.code].name}] ${codes[e.code].description}` : `[Error Code] ${e.code}`)}`
 				}
 
 				channels = channels
@@ -228,7 +230,7 @@
 
 			me.login = data.login
 			me.uid = data.info.user
-			me.nickname = data.info.nick
+			me.nickname = !isNaN(parseInt(data.info.nick)) ? RandomName(data.info.user) : data.info.nick
 
 			//socket.send_cmd('list', {})
 		})
@@ -252,7 +254,7 @@
 		socket.on('silent.msg', data => {
 			/*channels[0].messages[channels[0].messages.length] = {
 				uid: '0',
-				timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
+				timestamp: timestamp(),
 				nickname: 'STATUS',
 				text: data
 			}*/
@@ -265,10 +267,10 @@
 
 			if (channel) {
 				channel.messages[channel.messages.length] = {
-					timestamp: (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2),
+					timestamp: timestamp(),
 					uid: data.user,
 					nickname: channel.users[data.user] ? channel.users[data.user].info.name : data.user,
-					text: normalize.all(data.msg)
+					text: Normalize.all(data.msg)
 				}
 
 				channels = channels
@@ -300,18 +302,19 @@
 
 			if (channel && data.data) {
 				channel.users[data.user] = data.data
+				channel.users = sortUsers(channel.users)
 
 				if (statusJoinPart) {
 					let status = channels.find(channel => channel.name === 'Status')
+					let userAvatar = randomAvatar.create(data.user, {base64: true})
 
 					status.messages[status.messages.length] = {
-						timestamp,
+						timestamp: timestamp(),
 						nickname: 'STATUS',
-						text: `${channel.users[data.user] ? channel.users[data.user].info.nick : data.user} has joined ${data.room}`
+						status: `<img title="${data.user}" src="${userAvatar}" alt="${data.user}">`,
+						text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has joined ${data.room}`
 					}
 				}
-
-				channel.users = sortUsers(channel.users)
 
 				channels = channels
 			}
@@ -323,16 +326,17 @@
 			if (channel && data.user) {
 				if (statusJoinPart) {
 					let status = channels.find(channel => channel.name === 'Status')
+					let userAvatar = randomAvatar.create(data.user, {base64: true})
 
 					status.messages[status.messages.length] = {
-						timestamp,
+						timestamp: timestamp(),
 						nickname: 'STATUS',
-						text: `${channel.users[data.user] ? channel.users[data.user].info.nick : data.user} has left ${data.room}`
+						status: `<img title="${data.user}" src="${userAvatar}" alt="${data.user}">`,
+						text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has left ${data.room}`
 					}
 				}
 
 				delete channel.users[data.user]
-
 				channels = channels
 			}
 		})
@@ -345,7 +349,7 @@
 			if (channel && data.user) {
 				channel.messages[channel.messages.length] = {
 					uid: data.user,
-					timestamp,
+					timestamp: timestamp(),
 					nickname: channel.users[data.user] ? channel.users[data.user].info.nick : data.user,
 					text: `has reconnected`
 				}
@@ -364,7 +368,7 @@
 			if (channel && data.user) {
 				channel.messages[channel.messages.length] = {
 					uid: data.user,
-					timestamp,
+					timestamp: timestamp(),
 					nickname: channel.users[data.user] ? channel.users[data.user].info.nick : data.user,
 					text: `has disconnected`
 				}
@@ -392,6 +396,10 @@
 		//console.log('onDestroy')
 	})
 
+	function timestamp() {
+		return (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2)
+	}
+
 	function sortUsers(users) {
 		let users_sorted = Object.values(users)
 
@@ -412,8 +420,8 @@
 		let result_users = {}
 
 		users_sorted.forEach(user => {
-			user.info.nick = normalize.all(user.info.nick)
-			user.info.name = typeof user.info.name !== 'undefined' ? user.info.name : (!isNaN(parseInt(user.info.nick)) ? Name(user.info.user) : user.info.nick)
+			user.info.nick = Normalize.all(user.info.nick)
+			user.info.name = typeof user.info.name !== 'undefined' ? user.info.name : (!isNaN(parseInt(user.info.nick)) ? RandomName(user.info.user) : user.info.nick)
 			result_users[user.info.user] = user
 		})
 
@@ -422,8 +430,8 @@
 
 	function handleMessage(e) {
 		if (channels[currentTabIndex]) {
-			e.detail.nickname = normalize.all(e.detail.nickname)
-			e.detail.text = normalize.all(e.detail.text)
+			e.detail.nickname = Normalize.all(e.detail.nickname)
+			e.detail.text = Normalize.all(e.detail.text)
 			channels[currentTabIndex].messages.push(e.detail)
 			channels = channels
 		}
@@ -480,7 +488,7 @@
 									{#if virtualScroll}
 										{#if channel.messages.length}
 											<VirtualList autoScroll={true} items={channel.messages} let:item>
-												<Message avatars={showAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} text={item.text}/>
+												<Message avatars={showAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} status={item.status} text={item.text}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No messages</div>

@@ -1,7 +1,7 @@
 import Random from '../random'
 import Parser from './parser'
 
-export default class Avatar {
+export default class RandomAvatar {
 	constructor(spriteCollection, defaultOptions) {
 		this.spriteCollection = spriteCollection
 		this.defaultOptions = {

@@ -55,7 +55,7 @@ export default function (random, options = {}) {
 		'<svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" fill="none">',
 		group(random, sides(secondaryColor), options.sidesChance, 0, 66),
 		group(random, top(secondaryColor), options.topChance, 41, 0),
-		group(random, face(primaryColor, random.bool(options.textureChance) ? texture() : undefined), 100, 25, 44),
+		group(random, face(primaryColor, random.bool(options.textureChance) ? texture() : ''), 100, 25, 44),
 		group(random, mouth(), options.mouthChance, 52, 124),
 		group(random, eyes(), 100, 38, 76),
 		'</svg>'
