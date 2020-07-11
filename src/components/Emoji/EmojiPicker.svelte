@@ -118,7 +118,7 @@
 		}
 
 		categoryList.push(emoji)
-	});
+	})
 
 	const categoryOrder = [
 		'Smileys & People',

@@ -200,7 +200,7 @@
 	onMount(() => {
 		rows = contents.getElementsByClassName('virtual-list-row')
 		mounted = true
-	});
+	})
 </script>
 
 <div class="virtual-list-viewport" bind:this={viewport} bind:offsetHeight={viewportHeight} on:scroll={handleScroll} style="height: {height};">

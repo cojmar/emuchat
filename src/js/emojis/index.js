@@ -63,7 +63,7 @@ function replaceEmoji(text) {
 }
 
 function createText(text, clean) {
-	return document.createTextNode(clean ? text.replace(UFE0Fg, '') : text);
+	return document.createTextNode(clean ? text.replace(UFE0Fg, '') : text)
 }
 
 function getImage(emoji) {

@@ -98,7 +98,7 @@
 		} else {
 			contentRef.style.top = triggerBounds.height + 'px'
 		}
-	});
+	})
 
 	const pin = () => {
 		if (pinned) {

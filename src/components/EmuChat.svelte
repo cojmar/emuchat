@@ -86,6 +86,7 @@
 	import RandomName from '../js/names'
 	import RandomAvatar from '../js/avatars'
 	import Bots from '../js/avatars/bots'
+	import FullScreen from './FullScreen.svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import SplitPane from './SplitPane.svelte'
 	import MessageInput from './MessageInput.svelte'
@@ -94,18 +95,18 @@
 	import UserList from './UserList.svelte'
 	import Message from './Message.svelte'
 	import User from './User.svelte'
-	import PopOver from './PopOver.svelte'
 	import TabPanel from './TabPanel.svelte'
 	import TabList from './TabList.svelte'
 	import Tabs from './Tabs.svelte'
 	import Tab from './Tab.svelte'
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
-	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
 	export let showEmojis
 	export let showAvatars
 	export let statusJoinPart
 	export let virtualScroll
+
+	let isFullScreen = false
 
 	let randomAvatar = new RandomAvatar(Bots)
 
@@ -123,7 +124,7 @@
 		name: 'Status',
 		messages: [],
 		users: []
-	}];
+	}]
 
 	onMount(() => {
 		socket.on('connect', data => {
@@ -147,7 +148,7 @@
 			let codes = {
 				1000: {
 					name: 'Normal Closure',
-					description: 'Normal closure; the connection successfully completed whatever purpose for which it was created.'
+					description: 'Normal closure, the connection successfully completed whatever purpose for which it was created.'
 				},
 				1001: {
 					name: 'Going Away',
@@ -462,61 +463,55 @@
 	}
 </script>
 
-<div class="chat-wrapper">
-	<div class="chat-container">
-		<canvas id="chat-effect"></canvas>
-		<div class="chat-messages">
-			{#if channels}
-				<Tabs initialSelectedIndex={currentTabIndex}>
-					<TabList>
+<FullScreen let:onToggle on:change={e => isFullScreen = e.detail.isFullScreen}>
+	<div class="chat-wrapper">
+		<div class="chat-container">
+			<canvas id="chat-effect"></canvas>
+			<div class="chat-messages">
+				{#if channels}
+					<Tabs initialSelectedIndex={currentTabIndex}>
+						<TabList>
+							{#each channels as channel}
+								<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
+							{/each}
+							<ButtonIcon title="New Tab" icon={faPlus} on:click={handleTabNew}/>
+						</TabList>
 						{#each channels as channel}
-							<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
+							<TabPanel>
+								<SplitPane type="horizontal" pos={75} min={200} spacing={1} scrollable={!virtualScroll}>
+									<div class="message-container{virtualScroll ? '': ' padding'}" slot="messages">
+										{#if virtualScroll}
+											{#if channel.messages.length}
+												<VirtualList autoScroll={true} items={channel.messages} let:item>
+													<Message showEmojis={showEmojis} showAvatars={showAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} status={item.status} text={item.text}/>
+												</VirtualList>
+											{:else}
+												<div class="padding">No messages</div>
+											{/if}
+										{:else}
+											<MessageList showEmojis={showEmojis} showAvatars={showAvatars} messages="{channel.messages}"/>
+										{/if}
+									</div>
+									<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
+										{#if virtualScroll}
+											{#if Object.values(channel.users).length}
+												<VirtualList items={Object.values(channel.users)} let:item>
+													<User showEmojis={showEmojis} showAvatars={showAvatars} uid={item.info.user} nickname={item.info.name}/>
+												</VirtualList>
+											{:else}
+												<div class="padding">No users</div>
+											{/if}
+										{:else}
+											<UserList showEmojis={showEmojis} showAvatars={showAvatars} users="{Object.values(channel.users)}"/>
+										{/if}
+									</div>
+								</SplitPane>
+							</TabPanel>
 						{/each}
-						<ButtonIcon title="New Tab" icon={faPlus} on:click={handleTabNew}/>
-						<PopOver>
-							<span slot="target">
-								<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
-							</span>
-							<div slot="content">
-								TEST
-							</div>
-						</PopOver>
-					</TabList>
-					{#each channels as channel}
-						<TabPanel>
-							<SplitPane type="horizontal" pos={75} min={200} spacing={1} scrollable={!virtualScroll}>
-								<div class="message-container{virtualScroll ? '': ' padding'}" slot="messages">
-									{#if virtualScroll}
-										{#if channel.messages.length}
-											<VirtualList autoScroll={true} items={channel.messages} let:item>
-												<Message showEmojis={showEmojis} showAvatars={showAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} status={item.status} text={item.text}/>
-											</VirtualList>
-										{:else}
-											<div class="padding">No messages</div>
-										{/if}
-									{:else}
-										<MessageList showEmojis={showEmojis} showAvatars={showAvatars} messages="{channel.messages}"/>
-									{/if}
-								</div>
-								<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
-									{#if virtualScroll}
-										{#if Object.values(channel.users).length}
-											<VirtualList items={Object.values(channel.users)} let:item>
-												<User showEmojis={showEmojis} showAvatars={showAvatars} uid={item.info.user} nickname={item.info.name}/>
-											</VirtualList>
-										{:else}
-											<div class="padding">No users</div>
-										{/if}
-									{:else}
-										<UserList showEmojis={showEmojis} showAvatars={showAvatars} users="{Object.values(channel.users)}"/>
-									{/if}
-								</div>
-							</SplitPane>
-						</TabPanel>
-					{/each}
-				</Tabs>
-			{/if}
+					</Tabs>
+				{/if}
+			</div>
+			<MessageInput onToggle={onToggle} isFullScreen={isFullScreen} showEmojis={showEmojis} uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
 		</div>
-		<MessageInput showEmojis={showEmojis} uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
 	</div>
-</div>
+</FullScreen>

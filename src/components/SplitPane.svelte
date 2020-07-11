@@ -100,7 +100,7 @@
 
 	const refs = {}
 
-	let dragging = false;
+	let dragging = false
 
 	function clamp(num, min, max) {
 		return num < min ? min : num > max ? max : num

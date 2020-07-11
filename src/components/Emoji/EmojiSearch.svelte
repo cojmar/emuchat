@@ -86,7 +86,7 @@
 
 	onMount(() => {
 		searchField.focus()
-	});
+	})
 
 	function clearSearchText() {
 		searchText = ''
