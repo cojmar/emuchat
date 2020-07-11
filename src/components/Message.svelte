@@ -53,11 +53,20 @@
 	export let status
 
 	let nicknameSpan
+	let nicknameReplaced
 	let textSpan
+	let textReplaced
 
 	onMount(() => {
-		if (nicknameSpan) nicknameSpan = Emojis.replace(nicknameSpan)
-		if (textSpan) textSpan = Emojis.replace(textSpan)
+		if (nicknameSpan && !nicknameReplaced) {
+			nicknameSpan = Emojis.replace(nicknameSpan)
+			nicknameReplaced = true
+		}
+
+		if (textSpan && !textReplaced) {
+			textSpan = Emojis.replace(textSpan)
+			textReplaced = true
+		}
 	})
 </script>
 

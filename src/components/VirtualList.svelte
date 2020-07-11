@@ -53,19 +53,25 @@
 	let viewport
 	let contents
 	let viewportHeight = 0
-	let visible
+
+	let visible = items.slice(start, items.length).map((data, i) => {
+		return { index: i + start, data }
+	})
+
 	let mounted
 
 	let top = 0
 	let bottom = 0
 	let averageHeight
 
-	$: visible = items.slice(start, end).map((data, i) => {
-		return { index: i + start, data }
-	})
+	$: if (isVisible(viewport)) {
+		visible = items.slice(start, end).map((data, i) => {
+			return { index: i + start, data }
+		})
+	}
 
 	// whenever `items` changes, invalidate the current heightmap
-	$: if (mounted) refresh(items, viewportHeight, itemHeight)
+	$: if (mounted && isVisible(viewport)) refresh(items, viewportHeight, itemHeight)
 
 	async function refresh(items, viewportHeight, itemHeight) {
 		const { scrollTop } = viewport
@@ -97,7 +103,7 @@
 		bottom = remaining * averageHeight
 		heightMap.length = items.length
 
-		if (autoScroll && bottom <= 200) {
+		if (autoScroll /*&& bottom <= 200*/) {
 			viewport.scrollTo(0, viewport.scrollHeight)
 		}
 	}
@@ -164,6 +170,30 @@
 		// TODO if we overestimated the space these
 		// rows would occupy we may need to add some
 		// more. maybe we can just call handleScroll again?
+	}
+
+	function isVisible(node) {
+		if (!node) return false
+
+		const style = getComputedStyle(node)
+
+		if (style.display === 'none') return false
+		if (style.visibility !== 'visible') return false
+		if (style.opacity < 0.1) return false
+
+		if (node.offsetWidth + node.offsetHeight + node.getBoundingClientRect().height + node.getBoundingClientRect().width === 0) return false
+
+		const center = {
+			x: node.getBoundingClientRect().left + node.offsetWidth / 2,
+			y: node.getBoundingClientRect().top + node.offsetHeight / 2
+		}
+
+		if (center.x < 0) return false
+		if (center.x > (document.documentElement.clientWidth || window.innerWidth)) return false
+		if (center.y < 0) return false
+		if (center.y > (document.documentElement.clientHeight || window.innerHeight)) return false
+
+		return true
 	}
 
 	// trigger initial refresh

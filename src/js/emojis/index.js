@@ -35,6 +35,7 @@ function replaceNode(node) {
 			if (iconId && src) {
 				img = new Image()
 				img.setAttribute('draggable', 'false')
+				img.setAttribute('loading', 'lazy')
 				img.alt = rawText
 				img.src = src
 				modified = true
@@ -66,7 +67,7 @@ function createText(text, clean) {
 }
 
 function getImage(emoji) {
-	return `<img class="emoji" draggable="false" src="assets/images/emojis/${grabTheRightIcon(emoji)}.svg" alt=${emoji}/>`
+	return `<img class="emoji" draggable="false" loading="lazy" src="assets/images/emojis/${grabTheRightIcon(emoji)}.svg" alt=${emoji}/>`
 }
 
 function grabTheRightIcon(rawText) {

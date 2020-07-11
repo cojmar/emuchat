@@ -22,12 +22,16 @@
 
 	export let emoji
 
-	let button
-
 	const dispatch = createEventDispatcher()
 
+	let button
+	let replaced
+
 	onMount(() => {
-		if (button) button = Emojis.replace(button)
+		if (button && !replaced) {
+			button = Emojis.replace(button)
+			replaced = true
+		}
 	})
 
 	function onClick() {

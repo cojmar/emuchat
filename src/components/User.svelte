@@ -59,10 +59,14 @@
 	export let nickname
 	export let uid
 
-	let span;
+	let span
+	let replaced
 
 	onMount(() => {
-		if (span) span = Emojis.replace(span)
+		if (span && !replaced) {
+			span = Emojis.replace(span)
+			replaced = true
+		}
 	})
 </script>
 

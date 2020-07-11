@@ -5,6 +5,7 @@
 
 	:global(.popover-content) {
 		display: inline-block;
+		/* display: none; */
 		position: absolute;
 		opacity: 0;
 		visibility: hidden;
@@ -15,6 +16,7 @@
 	}
 
 	:global(.popover-content.visible) {
+		/* display: inline-block; */
 		opacity: 1;
 		visibility: visible;
 		transform: translate(0, -2px);
@@ -76,8 +78,6 @@
 
 <script>
 	import {onMount} from 'svelte'
-
-	// export let color = 'transparent'
 
 	let triggerRef
 	let contentRef

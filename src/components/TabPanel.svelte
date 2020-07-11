@@ -1,15 +1,17 @@
 <style>
 	:global(.tabs-panel) {
+		display: none;
 		position: absolute;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		height: calc(100% - 30px);
-		visibility: hidden;
+		/* visibility: hidden; */
 	}
 
 	:global(.tabs-panel.visible) {
-		visibility: visible;
+		display: block;
+		/* visibility: visible; */
 	}
 </style>
 

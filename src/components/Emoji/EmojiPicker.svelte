@@ -167,13 +167,7 @@
 	}
 
 	function hideVariants() {
-		// We have to defer the removal of the variants popup.
-		// Otherwise, it gets removed before the click event on the body
-		// happens, and the target will have a `null` parent, which
-		// means it will not be excluded and the clickoutside event will fire.
-		setTimeout(() => {
-			variantsVisible = false
-		});
+		variantsVisible = false
 	}
 </script>
 
@@ -183,7 +177,7 @@
 		<EmojiSearchResults searchText={searchText} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick}/>
 	{:else}
 		<div class="emoji-tabs">
-			<Tabs initialSelectedIndex={recentEmojis.length > 0 ? 0 : 1}>
+			<Tabs initialSelectedIndex={recentEmojis.length ? 0 : 1}>
 				<TabList>
 					<Tab>
 						<Icon icon={faHistory}/>

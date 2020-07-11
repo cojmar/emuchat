@@ -38,9 +38,13 @@
 	export let emoji
 
 	let mounted
+	let replaced
 	let span
 
-	$: if (mounted && span) span = Emojis.replace(span)
+	$: if (mounted && span && !replaced) {
+		span = Emojis.replace(span)
+		replaced = true
+	}
 
 	onMount(() => {
 		mounted = true
