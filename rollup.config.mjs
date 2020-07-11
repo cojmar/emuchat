@@ -2,6 +2,7 @@ import sirv from 'sirv'
 import polka from 'polka'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import json from 'rollup-plugin-json'
 import { terser } from 'rollup-plugin-terser'
 import babel  from 'rollup-plugin-babel'
 import svelte from 'rollup-plugin-svelte-hot'
@@ -36,6 +37,11 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		json({
+			preferConst: true,
+			compact: true,
+			namedExports: true
+		}),
 		!dev && babel({
 			env: {
 				development : {

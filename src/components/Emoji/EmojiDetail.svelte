@@ -17,15 +17,39 @@
 		font-size: 1.6em;
 		vertical-align: middle;
 	}
+
+	:global(.emoji-detail .emoji img) {
+		width: 22px;
+		height: 22px;
+		vertical-align: text-top;
+	}
+
+	:global(.emoji-detail .emoji svg) {
+		width: 22px;
+		height: 22px;
+		vertical-align: top;
+	}
 </style>
 
 <script>
+	import {onMount} from 'svelte'
+	import Emojis from '../../js/emojis'
+
 	export let emoji
+
+	let mounted
+	let span
+
+	$: if (mounted && span) span = Emojis.replace(span)
+
+	onMount(() => {
+		mounted = true
+	})
 </script>
 
 <div class="emoji-detail">
 	{#if emoji}
-		<span class="emoji">{emoji.emoji}</span> {emoji.name.replace(/_|-/gi, ' ').replace(/female/gi, 'female ').replace(/male/gi, 'male ')}
+		<span class="emoji" bind:this={span}>{emoji.emoji}</span> {emoji.name.replace(/_|-/gi, ' ').replace(/female/gi, 'female ').replace(/male/gi, 'male ')}
 	{:else}
 		Select or search for a emoji
 	{/if}

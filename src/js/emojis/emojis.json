@@ -1,4 +1,4 @@
-export default [{
+[{
 	"name": "monkey_face",
 	"key": "monkey_face",
 	"names": ["monkey_face"],

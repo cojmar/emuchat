@@ -6,7 +6,7 @@
 		font-size: 1.3em;
 		width: 1.5em;
 		height: 1.5em;
-		padding: 0;
+		padding: 0.2em;
 		margin: 0;
 	}
 
@@ -17,11 +17,18 @@
 </style>
 
 <script>
-	import {createEventDispatcher} from 'svelte'
+	import {onMount, createEventDispatcher} from 'svelte'
+	import Emojis from '../../js/emojis'
 
 	export let emoji
 
+	let button
+
 	const dispatch = createEventDispatcher()
+
+	onMount(() => {
+		if (button) button = Emojis.replace(button)
+	})
 
 	function onClick() {
 		dispatch('emojiclick', emoji)
@@ -36,4 +43,4 @@
 	}
 </script>
 
-<button class="emoji" on:mouseover={onMouseOver} on:mouseout={onMouseOut} on:click={onClick} type="button" >{emoji.emoji}</button>
+<button class="emoji" on:mouseover={onMouseOver} on:mouseout={onMouseOut} on:click={onClick} type="button" bind:this={button}>{emoji.emoji}</button>

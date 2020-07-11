@@ -57,4 +57,4 @@
 	$: userAvatar = uid ? randomAvatar.create(uid, {base64: true}) : ''
 </script>
 
-{#if uid}<span class="avatar"><img src="{userAvatar}" alt="{uid}"></span>{/if}
+{#if uid}<span class="avatar"><img src="{userAvatar}" draggable="false" alt="{uid}"></span>{/if}

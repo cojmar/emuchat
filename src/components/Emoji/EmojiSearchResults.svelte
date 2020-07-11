@@ -30,7 +30,7 @@
 	import Icon from '../Icon.svelte'
 	import {faFrown} from '@fortawesome/free-regular-svg-icons'
 	import EmojiList from './EmojiList.svelte'
-	import emojiData from '../../js/emoji.js'
+	import emojiData from '../../js/emojis/emojis.json'
 
 	export let searchText = ''
 
