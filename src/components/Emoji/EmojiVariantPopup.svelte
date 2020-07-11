@@ -33,6 +33,7 @@
 	import {faTimes} from '@fortawesome/free-solid-svg-icons'
 	import Emoji from './Emoji.svelte'
 
+	export let showEmojis
 	export let variants
 
 	const dispatch = createEventDispatcher()
@@ -49,7 +50,7 @@
 <div class="variants-container" on:click={onClickContainer}>
 	<div class="variants">
 		{#each Object.keys(variants) as variant}
-			<Emoji emoji={variants[variant]} on:emojiclick/>
+			<Emoji showEmojis={showEmojis} emoji={variants[variant]} on:emojiclick/>
 		{/each}
 		<div class="close-button" role="button" on:click={onClickClose}>
 			<Icon icon={faTimes}/>

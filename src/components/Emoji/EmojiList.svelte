@@ -43,6 +43,7 @@
 <script>
 	import Emoji from './Emoji.svelte'
 
+	export let showEmojis
 	export let name = ''
 	export let withTabs = true
 	export let emojis
@@ -52,6 +53,6 @@
 
 <div class="emoji-list" class:tall={!withTabs}>
 	{#each emojis as emoji}
-		<Emoji emoji={emoji} on:emojihover on:emojiclick/>
+		<Emoji showEmojis={showEmojis} emoji={emoji} on:emojihover on:emojiclick/>
 	{/each}
 </div>

@@ -20,6 +20,7 @@
 	import {onMount, createEventDispatcher} from 'svelte'
 	import Emojis from '../../js/emojis'
 
+	export let showEmojis
 	export let emoji
 
 	const dispatch = createEventDispatcher()
@@ -28,7 +29,7 @@
 	let replaced
 
 	onMount(() => {
-		if (button && !replaced) {
+		if (showEmojis && button && !replaced) {
 			button = Emojis.replace(button)
 			replaced = true
 		}

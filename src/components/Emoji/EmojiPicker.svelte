@@ -96,6 +96,7 @@
 	import EmojiVariantPopup from './EmojiVariantPopup.svelte'
 	import emojiData from '../../js/emojis/emojis.json'
 
+	export let showEmojis
 	export let maxRecents = 50
 
 	let variantsVisible = false
@@ -190,12 +191,12 @@
 				</TabList>
 
 				<TabPanel>
-					<EmojiList name="Recently Used" emojis={recentEmojis} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
+					<EmojiList name="Recently Used" showEmojis={showEmojis} emojis={recentEmojis} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
 				</TabPanel>
 
 				{#each categoryOrder as category}
 					<TabPanel>
-						<EmojiList name={category} emojis={emojiCategories[category]} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
+						<EmojiList showEmojis={showEmojis} name={category} emojis={emojiCategories[category]} on:emojihover={showEmojiDetails} on:emojiclick={onEmojiClick} />
 					</TabPanel>
 				{/each}
 			</Tabs>
@@ -203,8 +204,8 @@
 	{/if}
 
 	{#if variantsVisible}
-		<EmojiVariantPopup variants={variants} on:emojiclick={onVariantClick} on:close={hideVariants}/>
+		<EmojiVariantPopup showEmojis={showEmojis} variants={variants} on:emojiclick={onVariantClick} on:close={hideVariants}/>
 	{/if}
 
-	<EmojiDetail emoji={currentEmoji}/>
+	<EmojiDetail showEmojis={showEmojis} emoji={currentEmoji}/>
 </div>

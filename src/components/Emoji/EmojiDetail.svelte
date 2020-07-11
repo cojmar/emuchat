@@ -35,15 +35,14 @@
 	import {onMount} from 'svelte'
 	import Emojis from '../../js/emojis'
 
+	export let showEmojis
 	export let emoji
 
 	let mounted
-	let replaced
 	let span
 
-	$: if (mounted && span && !replaced) {
+	$: if (mounted && showEmojis && span) {
 		span = Emojis.replace(span)
-		replaced = true
 	}
 
 	onMount(() => {

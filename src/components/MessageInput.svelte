@@ -52,6 +52,7 @@
 
 	const dispatch = createEventDispatcher()
 
+	export let showEmojis
 	export let uid = ''
 	export let nickname = ''
 	export let timestamp = (`0${new Date().getHours()}`).slice(-2) + ':' + (`0${new Date().getMinutes()}`).slice(-2) + ':' + (`0${new Date().getSeconds()}`).slice(-2)
@@ -81,7 +82,7 @@
 			<ButtonIcon class="button button-icon button-emoji-picker" icon={faSmile}/>
 		</div>
 		<div slot="content">
-			<EmojiPicker on:emoji={onEmoji}/>
+			<EmojiPicker showEmojis={showEmojis} on:emoji={onEmoji}/>
 		</div>
 	</PopOver>
 	<Input class="input input-message" bind:value={message} placeholder="{placeholder}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />

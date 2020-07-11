@@ -40,6 +40,7 @@
     "seedrandom": "^3.0.5",
     "sirv": "^1.0.1",
     "svelte": "^3.24.0",
+    "svg-sprite": "^1.5.0",
     "svgson": "^4.1.0",
     "tinro": "^0.2.10"
   },

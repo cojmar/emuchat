@@ -55,7 +55,8 @@
 	import Avatar from './Avatar.svelte'
 	import Button from './Button.svelte'
 
-	export let avatars
+	export let showEmojis
+	export let showAvatars
 	export let nickname
 	export let uid
 
@@ -63,11 +64,11 @@
 	let replaced
 
 	onMount(() => {
-		if (span && !replaced) {
+		if (showEmojis && span && !replaced) {
 			span = Emojis.replace(span)
 			replaced = true
 		}
 	})
 </script>
 
-<Button class="button user" title={uid} on:click {...$$props}>{#if avatars}<Avatar uid={uid}/> {/if}<span class="nickname" bind:this={span}>{nickname}</span></Button>
+<Button class="button user" title={uid} on:click {...$$props}>{#if showAvatars}<Avatar uid={uid}/> {/if}<span class="nickname" bind:this={span}>{nickname}</span></Button>

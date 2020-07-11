@@ -102,9 +102,10 @@
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
 	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 
+	export let showEmojis
+	export let showAvatars
 	export let statusJoinPart
 	export let virtualScroll
-	export let showAvatars
 
 	let randomAvatar = new RandomAvatar(Bots)
 
@@ -311,7 +312,7 @@
 					status.messages[status.messages.length] = {
 						timestamp: timestamp(),
 						nickname: 'STATUS',
-						status: `<img title="${data.user}" src="${userAvatar}" alt="${data.user}">`,
+						status: showAvatars ? `<img title="${data.user}" src="${userAvatar}" draggable="false" loading="lazy" alt="${data.user}">` : undefined,
 						text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has joined ${data.room}`
 					}
 				}
@@ -331,7 +332,7 @@
 					status.messages[status.messages.length] = {
 						timestamp: timestamp(),
 						nickname: 'STATUS',
-						status: `<img title="${data.user}" src="${userAvatar}" alt="${data.user}">`,
+						status: showAvatars ? `<img title="${data.user}" src="${userAvatar}" draggable="false" loading="lazy" alt="${data.user}">` : undefined,
 						text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has left ${data.room}`
 					}
 				}
@@ -488,26 +489,26 @@
 									{#if virtualScroll}
 										{#if channel.messages.length}
 											<VirtualList autoScroll={true} items={channel.messages} let:item>
-												<Message avatars={showAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} status={item.status} text={item.text}/>
+												<Message showEmojis={showEmojis} showAvatars={showAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} status={item.status} text={item.text}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No messages</div>
 										{/if}
 									{:else}
-										<MessageList avatars={showAvatars} messages="{channel.messages}"/>
+										<MessageList showEmojis={showEmojis} showAvatars={showAvatars} messages="{channel.messages}"/>
 									{/if}
 								</div>
 								<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
 									{#if virtualScroll}
 										{#if Object.values(channel.users).length}
 											<VirtualList items={Object.values(channel.users)} let:item>
-												<User avatars={showAvatars} uid={item.info.user} nickname={item.info.name}/>
+												<User showEmojis={showEmojis} showAvatars={showAvatars} uid={item.info.user} nickname={item.info.name}/>
 											</VirtualList>
 										{:else}
 											<div class="padding">No users</div>
 										{/if}
 									{:else}
-										<UserList avatars={showAvatars} users="{Object.values(channel.users)}"/>
+										<UserList showEmojis={showEmojis} showAvatars={showAvatars} users="{Object.values(channel.users)}"/>
 									{/if}
 								</div>
 							</SplitPane>
@@ -516,6 +517,6 @@
 				</Tabs>
 			{/if}
 		</div>
-		<MessageInput uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
+		<MessageInput showEmojis={showEmojis} uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
 	</div>
 </div>

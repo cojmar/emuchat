@@ -50,31 +50,17 @@
 	}
 
 	:global(.split-pane > .horizontal) {
-		padding: 0 6px;
+		padding: 0 2px;
 		width: 0;
 		height: 100%;
 		cursor: ew-resize;
 	}
 
-	:global(.split-pane > .horizontal::after) {
-		left: 6px;
-		top: 0;
-		width: 1px;
-		height: 100%;
-	}
-
 	:global(.split-pane > .vertical) {
-		padding: 6px 0;
+		padding: 2px 0;
 		width: 100%;
 		height: 0;
 		cursor: ns-resize;
-	}
-
-	:global(.split-pane > .vertical::after) {
-		top: 6px;
-		left: 0;
-		width: 100%;
-		height: 1px;
 	}
 
 	:global(.split-pane > .left, .split-pane > .right, .split-pane > .pane-divider) {
@@ -193,7 +179,7 @@
 	</div>
 
 	{#if !fixed}
-		<div class="{type} pane-divider" style="{side}: calc({pos}% - 7px)" use:drag={setPos}></div>
+		<div class="{type} pane-divider" style="{side}: calc({pos}% - 2px)" use:drag={setPos}></div>
 	{/if}
 </div>
 

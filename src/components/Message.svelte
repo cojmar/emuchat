@@ -45,7 +45,8 @@
 	import Emojis from '../js/emojis'
 	import Avatar from './Avatar.svelte'
 
-	export let avatars
+	export let showEmojis
+	export let showAvatars
 	export let timestamp
 	export let uid
 	export let nickname
@@ -58,12 +59,12 @@
 	let textReplaced
 
 	onMount(() => {
-		if (nicknameSpan && !nicknameReplaced) {
+		if (showEmojis && nicknameSpan && !nicknameReplaced) {
 			nicknameSpan = Emojis.replace(nicknameSpan)
 			nicknameReplaced = true
 		}
 
-		if (textSpan && !textReplaced) {
+		if (showEmojis && textSpan && !textReplaced) {
 			textSpan = Emojis.replace(textSpan)
 			textReplaced = true
 		}
@@ -73,7 +74,7 @@
 <div class="message">
 	<p class="text">
 		<span class="timestamp">[{timestamp}]</span>
-		<span title={uid}>{#if avatars}<Avatar uid={uid}/> {/if}[<span class="nickname" bind:this={nicknameSpan}>{nickname}</span>]</span>
+		<span title={uid}>{#if showAvatars}<Avatar uid={uid}/> {/if}[<span class="nickname" bind:this={nicknameSpan}>{nickname}</span>]</span>
 		{#if status}<span class="status">{@html status}</span>{/if}
 		{#if text}<span class="text" bind:this={textSpan}>{text}</span>{/if}
 	</p>
