@@ -511,7 +511,7 @@
 					</Tabs>
 				{/if}
 			</div>
-			<MessageInput onToggle={onToggle} isFullScreen={isFullScreen} showEmojis={showEmojis} uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
+			<MessageInput onToggle={onToggle} isFullScreen={isFullScreen} showEmojis={false} uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
 		</div>
 	</div>
 </FullScreen>

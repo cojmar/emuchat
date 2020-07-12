@@ -32,27 +32,15 @@
 </style>
 
 <script>
-	import {onMount} from 'svelte'
-	import Emojis from '../../js/emojis'
+	import Emoji from './Emoji.svelte'
 
 	export let showEmojis
-	export let emoji
-
-	let mounted
-	let span
-
-	$: if (mounted && showEmojis && span) {
-		span = Emojis.replace(span)
-	}
-
-	onMount(() => {
-		mounted = true
-	})
+	export let currentEmoji
 </script>
 
 <div class="emoji-detail">
-	{#if emoji}
-		<span class="emoji" bind:this={span}>{emoji.emoji}</span> {emoji.name.replace(/_|-/gi, ' ').replace(/female/gi, 'female ').replace(/male/gi, 'male ')}
+	{#if currentEmoji}
+		<Emoji showEmojis={showEmojis} emoji={currentEmoji}/> {currentEmoji.name.replace(/_|-/gi, ' ').replace(/female/gi, 'female ').replace(/male/gi, 'male ')}
 	{:else}
 		Select or search for a emoji
 	{/if}

@@ -1,6 +1,6 @@
 <style>
 	:global(button.emoji) {
-		font-family: Twemoji, Arial, Helvetica, sans-serif;
+		font-family: TwemojiColr, Arial, Helvetica, sans-serif;
 		border: none;
 		background: transparent;
 		cursor: pointer;

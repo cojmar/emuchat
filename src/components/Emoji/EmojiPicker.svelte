@@ -207,5 +207,5 @@
 		<EmojiVariantPopup showEmojis={showEmojis} variants={variants} on:emojiclick={onVariantClick} on:close={hideVariants}/>
 	{/if}
 
-	<EmojiDetail showEmojis={showEmojis} emoji={currentEmoji}/>
+	<EmojiDetail showEmojis={showEmojis} currentEmoji={currentEmoji}/>
 </div>
