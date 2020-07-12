@@ -4,7 +4,7 @@
 		border: 1px solid #7d7d7d;
 		border-radius: 0;
 
-		font-family: Arial, Helvetica, sans-serif;
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
 		font-size: 100%;
 		line-height: 1;
 
@@ -45,5 +45,5 @@
 </style>
 
 <button class="button" type="button" on:click {...$$props}>
-	<slot />
+	<slot/>
 </button>

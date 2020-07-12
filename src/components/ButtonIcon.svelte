@@ -38,7 +38,5 @@
 </script>
 
 <Button class="button button-icon" on:click {...$$props}>
-	<slot>
-		<Icon icon={icon}/>
-	</slot>
+	<slot><Icon icon={icon}/></slot>
 </Button>

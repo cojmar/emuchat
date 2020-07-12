@@ -7,7 +7,7 @@
 		background-color: #333;
 		border: 1px solid #4c4c4c;
 		margin: auto;
-		font-family: Arial, Helvetica, sans-serif;
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
 		font-size: 100%;
 		line-height: 1;
 		color: #fff;
