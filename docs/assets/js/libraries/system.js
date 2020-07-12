@@ -99,7 +99,8 @@
 	$sys.browser.isNetscape								= browser.indexOf('Navigator') !== -1;
 	$sys.browser.isKMeleon								= browser.indexOf('K-Meleon') !== -1;
 	$sys.browser.isPaleMoon								= browser.indexOf('PaleMoon') !== -1;
-	$sys.browser.isFirefox								= !$sys.browser.isNetscape && !$sys.browser.isPaleMoon && browser.indexOf('Firefox') !== -1;
+	$sys.browser.isBasilisk								= browser.indexOf('Basilisk') !== -1;
+	$sys.browser.isFirefox								= !$sys.browser.isNetscape && !$sys.browser.isPaleMoon && !$sys.browser.Basilisk && browser.indexOf('Firefox') !== -1;
 	$sys.browser.isChrome								= browser.indexOf('Chrome') !== -1 || vendor === 'Google Inc.' || !!$sys.browser.chrome;
 	$sys.browser.isEdgeHTML								= browser.indexOf('Edge') !== -1;
 	$sys.browser.isEdgeBlink							= $sys.browser.isChrome && browser.indexOf('Edg/') !== -1;
@@ -114,7 +115,7 @@
 	$sys.browser.isOther								= !($sys.browser.isIE || $sys.browser.isEdge || $sys.browser.isFirefox || $sys.browser.isChrome || $sys.browser.isOpera || $sys.browser.isSafari);
 	$sys.browser.isMobile								= browser.indexOf('Mobi') !== -1;
 	$sys.browser.isDesktop								= !$sys.browser.isMobile;
-	$sys.browser.name									= $sys.browser.isEdge ? 'Microsoft Edge' : ($sys.browser.isIE ? 'Microsoft Internet Explorer' : ($sys.browser.isNetscape ? 'Netscape Navigator' : ($sys.browser.isKMeleon ? 'K-Meleon' : ($sys.browser.isPaleMoon ? 'PaleMoon' : ($sys.browser.isFirefox ? 'Mozilla Firefox' : ($sys.browser.isOpera ? 'Opera' : ($sys.browser.isElectron ? 'Electron' : ($sys.browser.isVivaldi ? 'Vivaldi' : ($sys.browser.isChromium ? 'Chromium' : ($sys.browser.isChrome ? 'Google Chrome' : ($sys.browser.isSafari ? 'Apple Safari' : undefined)))))))))));
+	$sys.browser.name									= $sys.browser.isEdge ? 'Microsoft Edge' : ($sys.browser.isIE ? 'Microsoft Internet Explorer' : ($sys.browser.isNetscape ? 'Netscape Navigator' : ($sys.browser.isKMeleon ? 'K-Meleon' : ($sys.browser.isPaleMoon ? 'PaleMoon' : ($sys.browser.isBasilisk ? 'Basilisk' : ($sys.browser.isFirefox ? 'Mozilla Firefox' : ($sys.browser.isOpera ? 'Opera' : ($sys.browser.isElectron ? 'Electron' : ($sys.browser.isVivaldi ? 'Vivaldi' : ($sys.browser.isChromium ? 'Chromium' : ($sys.browser.isChrome ? 'Google Chrome' : ($sys.browser.isSafari ? 'Apple Safari' : undefined))))))))))));
 	// noinspection DuplicatedCode
 	$sys.browser.version								= (function() {
 		var offset, version = undefined;
@@ -168,6 +169,9 @@
 			// noinspection JSValidateTypes
 			version = browser.substring(offset + 10);
 		} else if ((offset = browser.indexOf('PaleMoon')) !== -1) {
+			// noinspection JSValidateTypes
+			version = browser.substring(offset + 9);
+		} else if ((offset = browser.indexOf('Basilisk')) !== -1) {
 			// noinspection JSValidateTypes
 			version = browser.substring(offset + 9);
 		} else if ((offset = browser.indexOf('Firefox')) !== -1) {
