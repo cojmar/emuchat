@@ -21,13 +21,13 @@
 	:global(.emoji-detail .emoji img) {
 		width: 22px;
 		height: 22px;
-		vertical-align: text-top;
+		vertical-align: middle;
 	}
 
 	:global(.emoji-detail .emoji svg) {
 		width: 22px;
 		height: 22px;
-		vertical-align: top;
+		vertical-align: middle;
 	}
 </style>
 

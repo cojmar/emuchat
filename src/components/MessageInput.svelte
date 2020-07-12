@@ -103,7 +103,7 @@
 	</PopOver>
 	<ButtonIcon class="button button-icon button-toggle-fullscreen" type="button" title={fsTitle} icon={fsIcon} on:click={onToggle}/>
 	<Input class="input input-message" bind:value={message} placeholder="{placeholder}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
-	<ButtonIcon class="button button-icon button-send" type="submit" title={message ? "Send" : "Disabled"} disabled={!message}>
+	<ButtonIcon class="button button-icon button-send" type="submit" title="Send">
 		<svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">
 			<path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
 		</svg>
