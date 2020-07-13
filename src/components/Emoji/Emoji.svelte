@@ -1,5 +1,5 @@
 <style>
-	:global(button.emoji) {
+	:global(.emoji) {
 		font-family: Arial, Helvetica, sans-serif;
 		border: none;
 		background: transparent;
@@ -11,23 +11,32 @@
 		margin: 0;
 	}
 
-	:global(button.emoji:hover) {
+	:global(.engine-webkit .emoji) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-gecko .emoji) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-edgehtml .emoji) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.emoji:hover) {
 		background: #7d7d7d;
 		border-radius: 5px;
 	}
 
-	:global(button.emoji img) {
+	:global(.emoji img) {
 		width: 1em;
 		height: 1em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 
-	:global(button.emoji svg) {
+	:global(.emoji svg) {
 		width: 1em;
 		height: 1em;
-		margin: 0.2em;
-		vertical-align: middle;
 	}
 </style>
 

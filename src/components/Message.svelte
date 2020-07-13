@@ -1,9 +1,9 @@
 <style>
-	:global(.message) {
+	:global(.message-wrapper) {
 		margin: 7px 0;
 	}
 
-	:global(.message p) {
+	:global(.message-wrapper .message) {
 		display: inline-block;
 		border-radius: 5px;
 		padding: 5px;
@@ -11,31 +11,39 @@
 		background-color: #4c4c4c;
 	}
 
-	:global(.message img) {
+	:global(.message-wrapper img) {
 		width: 2em;
 		height: 2em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 
-	:global(.message svg) {
+	:global(.message-wrapper svg) {
 		width: 2em;
 		height: 2em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 
-	:global(.message .nickname img) {
+	:global(.message-wrapper .nickname img) {
 		width: 1em;
 		height: 1em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 
-	:global(.message .nickname svg) {
+	:global(.message-wrapper .nickname svg) {
 		width: 1em;
 		height: 1em;
-		margin: 0.2em;
+		vertical-align: middle;
+	}
+
+	:global(.message-wrapper .text img) {
+		width: 1em;
+		height: 1em;
+		vertical-align: middle;
+	}
+
+	:global(.message-wrapper .text svg) {
+		width: 1em;
+		height: 1em;
 		vertical-align: middle;
 	}
 </style>
@@ -71,8 +79,8 @@
 	})
 </script>
 
-<div class="message">
-	<p class="text">
+<div class="message-wrapper">
+	<p class="message">
 		<span class="timestamp">[{timestamp}]</span>
 		<span title={uid}>{#if showAvatars}<Avatar uid={uid}/> {/if}[<span class="nickname" bind:this={nicknameSpan}>{nickname}</span>]</span>
 		{#if status}<span class="status">{@html status}</span>{/if}

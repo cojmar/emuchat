@@ -4,7 +4,7 @@
 		border: 1px solid #7d7d7d;
 		border-radius: 0;
 
-		font-family: Twemoji, Arial, Helvetica, sans-serif;
+		font-family: Arial, Helvetica, sans-serif;
 		font-size: 100%;
 		line-height: 1;
 
@@ -19,6 +19,18 @@
 		user-select: none;
 
 		cursor: pointer;
+	}
+
+	:global(.engine-webkit .button) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-gecko .button) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-edgehtml .button) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
 	}
 
 	:global(.button:active) {

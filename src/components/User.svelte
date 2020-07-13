@@ -23,28 +23,24 @@
 	:global(.user img) {
 		width: 2em;
 		height: 2em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 
 	:global(.user svg) {
 		width: 2em;
 		height: 2em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 
 	:global(.user .nickname img) {
 		width: 1em;
 		height: 1em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 
 	:global(.user .nickname svg) {
 		width: 1em;
 		height: 1em;
-		margin: 0.2em;
 		vertical-align: middle;
 	}
 </style>

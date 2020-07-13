@@ -17,6 +17,18 @@
 		cursor: text;
 	}
 
+	:global(.engine-webkit .input) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-gecko .input) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-edgehtml .input) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
 	:global(.input:active) {
 		/* background-color: #7d7d7d; */
 		border-color: #fff;

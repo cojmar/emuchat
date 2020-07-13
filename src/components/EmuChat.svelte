@@ -7,10 +7,22 @@
 		background-color: #333;
 		border: 1px solid #4c4c4c;
 		margin: auto;
-		font-family: Twemoji, Arial, Helvetica, sans-serif;
+		font-family: Arial, Helvetica, sans-serif;
 		font-size: 100%;
 		line-height: 1;
 		color: #fff;
+	}
+
+	:global(.engine-webkit .chat-wrapper) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-gecko .chat-wrapper) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
+	}
+
+	:global(.engine-edgehtml .chat-wrapper) {
+		font-family: Twemoji, Arial, Helvetica, sans-serif;
 	}
 
 	:global(.chat-wrapper *) {
