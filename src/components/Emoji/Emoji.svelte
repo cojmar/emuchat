@@ -1,6 +1,6 @@
 <style>
 	:global(button.emoji) {
-		font-family: TwemojiColr, Arial, Helvetica, sans-serif;
+		font-family: Arial, Helvetica, sans-serif;
 		border: none;
 		background: transparent;
 		cursor: pointer;
@@ -14,6 +14,20 @@
 	:global(button.emoji:hover) {
 		background: #7d7d7d;
 		border-radius: 5px;
+	}
+
+	:global(button.emoji img) {
+		width: 1em;
+		height: 1em;
+		margin: 0.2em;
+		vertical-align: middle;
+	}
+
+	:global(button.emoji svg) {
+		width: 1em;
+		height: 1em;
+		margin: 0.2em;
+		vertical-align: middle;
 	}
 </style>
 

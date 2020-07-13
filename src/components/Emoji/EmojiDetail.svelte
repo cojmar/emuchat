@@ -17,18 +17,6 @@
 		font-size: 1.6em;
 		vertical-align: middle;
 	}
-
-	:global(.emoji-detail .emoji img) {
-		width: 22px;
-		height: 22px;
-		vertical-align: middle;
-	}
-
-	:global(.emoji-detail .emoji svg) {
-		width: 22px;
-		height: 22px;
-		vertical-align: middle;
-	}
 </style>
 
 <script>

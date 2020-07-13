@@ -12,30 +12,30 @@
 	}
 
 	:global(.message img) {
-		width: 30px;
-		height: 30px;
-		padding: 1px;
+		width: 2em;
+		height: 2em;
+		margin: 0.2em;
 		vertical-align: middle;
 	}
 
 	:global(.message svg) {
-		width: 30px;
-		height: 30px;
-		padding: 1px;
+		width: 2em;
+		height: 2em;
+		margin: 0.2em;
 		vertical-align: middle;
 	}
 
 	:global(.message .nickname img) {
-		width: 16px;
-		height: 16px;
-		padding: 1px;
+		width: 1em;
+		height: 1em;
+		margin: 0.2em;
 		vertical-align: middle;
 	}
 
 	:global(.message .nickname svg) {
-		width: 16px;
-		height: 16px;
-		padding: 1px;
+		width: 1em;
+		height: 1em;
+		margin: 0.2em;
 		vertical-align: middle;
 	}
 </style>

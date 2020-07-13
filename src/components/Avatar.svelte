@@ -1,17 +1,19 @@
 <style>
 	:global(.avatar img) {
-		width: 32px;
-		height: 32px;
+		width: 2em;
+		height: 2em;
+		margin: 0.2em;
 		vertical-align: middle;
 	}
 
 	:global(.avatar svg) {
-		width: 32px;
-		height: 32px;
+		width: 2em;
+		height: 2em;
+		margin: 0.2em;
 		vertical-align: middle;
 	}
 
-	:global(.avatar:after) {
+	/*:global(.avatar:after) {
 		position: absolute;
 		display: block;
 		content: '';
@@ -43,7 +45,7 @@
 
 		transform: scale(6);
 		opacity: 1;
-	}
+	}*/
 </style>
 
 <script>
