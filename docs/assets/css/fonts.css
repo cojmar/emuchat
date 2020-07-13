@@ -8,7 +8,15 @@
 
 @font-face {
 	font-family: 'TwemojiColr';
-	src: url('../fonts/twemojicolr.ttf');
+	src: url('../fonts/twemojicolr.woff2') format('woff2'), url('../fonts/twemojicolr.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'TwemojiSBIX';
+	src: url('../fonts/twemojisbix.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;

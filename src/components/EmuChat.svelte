@@ -85,6 +85,7 @@
 	import Normalize from '../js/normalize'
 	import RandomName from '../js/names'
 	import RandomAvatar from '../js/avatars'
+	import Twemoji from '../js/emojis/twemoji'
 	import Bots from '../js/avatars/bots'
 	import FullScreen from './FullScreen.svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
@@ -463,6 +464,7 @@
 	}
 </script>
 
+{@html Twemoji}
 <FullScreen let:onToggle on:change={e => isFullScreen = e.detail.isFullScreen}>
 	<div class="chat-wrapper">
 		<div class="chat-container">

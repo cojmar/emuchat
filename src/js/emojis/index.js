@@ -5,12 +5,12 @@ const UFE0Fg = /\uFE0F/g
 const U200D = String.fromCharCode(0x200D)
 const shouldntBeParsed = /^(?:iframe|noframes|noscript|script|select|style|textarea)$/
 
-function replace(emoji) {
-	return (typeof emoji === 'string' ? replaceEmoji : replaceNode)(emoji)
+function replace(emoji, useSVG = true) {
+	return (typeof emoji === 'string' ? replaceText : replaceNode)(emoji, useSVG)
 }
 
-function replaceNode(node) {
-	let allText = grabAllTextNodes(node, []), length = allText.length, modified, fragment, subnode, text, match, i, index, img, rawText, iconId, src
+function replaceNode(node, useSVG) {
+	let allText = grabAllTextNodes(node, []), length = allText.length, modified, fragment, subnode, text, match, i, index, svg, use, img, rawText, iconId
 
 	while (length--) {
 		modified = false
@@ -30,20 +30,34 @@ function replaceNode(node) {
 
 			iconId = grabTheRightIcon(rawText)
 			i = index + rawText.length
-			src = `assets/images/emojis/${iconId}.svg`
 
-			if (iconId && src) {
-				img = new Image()
-				img.setAttribute('draggable', 'false')
-				img.setAttribute('loading', 'lazy')
-				img.alt = rawText
-				img.src = src
-				modified = true
-				fragment.appendChild(img)
+			if (iconId) {
+				if (useSVG) {
+					svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+					svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink')
+
+					use = document.createElementNS('http://www.w3.org/2000/svg', 'use')
+					use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `#${iconId}`)
+
+					svg.appendChild(use)
+					modified = true
+					fragment.appendChild(svg)
+
+					if (!svg) fragment.appendChild(createText(rawText, false))
+					svg = null
+				} else {
+					img = new Image()
+					img.setAttribute('draggable', 'false')
+					img.setAttribute('loading', 'lazy')
+					img.alt = rawText
+					img.src = `assets/images/emojis/${iconId}.svg`
+					modified = true
+					fragment.appendChild(img)
+
+					if (!img) fragment.appendChild(createText(rawText, false))
+					img = null
+				}
 			}
-
-			if (!img) fragment.appendChild(createText(rawText, false))
-			img = null
 		}
 
 		if (modified) {
@@ -58,16 +72,16 @@ function replaceNode(node) {
 	return node
 }
 
-function replaceEmoji(text) {
-	return hasEmoji(text) ? String(text).replace(re, (emoji) => getImage(emoji)) : text
+function replaceText(text, useSVG) {
+	return hasEmoji(text) ? String(text).replace(re, (emoji) => getImage(emoji, useSVG)) : text
 }
 
 function createText(text, clean) {
 	return document.createTextNode(clean ? text.replace(UFE0Fg, '') : text)
 }
 
-function getImage(emoji) {
-	return `<img class="emoji" draggable="false" loading="lazy" src="assets/images/emojis/${grabTheRightIcon(emoji)}.svg" alt=${emoji}/>`
+function getImage(emoji, useSVG = false) {
+	return useSVG ? `<svg><use xlink:href="#${iconId}"/></svg>` : `<img class="emoji" draggable="false" loading="lazy" src="assets/images/emojis/${grabTheRightIcon(emoji)}.svg" alt=${emoji}/>`
 }
 
 function grabTheRightIcon(rawText) {
@@ -182,7 +196,7 @@ function toCodePoint(unicodeSurrogates, sep) {
 export default {
 	replace,
 	replaceNode,
-	replaceEmoji,
+	replaceText,
 	getImage,
 	grabTheRightIcon,
 	hasEmoji,
