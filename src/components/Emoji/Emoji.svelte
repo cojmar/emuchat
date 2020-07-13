@@ -49,10 +49,23 @@
 
 	const dispatch = createEventDispatcher()
 
+	let mounted
 	let button
 	let replaced
 
+	let currentEmoji = emoji.emoji
+
+	$: if (showEmojis && mounted && button) {
+		if (currentEmoji && currentEmoji !== emoji.emoji) {
+			button.innerHTML = emoji.emoji
+			currentEmoji = emoji.emoji
+			button = Emojis.replace(button)
+		}
+	}
+
 	onMount(() => {
+		mounted =  true
+
 		if (showEmojis && button && !replaced) {
 			button = Emojis.replace(button)
 			replaced = true
