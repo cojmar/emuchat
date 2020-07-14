@@ -6,6 +6,15 @@
 		-webkit-overflow-scrolling: touch;
 		padding: 10px;
 
+		scrollbar-base-color: #222;
+		scrollbar-3dlight-color: #222;
+		scrollbar-highlight-color: #222;
+		scrollbar-track-color: #3e3e42;
+		scrollbar-arrow-color: #111;
+		scrollbar-shadow-color: #222;
+		scrollbar-dark-shadow-color: #222;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+
 		scrollbar-width: thin;
 		scrollbar-color: rgba(0, 0, 0, 0.38) rgba(34, 33, 33, 0.95);
 
