@@ -102,6 +102,7 @@
 	import FullScreen from './FullScreen.svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import SplitPane from './SplitPane.svelte'
+	import PopOver from './PopOver.svelte'
 	import MessageInput from './MessageInput.svelte'
 	import VirtualList from './VirtualList.svelte'
 	import MessageList from './MessageList.svelte'
@@ -113,6 +114,9 @@
 	import Tabs from './Tabs.svelte'
 	import Tab from './Tab.svelte'
 	import {faPlus} from '@fortawesome/free-solid-svg-icons/faPlus'
+	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
+	import {faExpand} from '@fortawesome/free-solid-svg-icons/faExpand'
+	import {faCompress} from '@fortawesome/free-solid-svg-icons/faCompress'
 
 	export let showEmojis
 	export let showAvatars
@@ -120,6 +124,9 @@
 	export let virtualScroll
 
 	let isFullScreen = false
+
+	$: fsIcon = isFullScreen ? faCompress : faExpand
+	$: fsTitle = isFullScreen ? 'Exit FullScreen' : 'FullScreen'
 
 	let randomAvatar = new RandomAvatar(Bots)
 
@@ -489,6 +496,15 @@
 								<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
 							{/each}
 							<ButtonIcon title="New Tab" icon={faPlus} on:click={handleTabNew}/>
+							<PopOver>
+								<span slot="target">
+									<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
+								</span>
+								<div slot="content">
+									TEST
+								</div>
+							</PopOver>
+							<ButtonIcon class="button button-icon button-toggle-fullscreen" type="button" title={fsTitle} icon={fsIcon} on:click={onToggle}/>
 						</TabList>
 						{#each channels as channel}
 							<TabPanel>

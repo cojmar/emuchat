@@ -647,9 +647,9 @@
 	// region API
 
 	$sys.api.banner = function() {
-		global.console.log('╔═╗╔╦╗╦ ╦╔═╗╔═╗╔╦═╗╦╔═╗\n' +
-						   '╠═ ║║║║ ║╠═╝╠═  ║ ║║╠═╣\n' +
-						   '╚═╝╩ ╩╚═╝╩  ╚═╝═╩═╝╩╩ ╩');
+		global.console.log('%c  ╔═╗╔╦╗╦ ╦╔═╗╔═╗╔╦═╗╦╔═╗  \n' +
+							 '  ╠═ ║║║║ ║╠═╝╠═  ║ ║║╠═╣  \n' +
+							 '  ╚═╝╩ ╩╚═╝╩  ╚═╝═╩═╝╩╩ ╩  ', 'font-size: 40px; line-height: 1.12; color: #bada55; text-shadow: 2px 2px #f00, 2px 2px 25px #fff');
 		return this;
 	};
 

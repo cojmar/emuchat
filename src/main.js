@@ -1,8 +1,8 @@
 import App from './App.svelte'
 
-console.log('╔═╗╔╦╗╦ ╦╔═╗╦ ╦╔═╗╔╦╗\n' +
-			'╠═ ║║║║ ║║  ╠═╣╠═╣ ║ \n' +
-			'╚═╝╩ ╩╚═╝╚═╝╩ ╩╩ ╩ ╩ ')
+console.log('%c  ╔═╗╔╦╗╦ ╦╔═╗╦ ╦╔═╗╔╦╗  \n' +
+			  '  ╠═ ║║║║ ║║  ╠═╣╠═╣ ║   \n' +
+			  '  ╚═╝╩ ╩╚═╝╚═╝╩ ╩╩ ╩ ╩   ', 'font-size: 40px; line-height: 1.12; color: #bada55; text-shadow: 2px 2px #f00, 2px 2px 25px #fff')
 
 const app = new App({
 	target: document.body

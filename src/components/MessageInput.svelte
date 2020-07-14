@@ -38,7 +38,7 @@
 	}
 
 	:global(.chat-input .input-message) {
-		width: calc(100% - 88px);
+		width: calc(100% - 44px);
 	}
 </style>
 
@@ -46,6 +46,7 @@
 	import {createEventDispatcher} from 'svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import PopOver from './PopOver.svelte'
+	// import {PopOver} from './PopOver'
 	import Input from './Input.svelte'
 	import {EmojiPicker} from './Emoji'
 	import {faSmile} from '@fortawesome/free-solid-svg-icons/faSmile'
@@ -93,7 +94,7 @@
 			<EmojiPicker showEmojis={showEmojis} on:emoji={onEmoji}/>
 		</div>
 	</PopOver>
-	<PopOver>
+	<!--<PopOver>
 		<span slot="target">
 			<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
 		</span>
@@ -101,7 +102,7 @@
 			TEST
 		</div>
 	</PopOver>
-	<ButtonIcon class="button button-icon button-toggle-fullscreen" type="button" title={fsTitle} icon={fsIcon} on:click={onToggle}/>
+	<ButtonIcon class="button button-icon button-toggle-fullscreen" type="button" title={fsTitle} icon={fsIcon} on:click={onToggle}/>-->
 	<Input class="input input-message" bind:value={message} placeholder="{placeholder}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
 	<ButtonIcon class="button button-icon button-send" type="submit" title="Send">
 		<svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">

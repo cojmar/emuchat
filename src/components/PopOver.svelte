@@ -6,7 +6,7 @@
 	:global(.popover-content) {
 		display: inline-block;
 		/* display: none; */
-		position: absolute;
+		position: fixed;
 		opacity: 0;
 		visibility: hidden;
 		transform: translate(0, -20px);

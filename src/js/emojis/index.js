@@ -34,8 +34,6 @@ function replaceNode(node, useSVG) {
 			if (iconId) {
 				if (useSVG) {
 					svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-					svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink')
-
 					use = document.createElementNS('http://www.w3.org/2000/svg', 'use')
 					use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `#${iconId}`)
 
