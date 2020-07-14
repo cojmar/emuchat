@@ -12,6 +12,9 @@
 		overflow-x: hidden;
 		overflow-y: auto;
 
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.38) rgba(34, 33, 33, 0.95);
+
 		-moz-user-select: none;
 		-webkit-user-select: none;
 		-ms-user-select: none;

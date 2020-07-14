@@ -5,6 +5,10 @@
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
 		padding: 10px;
+
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.38) rgba(34, 33, 33, 0.95);
+
 	}
 
 	:global(.virtual-list-viewport::-webkit-scrollbar) {

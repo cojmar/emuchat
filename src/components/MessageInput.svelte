@@ -50,14 +50,14 @@
 	import Input from './Input.svelte'
 	import {EmojiPicker} from './Emoji'
 	import {faSmile} from '@fortawesome/free-solid-svg-icons/faSmile'
-	import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
+	//import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
 	import {faExpand} from '@fortawesome/free-solid-svg-icons/faExpand'
 	import {faCompress} from '@fortawesome/free-solid-svg-icons/faCompress'
 
 	const dispatch = createEventDispatcher()
 
-	export let onToggle
-	export let isFullScreen
+	//export let onToggle
+	//export let isFullScreen
 	export let showEmojis
 	export let uid = ''
 	export let nickname = ''
@@ -66,8 +66,8 @@
 
 	let message = ''
 
-	$: fsIcon = isFullScreen ? faCompress : faExpand
-	$: fsTitle = isFullScreen ? 'Exit FullScreen' : 'FullScreen'
+	//$: fsIcon = isFullScreen ? faCompress : faExpand
+	//$: fsTitle = isFullScreen ? 'Exit FullScreen' : 'FullScreen'
 
 	function handleSubmit() {
 		dispatch('message', {

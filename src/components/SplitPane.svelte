@@ -12,6 +12,9 @@
 		word-break: break-all;
 		overflow-x: hidden;
 		overflow-y: hidden;
+
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.38) rgba(34, 33, 33, 0.95);
 	}
 
 	:global(.split-pane > .pane::-webkit-scrollbar) {
