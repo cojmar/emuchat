@@ -13,11 +13,12 @@
 		scrollbar-arrow-color: #111;
 		scrollbar-shadow-color: #222;
 		scrollbar-dark-shadow-color: #222;
-		-ms-overflow-style: -ms-autohiding-scrollbar;
+		/* -ms-overflow-style: -ms-autohiding-scrollbar; */
 
 		scrollbar-width: thin;
+		scrollbar-face-color: rgba(0, 0, 0, 0.38);
+		scrollbar-track-color: rgba(34, 33, 33, 0.95);
 		scrollbar-color: rgba(0, 0, 0, 0.38) rgba(34, 33, 33, 0.95);
-
 	}
 
 	:global(.virtual-list-viewport::-webkit-scrollbar) {
