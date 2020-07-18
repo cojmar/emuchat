@@ -53,7 +53,7 @@
 
 	// props
 	export let items
-	export let itemHeight
+	export let itemHeight = 0
 	export let height = '100%'
 	export let autoScroll = false
 
@@ -117,7 +117,7 @@
 		bottom = remaining * averageHeight
 		heightMap.length = items.length
 
-		if (autoScroll /*&& bottom <= 200*/) {
+		if (autoScroll && bottom <= 200) {
 			viewport.scrollTo(0, viewport.scrollHeight)
 		}
 	}

@@ -4,8 +4,9 @@
 		height: 28px;
 		border: 1px solid #7d7d7d;
 		padding-top: 2px;
-		padding-bottom: 2px;
+		/* padding-bottom: 2px; */
 		margin-bottom: 2px;
+		margin-right: 1px;
 		overflow-x: hidden;
 		overflow-y: hidden;
 		white-space: nowrap;

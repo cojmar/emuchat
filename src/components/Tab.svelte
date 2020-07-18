@@ -5,7 +5,7 @@
 		border-right: 1px solid #7d7d7d;
 		margin: 0;
 		color: #7d7d7d;
-		padding: 5px;
+		padding: 4px;
 		cursor: pointer;
 		outline: none;
 
@@ -17,7 +17,7 @@
 
 	:global(.tab:hover) {
 		outline: 1px solid #fff;
-		outline-offset: -2px;
+		outline-offset: -1px;
 		color: #fff;
 	}
 

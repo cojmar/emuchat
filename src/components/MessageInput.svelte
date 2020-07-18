@@ -1,6 +1,7 @@
 <style>
 	:global(.chat-input) {
 		position: absolute;
+		height: 28px;
 		left: 0;
 		right: 0;
 		bottom: 0;
@@ -11,6 +12,16 @@
 
 	:global(.chat-input > *) {
 		float: left;
+	}
+
+	:global(.chat-input .button.button-icon) {
+		width: 28px;
+		height: 28px;
+	}
+
+	:global(.chat-input .button.button-icon svg.icon) {
+		width: 20px;
+		height: 20px;
 	}
 
 	:global(.chat-input .button-emoji-picker) {
@@ -38,7 +49,8 @@
 	}
 
 	:global(.chat-input .input-message) {
-		width: calc(100% - 44px);
+		width: calc(100% - 56px);
+		height: 28px;
 	}
 </style>
 
@@ -48,16 +60,10 @@
 	import PopOver from './PopOver.svelte'
 	// import {PopOver} from './PopOver'
 	import Input from './Input.svelte'
-	import {EmojiPicker} from './Emoji'
+	import {EmojiPicker} from './EmojiPicker'
 	import {faSmile} from '@fortawesome/free-solid-svg-icons/faSmile'
-	//import {faCog} from '@fortawesome/free-solid-svg-icons/faCog'
-	import {faExpand} from '@fortawesome/free-solid-svg-icons/faExpand'
-	import {faCompress} from '@fortawesome/free-solid-svg-icons/faCompress'
 
 	const dispatch = createEventDispatcher()
-
-	//export let onToggle
-	//export let isFullScreen
 	export let showEmojis
 	export let uid = ''
 	export let nickname = ''
@@ -65,9 +71,6 @@
 	export let placeholder = 'Enter a message'
 
 	let message = ''
-
-	//$: fsIcon = isFullScreen ? faCompress : faExpand
-	//$: fsTitle = isFullScreen ? 'Exit FullScreen' : 'FullScreen'
 
 	function handleSubmit() {
 		dispatch('message', {
@@ -94,15 +97,6 @@
 			<EmojiPicker showEmojis={showEmojis} on:emoji={onEmoji}/>
 		</div>
 	</PopOver>
-	<!--<PopOver>
-		<span slot="target">
-			<ButtonIcon class="button button-icon button-settings" title="Settings" icon={faCog}/>
-		</span>
-		<div slot="content">
-			TEST
-		</div>
-	</PopOver>
-	<ButtonIcon class="button button-icon button-toggle-fullscreen" type="button" title={fsTitle} icon={fsIcon} on:click={onToggle}/>-->
 	<Input class="input input-message" bind:value={message} placeholder="{placeholder}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="160" />
 	<ButtonIcon class="button button-icon button-send" type="submit" title="Send">
 		<svg class="icon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 24 24">

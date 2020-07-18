@@ -19,7 +19,7 @@
 		/* display: inline-block; */
 		opacity: 1;
 		visibility: visible;
-		transform: translate(0, -2px);
+		transform: translate(0, 0);
 		z-index: 1;
 	}
 
@@ -94,9 +94,10 @@
 		alignmentTopBottom = triggerBounds.top + contentBounds.height > window.innerHeight
 
 		if (alignmentTopBottom) {
-			contentRef.style.bottom = triggerBounds.height + 'px'
+			contentRef.style.bottom = Math.round(triggerBounds.height + 5) + 'px'
 		} else {
-			contentRef.style.top = triggerBounds.height + 'px'
+			contentRef.style.top = Math.round(triggerBounds.height + 5) + 'px'
+			contentRef.style.right = '2px'
 		}
 	})
 
@@ -115,6 +116,7 @@
 	const hide = () => open = pinned
 </script>
 
+{#if false}<slot/>{/if}
 <span class="popover" on:mousedown on:mouseover={show} on:mouseout={hide} on:mouseup on:mousewheel>
 	<span class="popover-target" on:click={pin} class:pinned={pinned} bind:this={triggerRef}>
 		<slot name="target"/>

@@ -1,5 +1,7 @@
 import normalizeData from './normalize.json'
 
+//𝑱𝒆𝒏𝒏i𝒇𝒆𝒓ツ
+//ᶜʰˡᵒᵉ
 //Sтєя𝒍iη𝑮♟
 //【﻿lil　neo】
 //۞𝕍𝕖𝕟𝕦𝕤۞

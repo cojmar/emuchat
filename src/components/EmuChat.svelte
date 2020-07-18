@@ -47,14 +47,22 @@
 
 	:global(.chat-wrapper > .chat-container > .chat-messages) {
 		width: calc(100% - 4px);
-		height: calc(100% - 28px);
+		height: calc(100% - 34px);
 		/* border: 1px solid #4c4c4c; */
 		margin: 2px;
 		/* padding: 4px; */
 	}
 
 	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tab-list) {
+		width: calc(75% - 1px);
+		float: left;
 		background-color: rgba(44, 44, 44, 0.8);
+	}
+
+	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .toolbar) {
+		width: calc(25% - 1px);
+		height: 28px;
+		float: left;
 	}
 
 	:global(.chat-wrapper > .chat-container > .chat-messages > .tabs > .tabs-panel > .split-pane > .pane) {
@@ -74,10 +82,12 @@
 
 	:global(.message-container) {
 		height: 100%;
+		padding: 1px;
 	}
 
 	:global(.user-container) {
 		height: 100%;
+		padding: 1px;
 	}
 
 	:global(.padding) {
@@ -99,9 +109,11 @@
 	import RandomAvatar from '../js/avatars'
 	import Twemoji from '../js/emojis/twemoji'
 	import Bots from '../js/avatars/bots'
+	import {JSONTree} from './JSONTree'
 	import FullScreen from './FullScreen.svelte'
 	import ButtonIcon from './ButtonIcon.svelte'
 	import SplitPane from './SplitPane.svelte'
+	import Toolbar from './Toolbar.svelte'
 	import PopOver from './PopOver.svelte'
 	import MessageInput from './MessageInput.svelte'
 	import VirtualList from './VirtualList.svelte'
@@ -118,15 +130,17 @@
 	import {faExpand} from '@fortawesome/free-solid-svg-icons/faExpand'
 	import {faCompress} from '@fortawesome/free-solid-svg-icons/faCompress'
 
+	export let showDebug
 	export let showEmojis
 	export let showAvatars
 	export let statusJoinPart
 	export let virtualScroll
+	export let channels
 
 	let isFullScreen = false
 
 	$: fsIcon = isFullScreen ? faCompress : faExpand
-	$: fsTitle = isFullScreen ? 'Exit FullScreen' : 'FullScreen'
+	$: fsTitle = isFullScreen ? 'Exit Full screen' : 'Full screen'
 
 	let randomAvatar = new RandomAvatar(Bots)
 
@@ -140,11 +154,19 @@
 		nickname: auth.info.nick || ''
 	}
 
-	let channels = [{
-		name: 'Status',
-		messages: [],
-		users: []
-	}]
+	if (showDebug) {
+		channels = [{
+			name: 'Debug'
+		} , {
+			name: 'Status',
+			messages: []
+		}]
+	} else {
+		channels = [{
+			name: 'Status',
+			messages: []
+		}]
+	}
 
 	onMount(() => {
 		socket.on('connect', data => {
@@ -330,11 +352,13 @@
 					let status = channels.find(channel => channel.name === 'Status')
 					let userAvatar = randomAvatar.create(data.user, {base64: true})
 
-					status.messages[status.messages.length] = {
-						timestamp: timestamp(),
-						nickname: 'STATUS',
-						status: showAvatars ? `<img title="${data.user}" src="${userAvatar}" draggable="false" loading="lazy" alt="${data.user}">` : undefined,
-						text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has joined ${data.room}`
+					if (status) {
+						status.messages[status.messages.length] = {
+							timestamp: timestamp(),
+							nickname: 'STATUS',
+							status: showAvatars ? `<img title="${data.user}" src="${userAvatar}" draggable="false" loading="lazy" alt="${data.user}">` : undefined,
+							text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has joined ${data.room}`
+						}
 					}
 				}
 
@@ -350,11 +374,13 @@
 					let status = channels.find(channel => channel.name === 'Status')
 					let userAvatar = randomAvatar.create(data.user, {base64: true})
 
-					status.messages[status.messages.length] = {
-						timestamp: timestamp(),
-						nickname: 'STATUS',
-						status: showAvatars ? `<img title="${data.user}" src="${userAvatar}" draggable="false" loading="lazy" alt="${data.user}">` : undefined,
-						text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has left ${data.room}`
+					if (status) {
+						status.messages[status.messages.length] = {
+							timestamp: timestamp(),
+							nickname: 'STATUS',
+							status: showAvatars ? `<img title="${data.user}" src="${userAvatar}" draggable="false" loading="lazy" alt="${data.user}">` : undefined,
+							text: `${channel.users[data.user] ? (typeof channel.users[data.user].info.name !== 'undefined' ? channel.users[data.user].info.name : channel.users[data.user].info.nick) : data.user} has left ${data.room}`
+						}
 					}
 				}
 
@@ -488,13 +514,19 @@
 	<div class="chat-wrapper">
 		<div class="chat-container">
 			<canvas id="chat-effect"></canvas>
-			<div class="chat-messages">
+			<div class="chat-messages clear">
 				{#if channels}
 					<Tabs initialSelectedIndex={currentTabIndex}>
 						<TabList>
 							{#each channels as channel}
-								<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
+								{#if channel.name === 'Debug'}
+									<Tab on:select={e => handleTabSelect(e)}>{channel.name}</Tab>
+								{:else}
+									<Tab showCloseButton={true} on:select={e => handleTabSelect(e)} on:close={e => handleTabClose(e)}>{channel.name}</Tab>
+								{/if}
 							{/each}
+						</TabList>
+						<Toolbar>
 							<ButtonIcon title="New Tab" icon={faPlus} on:click={handleTabNew}/>
 							<PopOver>
 								<span slot="target">
@@ -505,11 +537,15 @@
 								</div>
 							</PopOver>
 							<ButtonIcon class="button button-icon button-toggle-fullscreen" type="button" title={fsTitle} icon={fsIcon} on:click={onToggle}/>
-						</TabList>
+						</Toolbar>
 						{#each channels as channel}
-							<TabPanel>
-								<SplitPane type="horizontal" pos={75} min={200} spacing={1} scrollable={!virtualScroll}>
-									<div class="message-container{virtualScroll ? '': ' padding'}" slot="messages">
+							{#if channel.name === 'Debug'}
+								<TabPanel scrollable={true}>
+									<JSONTree class="padding" dark={true} value={channels}/>
+								</TabPanel>
+							{:else if channel.name === 'Status'}
+								<TabPanel>
+									<div class="message-container{virtualScroll ? '': ' padding'}">
 										{#if virtualScroll}
 											{#if channel.messages.length}
 												<VirtualList autoScroll={true} items={channel.messages} let:item>
@@ -522,26 +558,44 @@
 											<MessageList showEmojis={showEmojis} showAvatars={showAvatars} messages="{channel.messages}"/>
 										{/if}
 									</div>
-									<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
-										{#if virtualScroll}
-											{#if Object.values(channel.users).length}
-												<VirtualList items={Object.values(channel.users)} let:item>
-													<User showEmojis={showEmojis} showAvatars={showAvatars} uid={item.info.user} nickname={item.info.name}/>
-												</VirtualList>
+								</TabPanel>
+							{:else}
+								<TabPanel>
+									<SplitPane type="horizontal" pos={75} min={200} spacing={1} scrollable={!virtualScroll}>
+										<div class="message-container{virtualScroll ? '': ' padding'}" slot="messages">
+											{#if virtualScroll}
+												{#if channel.messages.length}
+													<VirtualList autoScroll={true} items={channel.messages} let:item>
+														<Message showEmojis={showEmojis} showAvatars={showAvatars} uid={item.uid} timestamp={item.timestamp} nickname={item.nickname} status={item.status} text={item.text}/>
+													</VirtualList>
+												{:else}
+													<div class="padding">No messages</div>
+												{/if}
 											{:else}
-												<div class="padding">No users</div>
+												<MessageList showEmojis={showEmojis} showAvatars={showAvatars} messages="{channel.messages}"/>
 											{/if}
-										{:else}
-											<UserList showEmojis={showEmojis} showAvatars={showAvatars} users="{Object.values(channel.users)}"/>
-										{/if}
-									</div>
-								</SplitPane>
-							</TabPanel>
+										</div>
+										<div class="user-container{virtualScroll ? '': ' padding'}" slot="users">
+											{#if virtualScroll}
+												{#if Object.values(channel.users).length}
+													<VirtualList items={Object.values(channel.users)} let:item>
+														<User showEmojis={showEmojis} showAvatars={showAvatars} uid={item.info.user} nickname={item.info.name}/>
+													</VirtualList>
+												{:else}
+													<div class="padding">No users</div>
+												{/if}
+											{:else}
+												<UserList showEmojis={showEmojis} showAvatars={showAvatars} users="{Object.values(channel.users)}"/>
+											{/if}
+										</div>
+									</SplitPane>
+								</TabPanel>
+							{/if}
 						{/each}
 					</Tabs>
 				{/if}
 			</div>
-			<MessageInput onToggle={onToggle} isFullScreen={isFullScreen} showEmojis={showEmojis} uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
+			<MessageInput showEmojis={showEmojis} uid="{me.uid}" nickname="{me.nickname}" placeholder={`You are typing as "${me.nickname}". To change nick, type /nick and your new nickname.`} on:message="{e => handleMessage(e, currentTabIndex)}"/>
 		</div>
 	</div>
 </FullScreen>

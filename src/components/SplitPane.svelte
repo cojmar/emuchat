@@ -183,6 +183,7 @@
 	$: scrolling = scrollable && !dragging ? ' pane-scrollable' : ''
 </script>
 
+{#if false}<slot/>{/if}
 <div class="split-pane clear" bind:this={refs.container}>
 	<div class="pane pane-{position.messages}{scrolling}" style="{dimension}: calc({pos}% - {spacing}px); margin-{position.users}: {spacing}px;" use:scroll>
 		<slot name="messages"/>

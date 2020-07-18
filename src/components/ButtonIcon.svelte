@@ -33,8 +33,9 @@
 <script>
 	import Button from './Button.svelte'
 	import Icon from './Icon.svelte'
+	import {faQuestion} from '@fortawesome/free-solid-svg-icons/faQuestion'
 
-	export let icon
+	export let icon = faQuestion
 </script>
 
 <Button class="button button-icon" on:click {...$$props}>
