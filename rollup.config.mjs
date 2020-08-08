@@ -50,7 +50,7 @@ export default {
 			},
 			runtimeHelpers: true,
 			extensions: ['.js', '.mjs', '.html', '.svelte'],
-			exclude: ['src/**', 'node_modules/@babel/**', /\/core-js\//],
+			exclude: ['node_modules/@babel/**', /\/core-js\//],
 			presets: [
 				['@babel/preset-env', {
 					targets: {

@@ -59,13 +59,13 @@
 		{#if expandable && isParentExpanded}
 			<JSONArrow on:click={toggleExpand} {expanded} />
 		{/if}
-		<JSONKey {key} colon={context.colon} {isParentExpanded} {isParentArray} on:click={toggleExpand} />
+		<JSONKey {key} colon={context.colon} {isParentExpanded} {isParentArray} on:click={toggleExpand}/>
 		<span on:click={toggleExpand}><span>{label}</span>{bracketOpen}</span>
 	</label>
 		{#if isParentExpanded}
 			<ul class:collapse={!expanded} on:click={expand}>
 				{#each slicedKeys as key, index}
-					<JSONNode key={getKey(key)} isParentExpanded={expanded} isParentArray={isArray} value={expanded ? getValue(key) : getPreviewValue(key)} />
+					<JSONNode key={getKey(key)} isParentExpanded={expanded} isParentArray={isArray} value={expanded ? getValue(key) : getPreviewValue(key)}/>
 					{#if !expanded && index < previewKeys.length - 1}
 						<span class="comma">,</span>
 					{/if}

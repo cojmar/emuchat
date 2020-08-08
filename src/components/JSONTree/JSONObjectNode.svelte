@@ -1,7 +1,7 @@
 <script>
 	import JSONNested from './JSONNested.svelte'
 
-	export let key, value, isParentExpanded, isParentArray, nodeType, valueGetter
+	export let key, value, isParentExpanded, isParentArray, nodeType//, valueGetter
 	export let expanded = false
 
 	$: keys = Object.getOwnPropertyNames(value)

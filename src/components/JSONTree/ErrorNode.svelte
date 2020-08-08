@@ -40,19 +40,19 @@
 
 <li class:indent={isParentExpanded}>
 	{#if isParentExpanded}
-		<JSONArrow on:click={toggleExpand} {expanded} />
+		<JSONArrow on:click={toggleExpand} {expanded}/>
 	{/if}
-	<JSONKey {key} colon={context.colon} {isParentExpanded} {isParentArray} />
+	<JSONKey {key} colon={context.colon} {isParentExpanded} {isParentArray}/>
 	<span on:click={toggleExpand}>Error: {expanded ? '' : value.message}</span>
 	{#if isParentExpanded}
 		<ul class:collapse={!expanded}>
 			{#if expanded}
-				<JSONNode key="message" value={value.message} />
+				<JSONNode key="message" value={value.message}/>
 				<li>
-					<JSONKey key="stack" colon=":" {isParentExpanded} />
+					<JSONKey key="stack" colon=":" {isParentExpanded}/>
 					<span>
 						{#each stack as line, index}
-							<span class:indent={index > 0}>{line}</span><br />
+							<span class:indent={index > 0}>{line}</span><br/>
 						{/each}
 					</span>
 				</li>
