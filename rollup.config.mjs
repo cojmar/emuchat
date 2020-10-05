@@ -1,16 +1,18 @@
 import sirv from 'sirv'
 import polka from 'polka'
 import resolve from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
 import commonjs from '@rollup/plugin-commonjs'
 import json from 'rollup-plugin-json'
 import { terser } from 'rollup-plugin-terser'
 import babel  from 'rollup-plugin-babel'
 import svelte from 'rollup-plugin-svelte-hot'
 import hmr from 'rollup-plugin-hot'
-//import autoPreprocess from 'svelte-preprocess'
+// import autoPreprocess from 'svelte-preprocess'
 
 const dev = !!process.env.ROLLUP_WATCH
 
+// noinspection JSUnusedGlobalSymbols,JSCheckFunctionSignatures
 export default {
 	input: 'src/main.js',
 	output: {
@@ -24,9 +26,10 @@ export default {
 		svelte({
 			dev: dev,
 			css: css => {
+				// noinspection JSCheckFunctionSignatures
 				css.write('docs/assets/css/main.min.css')
 			},
-			//preprocess: autoPreprocess(),
+			// preprocess: autoPreprocess(),
 			hot: dev && {
 				optimistic: true,
 				noPreserveState: true
@@ -41,6 +44,9 @@ export default {
 			preferConst: true,
 			compact: true,
 			namedExports: true
+		}),
+		dev && replace({
+			dev: dev,
 		}),
 		!dev && babel({
 			env: {
@@ -68,11 +74,12 @@ export default {
 			]
 		}),
 		dev && (() => {
-			polka().use('emuchat', sirv('docs', {
+			polka().use(sirv('docs', {
 				dev: true,
 				single: true
 			})).listen(5000, err => {
 				if (err) throw err
+				console.log('[HTTP] Listening on localhost:5000')
 			})
 		})(),
 		dev && hmr({
