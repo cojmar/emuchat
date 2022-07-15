@@ -42,7 +42,7 @@
     "rollup-plugin-terser": "^6.1.0",
     "seedrandom": "^3.0.5",
     "sirv": "^1.0.5",
-    "svelte": "3.23.2",
+    "svelte": "3.49.0",
     "svg-sprite": "^1.5.0",
     "svgson": "^4.1.0",
     "tinro": "^0.3.1"
